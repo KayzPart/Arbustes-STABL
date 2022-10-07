@@ -1,0 +1,18 @@
+{% extends "base.twig" %}
+
+{% block body %}
+	{{ include("Templates/header.twig") }}
+	<form action="" method="" post>
+		<label for="humain_login">Login</label>
+			<input type="text" id="humain_login" name="humain_login" required>
+		
+
+        <label for="mdp">Mot de passe</label>
+            <input type="password" id="mdp" name="mdp">
+        
+
+        <input type="submit" value="INSCRIPTION" name="submit">
+	</form>
+
+	{{ include("Templates/footer.twig") }}
+{% endblock %}
