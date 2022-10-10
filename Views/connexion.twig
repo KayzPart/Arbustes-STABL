@@ -2,9 +2,17 @@
 
 {% block body %}
 {{ include("Templates/header.twig") }}
-<form action="" method=""POST>
-connexion
-</form>
+<form action="./verifConnect" method="POST">
+		<label for="humain_login">Login</label>
+			<input type="text" id="humain_login" name="humain_login" required>
+		
+
+        <label for="mdp">Mot de passe</label>
+            <input type="password" id="mdp" name="mdp">
+        
+
+        <input type="submit" value="CONNEXION" name="submit">
+	</form>
 
 {{ include("Templates/footer.twig") }}
 {% endblock %}

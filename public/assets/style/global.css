@@ -50,9 +50,18 @@ header{
 }
 
 /* Homepage */
-.choix-tables input[type=radio]{
+.tables input[type=radio]{
     opacity: 0;
 }
-.choix-tables input[type=radio] + img{
+.tables input[type=radio] + img{
     cursor: pointer;
+}
+/* .choix-tables > form > label{
+    width: 200px;
+    height: 200px;
+} */
+.tables  > label > img{
+    width: 200px;
+    height: 200px;
+    object-fit: contain;
 }

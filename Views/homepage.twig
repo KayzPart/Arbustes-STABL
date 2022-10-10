@@ -1,19 +1,54 @@
 {% extends "base.twig" %}
 
 {% block body %}
-{{ include("Templates/header.twig") }}
-<div class="container">
-    <h2>Bonjour "Alexandre"</h2>
-    <section class="choix-tables">
-        <form action="" method="GET">
-            {% for i in 1..10 %}
-                <label>
-                    <input type="radio" name="param1" value="{{i}}">
-                    <img src="./public/assets/ressources/click-{{i}}.png" alt="table-{{i}}">
-                </label>
-            {% endfor %}
-        </form>
-    </section>
-</div>
-{{ include("Templates/footer.twig") }}
+	{{ include("Templates/header.twig") }}
+	<div class="container">
+		<h2>Bonjour
+			{{humain.getHumain_login}}</h2>
+		<section class="choix-tables">
+			<form action="./choice" method="GET">
+				<div class="tables">
+					{% for i in 1..10 %}
+						<label>
+							<input type="radio" name="scoreParam1" value="{{i}}">
+							<img src="./public/assets/ressources/click-{{i}}.png" alt="table-{{i}}">
+						</label>
+					{% endfor %}
+					<label>
+						<input type="radio" name="scoreParam1" value="-1">
+						<img src="./public/assets/ressources/click-tables.png" alt="tables">
+					</label>
+				</div>
+				<div class="ordre-desordre">
+					<div>
+						<label for="ordre">Ordre</label>
+						<input type="radio" id="odre" name="scoreParam2" value="1" checked>
+					</div>
+					<div>
+						<label for="desordre">Désordre</label>
+						<input type="radio" id="desordre" name="scoreParam2" value="2">
+					</div>
+				</div>
+                <div class="aide">
+                    <div>
+                        <label for="bille">Tableau de billes</label>
+                        <input type="radio" id="billes" name="scoreParam3" value="1" checked>
+                    </div>
+                    <div>
+                        <label for="avt-apr">Avant / Après</label>
+                        <input type="radio" id="avt-apr" name="scoreParam3" value="2">
+                    </div>
+                    <div>
+                        <label for="aucune">Aucune aide</label>
+                        <input type="radio" id="aucune" name="scoreParam3" value="0">
+                    </div>
+                </div>
+                <input type="hidden" name="id" value="{{humain.getHumain_id}}">
+                <input type="hidden" name="scoreValeur" value="0">
+                <input type="hidden" name="scoreOutilId" value="1">
+                <input type="submit" value="C'EST PARTI !">
+			</form>
+		</section>
+	</div>
+	{{ include("Templates/footer.twig") }}
 {% endblock %}
