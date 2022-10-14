@@ -66,8 +66,11 @@ class ControllerHumain extends ControllerTwig{
         $id = $_SESSION['humainId'];
         $twig = ControllerTwig::twigControl();
         $datas = new ModelHumain();
+        $outil = new ModelOutil();
+        $datasOutil = $outil->selectOutil();
         $humain = $datas->selectHumain($id);
-        echo $twig->render('homepage.twig', ['root' => ROOT, 'humain_id' => $_SESSION['humainId'], 'humain' => $humain]);
+        echo $twig->render('homepage.twig', ['root' => ROOT, 'humain_id' => $_SESSION['humainId'], 'humain' => $humain, 'outils' => $datasOutil[0]]);
+        // var_dump($datasOutil);
     }
 
 

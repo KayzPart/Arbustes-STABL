@@ -32,6 +32,7 @@ $router->map('POST', '/verifConnect', 'ControllerHumain#verifConnexion');
 $router->map('GET', '/homepage', 'ControllerHumain#redirectionEspace');
 
 $router->map('GET', '/choice', 'ControllerScore#insertScoreHumain');
+$router->map('GET', '/table', 'ControllerScore#jeuTable');
 
 
 

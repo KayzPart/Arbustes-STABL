@@ -14,8 +14,6 @@ class Score extends Hydrate{
     // Aucune aide(0) / Billes(1) / Avt-Apr (2)
     private $_score_param3;
 
-    // Zeubi
-    private $_score_param4;
     private $_score_est_actif;
     private $_score_date;
 
@@ -47,9 +45,6 @@ class Score extends Hydrate{
         return $this->_score_param3;
     }
 
-    public function getScore_param4(){
-        return $this->_score_param4;
-    }
 
     public function getScore_est_actif(){
         return $this->_score_est_actif;
@@ -85,10 +80,6 @@ class Score extends Hydrate{
 
     public function setScore_param3($score_param3){
         $this->_score_param3 = $score_param3;
-    }
-
-    public function setScore_param4($score_param4){
-        $this->_score_param4 = $score_param4;
     }
 
     public function setScore_est_actif($score_est_actif){
