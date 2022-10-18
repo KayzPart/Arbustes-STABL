@@ -35,4 +35,19 @@ class ModelScore extends Connect{
 
         // echo json_encode($selectScore->fetchAll(PDO::FETCH_ASSOC));
     }
+
+    // Envoie du score une fois compter et valider 
+    public function updateScore($id, $score_valeur){
+        $db = $this->getDb();
+        $updateScore = $db->prepare('UPDATE `score_valeur`= :score_valeur WHERE `score_id` = :id');
+        $updateScore->bindParam('id', $id, PDO::PARAM_INT);
+        $updateScore->bindParam('score_valeur', $score_valeur, PDO::PARAM_STR);
+        $updateScore->execute();
+        $newScore = [];
+        while($score = $updateScore->fetch(PDO::FETCH_ASSOC)){
+            $newScore[] = new Score($score);
+        }
+        return $newScore;
+
+    }
 }

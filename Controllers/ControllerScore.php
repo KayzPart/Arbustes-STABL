@@ -1,16 +1,23 @@
-<?php 
+<?php
 
-class ControllerScore extends ControllerTwig{
-    public static function insertScoreHumain($datas){
+class ControllerScore extends ControllerTwig
+{
+    public static function insertScoreHumain($datas)
+    {
         session_start();
         $datas = $_GET;
-        $manager = new ModelScore();
-        $manager->insertScore($datas);
-        header('Location: ./table');
+        if (isset($_GET['submit'])) {
+            $manager = new ModelScore();
+            $manager->insertScore($datas);
+            header('Location: ./table');
+        }else{
+            echo 'Pense à séléctionner toute les options';
+        }
         var_dump($datas);
     }
 
-    public static function jeuTable(){
+    public static function jeuTable()
+    {
         session_start();
         $twig = ControllerTwig::twigControl();
         $manager = new ModelScore();
@@ -19,6 +26,21 @@ class ControllerScore extends ControllerTwig{
         // $orderOrNot = $score->getScore_param2();
         // $aide = $score->getScore_param3();
         echo $twig->render('table.twig', ['root' => ROOT, 'score' => $score]);
-        // var_dump($score);
+        var_dump($score);
+    }
+
+    public static function updateScore(){
+        session_start();
+        if(isset($_GET['submit'])){
+            $id = $_GET['score_id'];
+            var_dump($id);
+            $score_valeur = $_GET['score_valeur'];
+            $twig = ControllerTwig::twigControl();
+            $manager = new ModelScore();
+            $updateScore = $manager->updateScore($id, $score_valeur);
+            echo $twig->render('table.twig', ['root' => ROOT, 'score' => $updateScore]);
+            var_dump($updateScore);
+        }
+        
     }
 }

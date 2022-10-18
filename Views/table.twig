@@ -1,9 +1,35 @@
 {% extends "base.twig" %}
 {% block body %}
-<!-- Récupérer la bonne table en fonction du user connecter et de la table sélectionner  -->
+	<!-- Récupérer la bonne table en fonction du user connecter et de la table sélectionner  -->
+	NombreSelectionner :
+	{{score.getScore_param1}}
+	<br>
+	Ordre/désordre :
+	{{score.getScore_param2}}
+	<br>
+	Aide :
+	{{score.getScore_param3}}
 
-test table : {{score.getScore_param1}}
-<section id="jeu"></section>
-<div id="resultats"></div>
-<img src="" alt="">
+	<div id="question"></div>
+	<form action="" method="GET" id="click-result">
+		<div id="score">
+        <p>
+            Score : 0 / 10
+        </p>
+        </div>
+		<section id="table"></section>
+        <div id="choice"></div>
+
+		<br>
+
+        
+
+		<br>
+        
+
+		<div id="result"></div>
+		<div id="test"></div>
+		
+	</form>
+
 {% endblock %}

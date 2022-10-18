@@ -10,9 +10,9 @@ class ControllerHumain extends ControllerTwig{
     // Affichage formulaire connexion
     public function connexion(){
         session_start();
-        // if(isset($_SESSION['humainId'])){
-        //     header('Location: ' . ROOT . '/homepage');
-        // }
+        if(isset($_SESSION['humainId'])){
+            header('Location: ' . ROOT . '/homepage');
+        }
         $twig = ControllerTwig::twigControl();
         echo $twig->render('connexion.twig', ['root' => ROOT]);
     }
@@ -29,6 +29,9 @@ class ControllerHumain extends ControllerTwig{
     // Vérification de la connexion
     public function verifConnexion(){
         session_start();
+        if(!isset($_SESSION['humainId'])){
+            header('Refresh: 0.01; url= ./connexion');
+        }
         $humain_login = $_POST['humain_login'];
         $mdp = $_POST['mdp'];
         $manager = new  ModelHumain();

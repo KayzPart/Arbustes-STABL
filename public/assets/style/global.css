@@ -142,13 +142,40 @@ header {
 }
 
 /* Jeu */
+
+/* #click-result{
+    display: flex;
+} */
 .billes {
-    background-image: url('../ressources/bille-vert.png');
+    background-image: url('../ressources/bille-jaune.png');
     background-size: contain;
     background-repeat: no-repeat;
     width: 50px;
     height: 50px;
     display: flex;
     align-items: center;
-    justify-content: center;
+    flex-direction: column-reverse;
+    /* cursor: pointer; */
+}
+.true{
+    background-image: url('../ressources/bille-vert.png');
+}
+.false{
+    background-image: url('../ressources/bille-rouge.png');
+}
+
+.billes input[type=radio] {
+    opacity: 0;
+}
+
+.billes input[type=radio]+img {
+    cursor: pointer;
+}
+
+.col-header{
+    background-image: url('../ressources/bille-vert.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    width: 50px;
+    height: 50px;
 }
