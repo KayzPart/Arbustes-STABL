@@ -157,9 +157,9 @@ header {
     flex-direction: column-reverse;
     /* cursor: pointer; */
 }
-.true{
+/* .true{
     background-image: url('../ressources/bille-vert.png');
-}
+} */
 .false{
     background-image: url('../ressources/bille-rouge.png');
 }

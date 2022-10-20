@@ -1,6 +1,16 @@
 <?php 
-require_once __DIR__ . '/vendor/autoload.php';
-require_once  __DIR__ .'/AltoRouter.php';
+session_start();
+$dir_rel="../../";
+$dir_cdi="../";
+$fichier="index.php";
+include($dir_rel.'_init.php');
+
+if (isset($_SESSION['outil_retour'])) $retour=$_SESSION['outil_retour']; else if (isset($_SESSION['retour_page'])) $retour=$_SESSION['retour_page']; else $retour='outil.php';
+$_SESSION['outil_id'] = trouve_outil_id($_SERVER["PHP_SELF"]);
+
+
+require_once __DIR__ . '/../vendor/autoload.php';
+require_once  __DIR__ .'/../vendor/altorouter/altorouter/AltoRouter.php';
 
 // var_dump($_GET);
 // On sépare les paramètres
@@ -9,11 +19,11 @@ require_once  __DIR__ .'/AltoRouter.php';
 
 
 
-define('ROOT', '/Arbustes-appli');
+define('ROOT', $dossier_server_path.'/cdi/'.$_SESSION['outil_id']);
 
 // Création d'une instance de AltoRouter
 $router = new AltoRouter();
-
+// $router->setBasePath($dossier_server_path.'/cdi/'.$_SESSION['outil_id']);
 $router->setBasePath(ROOT);
 
 // Routes

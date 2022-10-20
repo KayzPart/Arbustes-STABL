@@ -9,12 +9,12 @@ class ControllerHumain extends ControllerTwig{
 
     // Affichage formulaire connexion
     public function connexion(){
-        session_start();
-        if(isset($_SESSION['humainId'])){
-            header('Location: ' . ROOT . '/homepage');
-        }
+        // session_start();
+        // if(isset($_SESSION['humainId'])){
+        //     header('Location: ' . $_SESSION['outil_retour']);
+        // }
         $twig = ControllerTwig::twigControl();
-        echo $twig->render('connexion.twig', ['root' => ROOT]);
+        echo $twig->render('connexion.twig');
     }
 
     // Récupération des données après inscription / Ajouter la redirection a la page de connexion après isncription 
@@ -28,7 +28,7 @@ class ControllerHumain extends ControllerTwig{
 
     // Vérification de la connexion
     public function verifConnexion(){
-        session_start();
+        // session_start();
         if(!isset($_SESSION['humainId'])){
             header('Refresh: 0.01; url= ./connexion');
         }
@@ -62,7 +62,7 @@ class ControllerHumain extends ControllerTwig{
 
     // Redirection après connexion
     public static function redirectionEspace(){
-        session_start();
+        // session_start();
         if(!isset($_SESSION['humainId'])){
             header('Refresh: 0.01; url= ./connexion');
         }

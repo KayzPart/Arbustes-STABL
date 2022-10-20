@@ -10,8 +10,9 @@
         }
     
         private static function setDb(){
+            global $bdd;
             try {
-                self::$_db = new PDO("mysql:host=localhost;dbname=stage;charset=UTF8", 'root', '');
+                self::$_db = &$bdd;
             } catch (PDOException $e) {
                 echo 'Erreur de connection' . '<br>' . $e->getMessage();
             }
