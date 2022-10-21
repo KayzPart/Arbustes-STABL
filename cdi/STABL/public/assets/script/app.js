@@ -1,4 +1,4 @@
-fetch('./Models/Ajax.php', {
+fetch('./STABL/Models/Ajax.php', {
   method: 'GET',
   mode: 'cors',
   headers: {
@@ -49,23 +49,23 @@ fetch('./Models/Ajax.php', {
         console.log(item);
       });
 
-      
+
       for (let i = 1; i <= 10; i++) {
         // console.log(result)
         document.getElementById('table').innerHTML += `<div class="operation">${nombreSelectionner} x ${i} = ... <br ></div>`
       }
-      
-      for (let i = 1; i <= 10; i++) {
-        let result = nombreSelectionner * i
-        
-        document.getElementById('choice').innerHTML += `<div class="billes"><input type="radio" name="score_valeur" id="score_valeur" value= ${result}>${result}</div>`
-      }
+
+
 
       startGame()
       function startGame() {
         // Question opération
         document.getElementById('question').innerHTML = `<span>${nombreSelectionner} x ${nombre2}</span>`
-        
+        for (let i = 1; i <= 10; i++) {
+          let result = nombreSelectionner * i
+
+          document.getElementById('choice').innerHTML += `<div class="billes"><input type="radio" name="score_valeur" id="score_valeur" value= ${result}>${result}</div>`
+        }
         if (order == 1 && help == 1) {
           generateBilles()
         }
@@ -86,7 +86,7 @@ fetch('./Models/Ajax.php', {
         }
         document.body.appendChild(table);
       }
-      
+
       function click() {
         const inputScoreValeur = document.querySelectorAll('input[type=radio][name=score_valeur]')
         const valeurScore = document.querySelector('input[type=radio][name=score_valeur]')
@@ -106,7 +106,7 @@ fetch('./Models/Ajax.php', {
                 nombre2++
                 console.log(nombreSelectionner * nombre2)
                 startGame()
-                
+
               } else {
                 parent.classList.add('false')
                 document.getElementById('result').innerHTML = `<p> Essaye encore !</p>`
@@ -129,7 +129,7 @@ fetch('./Models/Ajax.php', {
         document.getElementById('score').innerHTML = `<p> Score : ${score} / 10</p>`
       }
 
-     
+
     })
   })
   .catch((error) => console.log(error))
@@ -147,7 +147,7 @@ function showScoreInformation() {
   document.getElementById('score').innerHTML = `<p>Score : 20:20</p>`
 }
 
-// Test table multiplication 
+// Test table multiplication
 // const array = []
 // for (let i = 1; i < 11; i++) {
 //   array.push(i)

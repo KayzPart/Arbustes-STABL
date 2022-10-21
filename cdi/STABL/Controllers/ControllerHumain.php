@@ -23,13 +23,13 @@ class ControllerHumain extends ControllerTwig{
         $datas = $_POST;
         $humain = new ModelHumain();
         $datas = $humain->humainInscription($datas); 
-        echo $twig->render('inscription.twig', ['humain' => $datas, 'root' => ROOT]);
+        echo $twig->render('inscription.twig', ['humain' => $datas]);
     }
 
     // Vérification de la connexion
     public function verifConnexion(){
         // session_start();
-        if(!isset($_SESSION['humainId'])){
+        if(!isset($_SESSION['humain']['humain_id'])){
             header('Refresh: 0.01; url= ./connexion');
         }
         $humain_login = $_POST['humain_login'];
@@ -40,7 +40,7 @@ class ControllerHumain extends ControllerTwig{
             $passwordVerif = password_verify($mdp, $humain->getMdp());
 
             if($passwordVerif){
-                $_SESSION['humainId'] = $humain->getHumain_id();
+                $_SESSION['humain']['humain_id'] = $humain->getHumain_id();
                 echo "Vous êtes connecter avec succès $humain_login !";
                 header('Location: ./homepage');
             }else{
@@ -51,7 +51,7 @@ class ControllerHumain extends ControllerTwig{
             echo "Login ou mot de passe incorrect";
             header("Refresh: 2; url= ./connexion");
         }
-        if(!isset($_SESSION['humainId'])){
+        if(!isset($_SESSION['humain']['humain_id'])){
             header("Refresh: 2; url= ./connexion");
             echo "Vous devez vous connecter pour accéder à l\'application
             <br><br>
@@ -63,16 +63,16 @@ class ControllerHumain extends ControllerTwig{
     // Redirection après connexion
     public static function redirectionEspace(){
         // session_start();
-        if(!isset($_SESSION['humainId'])){
+        if(!isset($_SESSION['humain']['humain_id'])){
             header('Refresh: 0.01; url= ./connexion');
         }
-        $id = $_SESSION['humainId'];
+        $id = $_SESSION['humain']['humain_id'];
         $twig = ControllerTwig::twigControl();
         $datas = new ModelHumain();
         $outil = new ModelOutil();
         $datasOutil = $outil->selectOutil();
         $humain = $datas->selectHumain($id);
-        echo $twig->render('homepage.twig', ['root' => ROOT, 'humain_id' => $_SESSION['humainId'], 'humain' => $humain, 'outils' => $datasOutil[0]]);
+        echo $twig->render('homepage.twig', ['humain_id' => $_SESSION['humain']['humain_id'], 'humain' => $humain, 'outils' => $datasOutil[0]]);
         // var_dump($datasOutil);
     }
 

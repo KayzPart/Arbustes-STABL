@@ -4,7 +4,7 @@ class ControllerScore extends ControllerTwig
 {
     public static function insertScoreHumain($datas)
     {
-        session_start();
+        // session_start();
         $datas = $_GET;
         if (isset($_GET['submit'])) {
             $manager = new ModelScore();
@@ -18,19 +18,19 @@ class ControllerScore extends ControllerTwig
 
     public static function jeuTable()
     {
-        session_start();
+        // session_start();
         $twig = ControllerTwig::twigControl();
         $manager = new ModelScore();
         $score = $manager->selectScore();
         // $selectTable = $score->getScore_param1();
         // $orderOrNot = $score->getScore_param2();
         // $aide = $score->getScore_param3();
-        echo $twig->render('table.twig', ['root' => ROOT, 'score' => $score]);
+        echo $twig->render('table.twig', ['score' => $score]);
         var_dump($score);
     }
 
     public static function updateScore(){
-        session_start();
+        // session_start();
         if(isset($_GET['submit'])){
             $id = $_GET['score_id'];
             var_dump($id);
@@ -38,7 +38,7 @@ class ControllerScore extends ControllerTwig
             $twig = ControllerTwig::twigControl();
             $manager = new ModelScore();
             $updateScore = $manager->updateScore($id, $score_valeur);
-            echo $twig->render('table.twig', ['root' => ROOT, 'score' => $updateScore]);
+            echo $twig->render('table.twig', ['score' => $updateScore]);
             var_dump($updateScore);
         }
         

@@ -19,12 +19,12 @@ require_once  __DIR__ .'/../vendor/altorouter/altorouter/AltoRouter.php';
 
 
 
-define('ROOT', $dossier_server_path.'/cdi/'.$_SESSION['outil_id']);
+// define('ROOT', $dossier_server_path.'/cdi/'.$_SESSION['outil_id']);
 
 // Création d'une instance de AltoRouter
 $router = new AltoRouter();
-// $router->setBasePath($dossier_server_path.'/cdi/'.$_SESSION['outil_id']);
-$router->setBasePath(ROOT);
+$router->setBasePath($dossier_server_path.'/cdi/'.$_SESSION['outil_id']);
+// $router->setBasePath(ROOT);
 
 // Routes
 $router->map('GET', '/', 'ControllerHumain#checked', '/');
