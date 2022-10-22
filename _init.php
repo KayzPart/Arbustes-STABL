@@ -1,5 +1,5 @@
 <?php
-// session_start();
+session_start();
 // unset($_SESSION['humain']['humain_id']);
 $dossier_server_path = '/Arbustes-appli';
 $bdd = new PDO("mysql:host=localhost;dbname=stage_stabl;charset=UTF8", 'root', '');

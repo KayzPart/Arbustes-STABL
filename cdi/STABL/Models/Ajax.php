@@ -1,6 +1,7 @@
 <?php
+global $bdd;
  try {
-    $bdd = new PDO("mysql:host=localhost;dbname=stage;charset=UTF8", 'root', '');
+    $bdd = new PDO("mysql:host=localhost;dbname=stage_stabl;charset=UTF8", 'root', '');
 } catch (PDOException $e) {
     echo 'Erreur de connection' . '<br>' . $e->getMessage();
 }
