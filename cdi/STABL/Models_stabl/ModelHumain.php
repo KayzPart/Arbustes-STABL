@@ -45,5 +45,10 @@ class ModelHumain extends Connect{
         $reqSelect->execute();
         $data = $reqSelect->fetch(PDO::FETCH_ASSOC);
         return new Humain($data);
+        // $humain = [];
+        // while($data = $reqSelect->fetch(PDO::FETCH_ASSOC)){
+        //     $humain[] = new Humain($data);
+        // }
+        // return $humain;
     }
 }

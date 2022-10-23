@@ -8,7 +8,7 @@
        "squizlabs/php_codesniffer": "3.6.2"
     },
     "autoload": {
-       "classmap": ["STABL/Classes", "STABL/Controllers", "STABL/Models", "STABL/Views"]
+       "classmap": ["STABL/Classes_stabl", "STABL/Controllers_stabl", "STABL/Models_stabl", "STABL/Views_stabl"]
     },
     "scripts": {
       "test": "vendor/bin/phpunit"

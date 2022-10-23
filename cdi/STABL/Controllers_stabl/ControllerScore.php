@@ -1,6 +1,6 @@
 <?php
 
-class ControllerScore extends ControllerTwig
+class ControllerScore extends ControllerTwigStabl
 {
     public static function insertScoreHumain($datas)
     {
@@ -19,7 +19,7 @@ class ControllerScore extends ControllerTwig
     public static function jeuTable()
     {
         // session_start();
-        $twig = ControllerTwig::twigControl();
+        $twig = ControllerTwigStabl::twigControl();
         $manager = new ModelScore();
         $score = $manager->selectScore();
         // $selectTable = $score->getScore_param1();
@@ -35,7 +35,7 @@ class ControllerScore extends ControllerTwig
             $id = $_GET['score_id'];
             var_dump($id);
             $score_valeur = $_GET['score_valeur'];
-            $twig = ControllerTwig::twigControl();
+            $twig = ControllerTwigStabl::twigControl();
             $manager = new ModelScore();
             $updateScore = $manager->updateScore($id, $score_valeur);
             echo $twig->render('table.twig', ['score' => $updateScore]);

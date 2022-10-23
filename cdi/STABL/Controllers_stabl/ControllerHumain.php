@@ -1,9 +1,9 @@
 <?php 
 
-class ControllerHumain extends ControllerTwig{
+class ControllerHumain extends ControllerTwigStabl{
     //Page d'entrée - Bouton Connexion/Inscription
     public static function checked(){
-        $twig = ControllerTwig::twigControl();
+        $twig = ControllerTwigStabl::twigControl();
         echo $twig->render('checked.twig');
     } 
 
@@ -13,13 +13,13 @@ class ControllerHumain extends ControllerTwig{
         // if(isset($_SESSION['humainId'])){
         //     header('Location: ' . $_SESSION['outil_retour']);
         // }
-        $twig = ControllerTwig::twigControl();
+        $twig = ControllerTwigStabl::twigControl();
         echo $twig->render('connexion.twig');
     }
 
     // Récupération des données après inscription / Ajouter la redirection a la page de connexion après isncription 
     public function formInscription($datas){
-        $twig = ControllerTwig::twigControl();
+        $twig = ControllerTwigStabl::twigControl();
         $datas = $_POST;
         $humain = new ModelHumain();
         $datas = $humain->humainInscription($datas); 
@@ -33,6 +33,7 @@ class ControllerHumain extends ControllerTwig{
         //     header('Refresh: 0.01; url= ./connexion');
         // }
         if(empty($avec_connexion)){
+            // unset($_SESSION['humain']['humain_id']);
             header('Location: ./homepage');
         }
         $humain_login = $_POST['humain_login'];
@@ -70,7 +71,7 @@ class ControllerHumain extends ControllerTwig{
             header('Refresh: 0.01; url= ./connexion');
         }
         $id = $_SESSION['humain']['humain_id'];
-        $twig = ControllerTwig::twigControl();
+        $twig = ControllerTwigStabl::twigControl();
         $datas = new ModelHumain();
         $outil = new ModelOutil();
         $datasOutil = $outil->selectOutil();
