@@ -1,5 +1,4 @@
 <?php 
-session_start();
 $dir_rel="../../";
 $dir_cdi="../";
 $fichier="index.php";
@@ -12,19 +11,8 @@ $_SESSION['outil_id'] = trouve_outil_id($_SERVER["PHP_SELF"]);
 require_once __DIR__ . '/../vendor/autoload.php';
 require_once  __DIR__ .'/../vendor/altorouter/altorouter/AltoRouter.php';
 
-// var_dump($_GET);
-// On sépare les paramètres
-// $params = explode('/', $_GET['p']);
-// var_dump($params);
-
-
-
-// define('ROOT', $dossier_server_path.'/cdi/'.$_SESSION['outil_id']);
-
-// Création d'une instance de AltoRouter
 $router = new AltoRouter();
 $router->setBasePath($dossier_server_path.'/cdi/'.$_SESSION['outil_id']);
-// $router->setBasePath(ROOT);
 
 // Routes
 $router->map('GET', '/', 'ControllerHumain#checked', '/');

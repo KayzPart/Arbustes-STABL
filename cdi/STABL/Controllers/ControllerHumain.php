@@ -29,8 +29,11 @@ class ControllerHumain extends ControllerTwig{
     // Vérification de la connexion
     public function verifConnexion(){
         // session_start();
-        if(!isset($_SESSION['humain']['humain_id'])){
-            header('Refresh: 0.01; url= ./connexion');
+        // if(!isset($_SESSION['humain']['humain_id'])){
+        //     header('Refresh: 0.01; url= ./connexion');
+        // }
+        if(empty($avec_connexion)){
+            header('Location: ./homepage');
         }
         $humain_login = $_POST['humain_login'];
         $mdp = $_POST['mdp'];
@@ -73,7 +76,7 @@ class ControllerHumain extends ControllerTwig{
         $datasOutil = $outil->selectOutil();
         $humain = $datas->selectHumain($id);
         echo $twig->render('homepage.twig', ['humain_id' => $_SESSION['humain']['humain_id'], 'humain' => $humain, 'outils' => $datasOutil[0]]);
-        // var_dump($datasOutil);
+        var_dump($humain);
     }
 
 
