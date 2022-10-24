@@ -1,5 +1,5 @@
 <?php 
-class Score extends Hydrate{
+class Score_stabl extends Hydrate_stabl{
     private $_score_id;
     private $_score_valeur;
     private $_score_outil_id;

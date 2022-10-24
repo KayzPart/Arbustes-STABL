@@ -14,7 +14,8 @@ require_once  __DIR__ .'/../vendor/altorouter/altorouter/AltoRouter.php';
 $router = new AltoRouter();
 $router->setBasePath($dossier_server_path.'/cdi/'.$_SESSION['outil_id']);
 
-// Routes
+if(!isset($_SESSION['humain']['humain_id'])){
+    // Routes
 $router->map('GET', '/', 'ControllerHumain#checked', '/');
 
 $router->map('GET', '/connexion', 'ControllerHumain#connexion');
@@ -26,11 +27,13 @@ $router->map('GET|POST', '/inscription', 'ControllerHumain#formInscription', 'ne
 // Vérification de la connexion
 $router->map('POST', '/verifConnect', 'ControllerHumain#verifConnexion');
 
-// Redirection après connexion
-$router->map('GET', '/homepage', 'ControllerHumain#redirectionEspace');
-
 $router->map('GET', '/choice', 'ControllerScore#insertScoreHumain');
 $router->map('GET', '/table', 'ControllerScore#jeuTable');
+} else {
+    // Redirection après connexion
+    $router->map('GET', '/homepage', 'ControllerHumain#redirectionEspace');
+}
+
 
 
 

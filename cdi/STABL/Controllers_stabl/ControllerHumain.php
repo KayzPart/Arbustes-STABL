@@ -32,10 +32,6 @@ class ControllerHumain extends ControllerTwigStabl{
         // if(!isset($_SESSION['humain']['humain_id'])){
         //     header('Refresh: 0.01; url= ./connexion');
         // }
-        if(empty($avec_connexion)){
-            // unset($_SESSION['humain']['humain_id']);
-            header('Location: ./homepage');
-        }
         $humain_login = $_POST['humain_login'];
         $mdp = $_POST['mdp'];
         $manager = new  ModelHumain();

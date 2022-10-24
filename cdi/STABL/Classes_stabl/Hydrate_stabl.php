@@ -1,5 +1,5 @@
 <?php 
-class Hydrate {
+class Hydrate_stabl {
     public function __construct (array $datas) {
         $this->hydrate($datas); 
     }

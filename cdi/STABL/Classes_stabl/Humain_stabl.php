@@ -1,5 +1,5 @@
 <?php 
-class Humain extends Hydrate{
+class Humain_stabl extends Hydrate_stabl{
     private $_humain_id;
     private $_humain_login;
     private $_mdp;

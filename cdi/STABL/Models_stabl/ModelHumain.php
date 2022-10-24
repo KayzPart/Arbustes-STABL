@@ -17,7 +17,7 @@ class ModelHumain extends Connect{
             
             $nouveauHumain = [];
             while ($humain = $reqHumainInscription->fetch(PDO::FETCH_ASSOC)){
-                $nouveauHumain[] = new Humain($humain);
+                $nouveauHumain[] = new Humain_stabl($humain);
             }
 
             echo "$humain_login votre inscription à bien été prise en compte";
@@ -32,7 +32,7 @@ class ModelHumain extends Connect{
         $reqConnect->execute();
         $log = $reqConnect->fetch(PDO::FETCH_ASSOC);
             if($reqConnect->rowCount() > 0){
-                return new Humain($log);
+                return new Humain_stabl($log);
             }else{
                 return "Login ou mot de passe incorrect";
             }
@@ -44,7 +44,7 @@ class ModelHumain extends Connect{
         $reqSelect->bindParam(':id', $id, PDO::PARAM_INT);
         $reqSelect->execute();
         $data = $reqSelect->fetch(PDO::FETCH_ASSOC);
-        return new Humain($data);
+        return new Humain_stabl($data);
         // $humain = [];
         // while($data = $reqSelect->fetch(PDO::FETCH_ASSOC)){
         //     $humain[] = new Humain($data);

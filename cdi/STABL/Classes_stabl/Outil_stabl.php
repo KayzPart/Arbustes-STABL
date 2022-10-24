@@ -1,6 +1,6 @@
 <?php 
 
-class Outil extends Hydrate{
+class Outil_stabl extends Hydrate_stabl{
     private $_outil_id;
     private $_outil_est_actif;
     private $_outil_nom;
