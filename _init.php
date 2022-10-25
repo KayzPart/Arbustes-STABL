@@ -2,7 +2,7 @@
 session_start();
 $dossier_server_path = '/Arbustes-appli';
 $bdd = new PDO("mysql:host=localhost;dbname=stage_stabl;charset=UTF8", 'root', '');
-$_SESSION['humain']['humain_id'] = 9;
+// $_SESSION['humain']['humain_id'] = 9;
 // unset($_SESSION['humain']['humain_id']);
 $_SESSION['outil_retour'] = $dossier_server_path. '/cdi/STABL';
 function trouve_outil_id($dossier) {

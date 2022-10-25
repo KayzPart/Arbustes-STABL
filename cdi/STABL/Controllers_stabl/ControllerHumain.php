@@ -33,11 +33,11 @@ class ControllerHumain extends ControllerTwigStabl{
         //     header('Refresh: 0.01; url= ./connexion');
         // }
         $humain_login = $_POST['humain_login'];
-        $mdp = $_POST['mdp'];
+        $humain_mdp_code = $_POST['mdp'];
         $manager = new  ModelHumain();
         $humain = $manager->sessionHumain($humain_login);
         if($humain != "Login ou mot de passe incorrect !"){
-            $passwordVerif = password_verify($mdp, $humain->getMdp());
+            $passwordVerif = password_verify($humain_mdp_code, $humain->getMdp());
 
             if($passwordVerif){
                 $_SESSION['humain']['humain_id'] = $humain->getHumain_id();

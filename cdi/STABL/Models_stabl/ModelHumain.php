@@ -5,9 +5,9 @@ class ModelHumain extends Connect{
     public function humainInscription($datas){
         if(isset($_POST['submit'])){
             $humain_login = $_POST['humain_login'];
-            $mdp = $_POST['mdp'];
+            $humain_mdp_code = $_POST['mdp'];
 
-            $hashed_password = password_hash($mdp, PASSWORD_DEFAULT);
+            $hashed_password = password_hash($humain_mdp_code, PASSWORD_DEFAULT);
 
             $db = $this->getDb();
             $reqHumainInscription = $db->prepare('INSERT INTO `si_humain` (`humain_login`, `mdp`) VALUES (:humain_login, :hashed_password)');
