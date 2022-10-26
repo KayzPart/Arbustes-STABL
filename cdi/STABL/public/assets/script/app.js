@@ -1,4 +1,4 @@
-fetch('./STABL/Models/Ajax.php', {
+fetch('./Models/Ajax.php', {
   method: 'GET',
   mode: 'cors',
   headers: {
@@ -14,58 +14,47 @@ fetch('./STABL/Models/Ajax.php', {
       let nombreSelectionner = element.score_param1
       let order = element.score_param2
       let help = element.score_param3
+      let idScore = element.score_id
       let nombre2 = 1
       let random = 10
       let score = 0
       let counter = 0
-      // let resultOperation = nombreSelectionner * nombre2
 
-      let multiple = [
-        { nombreSelectionner, nombre2: 1 },
-        { nombreSelectionner, nombre2: 2 },
-        { nombreSelectionner, nombre2: 3 },
-        { nombreSelectionner, nombre2: 4 },
-        { nombreSelectionner, nombre2: 5 },
-        { nombreSelectionner, nombre2: 6 },
-        { nombreSelectionner, nombre2: 7 },
-        { nombreSelectionner, nombre2: 8 },
-        { nombreSelectionner, nombre2: 9 },
-        { nombreSelectionner, nombre2: 10 }
-      ];
-
-      console.log(multiple)
-      let resultOperations = multiple.map(function (element) {
-        const results = `${element.nombreSelectionner}` * `${element.nombre2}`
-        return results
-        // console.log(results)
-      })
-      // for(let op of resultOperations.values()){
-      //   console.log(op)
-      // }
-      const tables = document.getElementById('tables')
-      tables.innerHTML += resultOperations.join(" ")
-
-      multiple.forEach(function (item, index) {
-        console.log(item);
-      });
-
+      // let multiple = [
+      //   { nombreSelectionner, nombre2: 1 },
+      //   { nombreSelectionner, nombre2: 2 },
+      //   { nombreSelectionner, nombre2: 3 },
+      //   { nombreSelectionner, nombre2: 4 },
+      //   { nombreSelectionner, nombre2: 5 },
+      //   { nombreSelectionner, nombre2: 6 },
+      //   { nombreSelectionner, nombre2: 7 },
+      //   { nombreSelectionner, nombre2: 8 },
+      //   { nombreSelectionner, nombre2: 9 },
+      //   { nombreSelectionner, nombre2: 10 }
+      // ];
+      // console.log(multiple)
+      // let resultOperations = multiple.map(function (element) {
+      //   // const results2 = `${element.nombreSelectionner}` .'x'. `${element.nombre2}`
+      //   let results = `${element.nombreSelectionner}` * `${element.nombre2}`
+      //   // return results
+      //   return `${element.nombreSelectionner} x ${element.nombre2} = ...`
+      // })
+      // const tables = document.getElementById('tables')
+      // tables.innerHTML += resultOperations.join(' ')
 
       for (let i = 1; i <= 10; i++) {
-        // console.log(result)
-        document.getElementById('table').innerHTML += `<div class="operation">${nombreSelectionner} x ${i} = ... <br ></div>`
+        let result = nombreSelectionner * i
+
+        document.getElementById('choice').innerHTML += `<div class="billes"><input type="radio" value= "${result}"><label>${result}</label></div>`
+
+
+        document.getElementById('table').innerHTML += `<div class="operation">${nombreSelectionner} x ${i} = &nbsp;<span class="results">${result}</span> <br ></div>`
       }
-
-
 
       startGame()
       function startGame() {
         // Question opération
         document.getElementById('question').innerHTML = `<span>${nombreSelectionner} x ${nombre2}</span>`
-        for (let i = 1; i <= 10; i++) {
-          let result = nombreSelectionner * i
-
-          document.getElementById('choice').innerHTML += `<div class="billes"><input type="radio" name="score_valeur" id="score_valeur" value= ${result}>${result}</div>`
-        }
         if (order == 1 && help == 1) {
           generateBilles()
         }
@@ -73,6 +62,7 @@ fetch('./STABL/Models/Ajax.php', {
       }
 
       function generateBilles() {
+        const billes = document.getElementById('generateBille')
         const table = document.createElement('table');
         for (let i = 1; i <= nombre2; i++) {
           const row = document.createElement('tr');
@@ -84,42 +74,47 @@ fetch('./STABL/Models/Ajax.php', {
           table.appendChild(row);
           break
         }
-        document.body.appendChild(table);
+        billes.append(table);
       }
 
       function click() {
-        const inputScoreValeur = document.querySelectorAll('input[type=radio][name=score_valeur]')
-        const valeurScore = document.querySelector('input[type=radio][name=score_valeur]')
+
+        const inputScoreValeur = document.querySelectorAll('input[type=radio]')
+        const valeurScore = document.querySelector('input[type=radio]')
+        const spanResult = document.querySelectorAll('.results')
+
 
         if (valeurScore) {
           inputScoreValeur.forEach((elem) => {
             const parent = elem.parentNode
             elem.addEventListener("click", function (event) {
               let item = event.target.value;
-              console.log(item);
+
               if (item == nombreSelectionner * nombre2) {
-                // parent.classList.add('true')
                 parent.style.backgroundImage = "url('public/assets/ressources/bille-vert.png')"
-                document.getElementById('result').innerHTML = `<p> Bien jouer !`
-                // document.getElementById('table').innerHTML += `<div class="operation">${nombreSelectionner} x ${nombre2} = ${nombreSelectionner * nombre2}<br ></div>`
+                spanResult.forEach(result => {
+                  if (result.textContent == nombreSelectionner * nombre2) {
+                    result.classList.add('show')
+                    result.style.color = 'green'
+                  }
+                })
+                console.log(`${nombreSelectionner} x ${nombre2} = ${nombreSelectionner * nombre2}`)
                 score++
                 nombre2++
-                console.log(nombreSelectionner * nombre2)
-                startGame()
-
+                const myTimeout = setTimeout(() => {
+                  startGame()
+                  parent.style.backgroundImage = "url('public/assets/ressources/bille-jaune.png')"
+                }, 1000)
+                if (score === 10) {
+                  clearTimeout(myTimeout)
+                }
               } else {
                 parent.classList.add('false')
-                document.getElementById('result').innerHTML = `<p> Essaye encore !</p>`
+                setTimeout(() => {
+                  parent.style.backgroundImage = "url('public/assets/ressources/bille-jaune.png')"
+                }, 3000)
               }
-              counter++
               showScore()
-              // if (counter < 10) {
-              //   setTimeout(startGame(), 3000)
-              //   return
-              // }else{
-              //   document.getElementById('score').innerHTML = ""
-              //   document.getElementById('result').innerHTML = `<p> Score : ${score} / 10</p>`
-              // }
             });
           });
         }
@@ -127,8 +122,10 @@ fetch('./STABL/Models/Ajax.php', {
 
       function showScore() {
         document.getElementById('score').innerHTML = `<p> Score : ${score} / 10</p>`
+        if (score === 10) {
+          document.getElementById('finalScore').innerHTML = `<input type="hidden" name="score_valeur" value="${score}"><input type="hidden"  name="score_id" value="${idScore}"><input type="submit" name="submit" value="Bien joué ! Enregistre ton score 🏆">`
+        }
       }
-
 
     })
   })
@@ -138,7 +135,6 @@ fetch('./STABL/Models/Ajax.php', {
 
 function randomNumber() {
   nombre2 = Math.floor(Math.random() * random);
-  // console.log(nombre2)
 }
 
 
@@ -146,15 +142,3 @@ function randomNumber() {
 function showScoreInformation() {
   document.getElementById('score').innerHTML = `<p>Score : 20:20</p>`
 }
-
-// Test table multiplication
-// const array = []
-// for (let i = 1; i < 11; i++) {
-//   array.push(i)
-// }
-// for (let j = 1; j < 11; j++) {
-//   const multiplications = array.map((num) => {
-//     return num * j;
-//   })
-//   console.log(multiplications)
-// }
