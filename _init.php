@@ -1,6 +1,6 @@
 <?php
 session_start();
-$dossier_server_path = '/Arbustes-appli';
+$dossier_server_path = '/Arbustes-STABL';
 $bdd = new PDO("mysql:host=localhost;dbname=stage_stabl;charset=UTF8", 'root', '');
 // $_SESSION['humain']['humain_id'] = 9;
 // unset($_SESSION['humain']['humain_id']);

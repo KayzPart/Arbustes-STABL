@@ -8,7 +8,7 @@ $baseDir = dirname($vendorDir);
 return array(
     'AltoRouter' => $vendorDir . '/altorouter/altorouter/AltoRouter.php',
     'Composer\\InstalledVersions' => $vendorDir . '/composer/InstalledVersions.php',
-    'Connect' => $baseDir . '/STABL/Controllers_stabl/Connect.php',
+    'Connect' => $baseDir . '/STABL/Models_stabl/Connect.php',
     'ControllerHumain' => $baseDir . '/STABL/Controllers_stabl/ControllerHumain.php',
     'ControllerScore' => $baseDir . '/STABL/Controllers_stabl/ControllerScore.php',
     'ControllerTwigStabl' => $baseDir . '/STABL/Controllers_stabl/ControllerTwigStabl.php',

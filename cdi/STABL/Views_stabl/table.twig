@@ -1,36 +1,23 @@
 {% extends "base.twig" %}
 {% block body %}
-	<!-- Récupérer la bonne table en fonction du user connecter et de la table sélectionner  -->
-	NombreSelectionner :
-	{{score.getScore_param1}}
-	<br>
-	Ordre/désordre :
-	{{score.getScore_param2}}
-	<br>
-	Aide :
-	{{score.getScore_param3}}
+	{{ include("Templates/header.twig")}}
 
 	<div id="question"></div>
-	<form action="" method="GET" id="click-result">
+	<form action="./update" method="GET" id="click-result">
 		<div id="score">
-        <p>
-            Score : 0 / 10
-        </p>
-        </div>
-		<section id="table"></section>
-		<div id="tables"></div>
-        <div id="choice"></div>
+			<p>
+				Score : 0 / 10
+			</p>
+		</div>
+		<section class="content">
+			<div id="table"></div>
+			<div id="choice"></div>
+		</section>
+		<div id="generateBille"></div>
 
-		<br>
-
-        
-
-		<br>
-        
-
-		<div id="result"></div>
-		<div id="test"></div>
+		<div id="finalScore"></div>
 		
+
 	</form>
 
 {% endblock %}

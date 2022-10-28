@@ -14,45 +14,38 @@ require_once  __DIR__ .'/../vendor/altorouter/altorouter/AltoRouter.php';
 $router = new AltoRouter();
 $router->setBasePath($dossier_server_path.'/cdi/'.$_SESSION['outil_id']);
 
-// if(!isset($_SESSION['humain']['humain_id'])){
-//     // Routes
-// $router->map('GET', '/', 'ControllerHumain#checked', '/');
-
-// $router->map('GET', '/connexion', 'ControllerHumain#connexion');
-
-// // $router->map('POST', '/returnConnect', 'ControllerHumain#inscription');
-
-// $router->map('GET|POST', '/inscription', 'ControllerHumain#formInscription', 'newUse');
-
-// // Vérification de la connexion
-// $router->map('POST', '/verifConnect', 'ControllerHumain#verifConnexion');
-
-// $router->map('GET', '/choice', 'ControllerScore#insertScoreHumain');
-// $router->map('GET', '/table', 'ControllerScore#jeuTable');
-// } else {
-//     // Redirection après connexion
-//     $router->map('GET', '/homepage', 'ControllerHumain#redirectionEspace');
-// }
-
 // Routes
-if (!isset($_SESSION['humain']['humain_id'])) {
-    $router->map('GET', '/', 'ControllerHumain#checked', '/');
-    $router->map('GET', '/connexion', 'ControllerHumain#connexion');
-    // $router->map('POST', '/returnConnect', 'ControllerHumain#inscription');
-    $router->map('GET|POST', '/inscription', 'ControllerHumain#formInscription', 'newUse');
-    // Vérification de la connexion
-    $router->map('POST', '/verifConnect', 'ControllerHumain#verifConnexion');
-    $router->map('GET', '/homepage', 'ControllerHumain#redirectionEspace');
-  }
-  else {
-    $router->map('GET', '/', 'ControllerHumain#redirectionEspace');
-  }
+// if (!isset($_SESSION['humain']['humain_id'])) {
+//     $router->map('GET', '/', 'ControllerHumain#checked', '/');
+//     $router->map('GET', '/connexion', 'ControllerHumain#connexion');
+//     // $router->map('POST', '/returnConnect', 'ControllerHumain#inscription');
+//     $router->map('GET|POST', '/inscription', 'ControllerHumain#formInscription', 'newUse');
+//     // Vérification de la connexion
+//     $router->map('POST', '/verifConnect', 'ControllerHumain#verifConnexion');
+//     $router->map('GET', '/homepage', 'ControllerHumain#redirectionEspace');
+//     $router->map('GET', '/choice', 'ControllerScore#insertScoreHumain');
+//     $router->map('GET', '/table', 'ControllerScore#jeuTable');
+//   }
+//   else {
+//     $router->map('GET', '/', 'ControllerHumain#redirectionEspace');
+//   }
 
+$router->map('GET', '/', 'ControllerHumain#checked', '/');
 
+$router->map('GET', '/connexion', 'ControllerHumain#connexion');
 
+$router->map('GET|POST', '/inscription', 'ControllerHumain#formInscription', 'newUse');
 
+// Vérification de la connexion
+$router->map('POST', '/verifConnect', 'ControllerHumain#verifConnexion');
 
+// Redirection après connexion
+$router->map('GET', '/homepage', 'ControllerHumain#redirectionEspace');
 
+$router->map('GET', '/choice', 'ControllerScore#insertScoreHumain');
+$router->map('GET', '/table', 'ControllerScore#jeuTable');
+
+$router->map('GET', '/update', 'ControllerScore#updateScore');
 $match = $router->match();
 
 if($match){

@@ -10,58 +10,70 @@ fetch('./Models/Ajax.php', {
   .then((response) => { return response.json() })
   .then(datas => {
     datas.map(element => {
-      // Général
+      // Variables
       let nombreSelectionner = element.score_param1
       let order = element.score_param2
       let help = element.score_param3
       let idScore = element.score_id
       let nombre2 = 1
-      let random = 10
+      let randomRange = 11
       let score = 0
       let counter = 0
 
-      // let multiple = [
-      //   { nombreSelectionner, nombre2: 1 },
-      //   { nombreSelectionner, nombre2: 2 },
-      //   { nombreSelectionner, nombre2: 3 },
-      //   { nombreSelectionner, nombre2: 4 },
-      //   { nombreSelectionner, nombre2: 5 },
-      //   { nombreSelectionner, nombre2: 6 },
-      //   { nombreSelectionner, nombre2: 7 },
-      //   { nombreSelectionner, nombre2: 8 },
-      //   { nombreSelectionner, nombre2: 9 },
-      //   { nombreSelectionner, nombre2: 10 }
-      // ];
-      // console.log(multiple)
-      // let resultOperations = multiple.map(function (element) {
-      //   // const results2 = `${element.nombreSelectionner}` .'x'. `${element.nombre2}`
-      //   let results = `${element.nombreSelectionner}` * `${element.nombre2}`
-      //   // return results
-      //   return `${element.nombreSelectionner} x ${element.nombre2} = ...`
-      // })
-      // const tables = document.getElementById('tables')
-      // tables.innerHTML += resultOperations.join(' ')
 
       for (let i = 1; i <= 10; i++) {
         let result = nombreSelectionner * i
 
         document.getElementById('choice').innerHTML += `<div class="billes"><input type="radio" value= "${result}"><label>${result}</label></div>`
 
-
         document.getElementById('table').innerHTML += `<div class="operation">${nombreSelectionner} x ${i} = &nbsp;<span class="results">${result}</span> <br ></div>`
       }
 
       startGame()
       function startGame() {
+        
+        if (order == 1 && help == 1) {
+          generateBallsInOrder()
+        }
+        else if (order == 1 && help == 2) {
+          table()
+        }
+        else if(order == 2 && help == 1){
+          randomNumber()
+          generateBallsOutOfOrder()
+        }
+        else if(order == 2 && help == 2){
+          randomNumber()
+          tableOutOfOrder()
+        }
         // Question opération
         document.getElementById('question').innerHTML = `<span>${nombreSelectionner} x ${nombre2}</span>`
-        if (order == 1 && help == 1) {
-          generateBilles()
-        }
         click()
       }
 
-      function generateBilles() {
+      function tableOutOfOrder() {
+        const spanResult = document.querySelectorAll('.results')
+        for (i = 1; i <= nombre2; i++) {
+          if(i == 10){
+            break
+          }
+          // console.log(i)
+          // console.log(spanResult[i])
+          spanResult[i].classList.add('show')
+
+          
+          if(i == nombre2 -1 ){
+            spanResult[i].classList.remove('show')
+          }
+          else if(i < nombre2 -1  && i < nombre2 -2){
+            spanResult[i].classList.remove('show')
+          }
+          
+        }
+      }
+      
+
+      function generateBallsInOrder() {
         const billes = document.getElementById('generateBille')
         const table = document.createElement('table');
         for (let i = 1; i <= nombre2; i++) {
@@ -72,24 +84,53 @@ fetch('./Models/Ajax.php', {
             row.appendChild(col);
           }
           table.appendChild(row);
-          break
+          break;
         }
         billes.append(table);
       }
 
-      function click() {
+      function generateBallsOutOfOrder() {
+        const billes = document.getElementById('generateBille')
+        const table = document.createElement('table');
+        let j
+        for (let i = 1; i <= nombre2; i++) {
+          const row = document.createElement('tr');
+          for (j = 1; j <= nombreSelectionner; j++) {
+            const col = document.createElement('td');
+            col.classList.add('col-header')
+            row.appendChild(col);
+          }
+          table.appendChild(row);
+        } 
+        billes.append(table)
+        
+      }
+      function table() {
+        const spanResult = document.querySelectorAll('.results')
+        let i = 1
+        for (i = 1; i <= nombre2; i++) {
+          if(i == 10){
+            break
+          }
+          spanResult[i].classList.add('show')
+          
+          if(i == nombre2 -1){
+            spanResult[i].classList.remove('show')
+          }
+        }
+      }
 
+      // Function that checks the click, the result and the value and which adds the correct result in the table
+      function click() {
         const inputScoreValeur = document.querySelectorAll('input[type=radio]')
         const valeurScore = document.querySelector('input[type=radio]')
-        const spanResult = document.querySelectorAll('.results')
-
-
         if (valeurScore) {
           inputScoreValeur.forEach((elem) => {
             const parent = elem.parentNode
             elem.addEventListener("click", function (event) {
               let item = event.target.value;
-
+              console.log(item)
+              const spanResult = document.querySelectorAll('.results')
               if (item == nombreSelectionner * nombre2) {
                 parent.style.backgroundImage = "url('public/assets/ressources/bille-vert.png')"
                 spanResult.forEach(result => {
@@ -98,7 +139,7 @@ fetch('./Models/Ajax.php', {
                     result.style.color = 'green'
                   }
                 })
-                console.log(`${nombreSelectionner} x ${nombre2} = ${nombreSelectionner * nombre2}`)
+                // console.log(`${nombreSelectionner} x ${nombre2} = ${nombreSelectionner * nombre2}`)
                 score++
                 nombre2++
                 const myTimeout = setTimeout(() => {
@@ -127,18 +168,18 @@ fetch('./Models/Ajax.php', {
         }
       }
 
+      function randomNumber() {
+        // nombre2 = Math.floor(Math.random() * (10 - 1)) + 1;
+        // console.log(nombreSelectionner + 'x' + nombre2)
+        let arrayNumbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+        nombre2 = arrayNumbers.sort(function () {
+          return Math.random() - 0.5;
+        });
+        nombre2 = nombre2.pop()
+        console.log(nombre2)
+      }
+      
+
     })
   })
   .catch((error) => console.log(error))
-
-// Function externes
-
-function randomNumber() {
-  nombre2 = Math.floor(Math.random() * random);
-}
-
-
-// Afficher le score dynamiquement
-function showScoreInformation() {
-  document.getElementById('score').innerHTML = `<p>Score : 20:20</p>`
-}

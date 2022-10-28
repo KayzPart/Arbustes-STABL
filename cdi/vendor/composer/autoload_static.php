@@ -64,7 +64,7 @@ class ComposerStaticInitcebccc70ee1025448ee9450b0efed45f
     public static $classMap = array (
         'AltoRouter' => __DIR__ . '/..' . '/altorouter/altorouter/AltoRouter.php',
         'Composer\\InstalledVersions' => __DIR__ . '/..' . '/composer/InstalledVersions.php',
-        'Connect' => __DIR__ . '/../..' . '/STABL/Controllers_stabl/Connect.php',
+        'Connect' => __DIR__ . '/../..' . '/STABL/Models_stabl/Connect.php',
         'ControllerHumain' => __DIR__ . '/../..' . '/STABL/Controllers_stabl/ControllerHumain.php',
         'ControllerScore' => __DIR__ . '/../..' . '/STABL/Controllers_stabl/ControllerScore.php',
         'ControllerTwigStabl' => __DIR__ . '/../..' . '/STABL/Controllers_stabl/ControllerTwigStabl.php',
