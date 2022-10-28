@@ -1,18 +1,20 @@
-<?php 
-$dir_rel="../../";
-$dir_cdi="../";
-$fichier="index.php";
-include($dir_rel.'_init.php');
+<?php
+$dir_rel = "../../";
+$dir_cdi = "../";
+$fichier = "index.php";
+include($dir_rel . '_init.php');
 
-if (isset($_SESSION['outil_retour'])) $retour=$_SESSION['outil_retour']; else if (isset($_SESSION['retour_page'])) $retour=$_SESSION['retour_page']; else $retour='outil.php';
+if (isset($_SESSION['outil_retour'])) $retour = $_SESSION['outil_retour'];
+else if (isset($_SESSION['retour_page'])) $retour = $_SESSION['retour_page'];
+else $retour = 'outil.php';
 $_SESSION['outil_id'] = trouve_outil_id($_SERVER["PHP_SELF"]);
 
 
 require_once __DIR__ . '/../vendor/autoload.php';
-require_once  __DIR__ .'/../vendor/altorouter/altorouter/AltoRouter.php';
+require_once  __DIR__ . '/../vendor/altorouter/altorouter/AltoRouter.php';
 
 $router = new AltoRouter();
-$router->setBasePath($dossier_server_path.'/cdi/'.$_SESSION['outil_id']);
+$router->setBasePath($dossier_server_path . '/cdi/' . $_SESSION['outil_id']);
 
 // Routes
 // if (!isset($_SESSION['humain']['humain_id'])) {
@@ -22,37 +24,22 @@ $router->setBasePath($dossier_server_path.'/cdi/'.$_SESSION['outil_id']);
 //     $router->map('GET|POST', '/inscription', 'ControllerHumain#formInscription', 'newUse');
 //     // Vérification de la connexion
 //     $router->map('POST', '/verifConnect', 'ControllerHumain#verifConnexion');
-//     $router->map('GET', '/homepage', 'ControllerHumain#redirectionEspace');
-//     $router->map('GET', '/choice', 'ControllerScore#insertScoreHumain');
-//     $router->map('GET', '/table', 'ControllerScore#jeuTable');
-//   }
-//   else {
-//     $router->map('GET', '/', 'ControllerHumain#redirectionEspace');
-//   }
-
-$router->map('GET', '/', 'ControllerHumain#checked', '/');
-
-$router->map('GET', '/connexion', 'ControllerHumain#connexion');
-
-$router->map('GET|POST', '/inscription', 'ControllerHumain#formInscription', 'newUse');
-
-// Vérification de la connexion
-$router->map('POST', '/verifConnect', 'ControllerHumain#verifConnexion');
-
-// Redirection après connexion
-$router->map('GET', '/homepage', 'ControllerHumain#redirectionEspace');
-
+// }
+// else{
+//     $router->map('GET', '/', 'ControllerHumain#redirectionEspace', '/');
+// }
+$router->map('GET', '/', 'ControllerHumain#redirectionEspace');
 $router->map('GET', '/choice', 'ControllerScore#insertScoreHumain');
 $router->map('GET', '/table', 'ControllerScore#jeuTable');
-
 $router->map('GET', '/update', 'ControllerScore#updateScore');
+
 $match = $router->match();
 
-if($match){
+if ($match) {
     list($controller, $action) = explode('#', $match['target']);
-    $obj = new $controller; 
-   
-    if(is_callable(array($obj, $action))){
-         call_user_func_array(array($obj, $action), array($match['params']));
+    $obj = new $controller;
+
+    if (is_callable(array($obj, $action))) {
+        call_user_func_array(array($obj, $action), array($match['params']));
     }
-} 
+}

@@ -1,4 +1,4 @@
-fetch('./Models/Ajax.php', {
+fetch('./Models_stabl/Ajax.php', {
   method: 'GET',
   mode: 'cors',
   headers: {
@@ -175,8 +175,9 @@ fetch('./Models/Ajax.php', {
         nombre2 = arrayNumbers.sort(function () {
           return Math.random() - 0.5;
         });
-        nombre2 = nombre2.pop()
         console.log(nombre2)
+        // nombre2 = nombre2.pop()
+        nombre2 = nombre2.pop()
       }
       
 

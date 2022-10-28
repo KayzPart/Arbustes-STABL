@@ -18,15 +18,10 @@ class ControllerScore extends ControllerTwigStabl
 
     public static function jeuTable()
     {
-        // session_start();
         $twig = ControllerTwigStabl::twigControl();
         $manager = new ModelScore();
         $score = $manager->selectScore();
-        // $selectTable = $score->getScore_param1();
-        // $orderOrNot = $score->getScore_param2();
-        // $aide = $score->getScore_param3();
         echo $twig->render('table.twig', ['score' => $score]);
-        var_dump($score);
     }
 
     public static function updateScore(){
@@ -41,6 +36,7 @@ class ControllerScore extends ControllerTwigStabl
             echo $twig->render('table.twig', ['score' => $updateScore]);
             var_dump($updateScore);
         }
+        header('Location: ./');
         
     }
 }
