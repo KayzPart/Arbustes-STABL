@@ -1,3 +1,4 @@
+let arrayNumbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
 fetch('./Models_stabl/Ajax.php', {
   method: 'GET',
   mode: 'cors',
@@ -31,18 +32,18 @@ fetch('./Models_stabl/Ajax.php', {
 
       startGame()
       function startGame() {
-        
+
         if (order == 1 && help == 1) {
           generateBallsInOrder()
         }
         else if (order == 1 && help == 2) {
           table()
         }
-        else if(order == 2 && help == 1){
+        else if (order == 2 && help == 1) {
           randomNumber()
           generateBallsOutOfOrder()
         }
-        else if(order == 2 && help == 2){
+        else if (order == 2 && help == 2) {
           randomNumber()
           tableOutOfOrder()
         }
@@ -53,25 +54,26 @@ fetch('./Models_stabl/Ajax.php', {
 
       function tableOutOfOrder() {
         const spanResult = document.querySelectorAll('.results')
-        for (i = 1; i <= nombre2; i++) {
-          if(i == 10){
-            break
-          }
-          // console.log(i)
-          // console.log(spanResult[i])
-          spanResult[i].classList.add('show')
+        // for (i = 1; i <= nombre2; i++) {
+        //   // if (i == 10) {
+        //   //   break
+        //   // }
+        //   spanResult[i].classList.add('show')
+        //   console.log(i)
+        //   console.log(spanResult[i])
 
-          
-          if(i == nombre2 -1 ){
-            spanResult[i].classList.remove('show')
-          }
-          else if(i < nombre2 -1  && i < nombre2 -2){
-            spanResult[i].classList.remove('show')
-          }
-          
+        //   if (i == nombre2 -1) {
+        //     spanResult[i].classList.remove('show')
+        //   }
+        //   else if (i < nombre2 - 1 && i < nombre2 - 2) {
+        //     spanResult[i].classList.remove('show')
+        //   }
+
+        // }
+        for( i = 0; i <= spanResult.length; i++){
+          console.log(spanResult[i])
         }
       }
-      
 
       function generateBallsInOrder() {
         const billes = document.getElementById('generateBille')
@@ -84,7 +86,7 @@ fetch('./Models_stabl/Ajax.php', {
             row.appendChild(col);
           }
           table.appendChild(row);
-          break;
+          break
         }
         billes.append(table);
       }
@@ -101,20 +103,20 @@ fetch('./Models_stabl/Ajax.php', {
             row.appendChild(col);
           }
           table.appendChild(row);
-        } 
+        }
         billes.append(table)
-        
+
       }
       function table() {
         const spanResult = document.querySelectorAll('.results')
         let i = 1
         for (i = 1; i <= nombre2; i++) {
-          if(i == 10){
+          if (i == 10) {
             break
           }
           spanResult[i].classList.add('show')
-          
-          if(i == nombre2 -1){
+
+          if (i == nombre2 - 1) {
             spanResult[i].classList.remove('show')
           }
         }
@@ -129,7 +131,6 @@ fetch('./Models_stabl/Ajax.php', {
             const parent = elem.parentNode
             elem.addEventListener("click", function (event) {
               let item = event.target.value;
-              console.log(item)
               const spanResult = document.querySelectorAll('.results')
               if (item == nombreSelectionner * nombre2) {
                 parent.style.backgroundImage = "url('public/assets/ressources/bille-vert.png')"
@@ -139,7 +140,6 @@ fetch('./Models_stabl/Ajax.php', {
                     result.style.color = 'green'
                   }
                 })
-                // console.log(`${nombreSelectionner} x ${nombre2} = ${nombreSelectionner * nombre2}`)
                 score++
                 nombre2++
                 const myTimeout = setTimeout(() => {
@@ -169,18 +169,19 @@ fetch('./Models_stabl/Ajax.php', {
       }
 
       function randomNumber() {
-        // nombre2 = Math.floor(Math.random() * (10 - 1)) + 1;
-        // console.log(nombreSelectionner + 'x' + nombre2)
-        let arrayNumbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
-        nombre2 = arrayNumbers.sort(function () {
-          return Math.random() - 0.5;
-        });
-        console.log(nombre2)
-        // nombre2 = nombre2.pop()
-        nombre2 = nombre2.pop()
+        const inputScoreValeur = document.querySelectorAll('input[type=radio]')
+        let resultsFind = []
+        let numbers = arrayNumbers.sort(() => Math.random() - 0.5)
+        nombre2 = numbers.pop()
+        inputScoreValeur.forEach((elem) => {
+          elem.addEventListener('click', function (event) {
+            let item = event.target.value
+            if(item == nombreSelectionner * nombre2){
+              arrayNumbers.indexOf(nombre2)
+            }
+          })
+        })
       }
-      
-
     })
   })
   .catch((error) => console.log(error))
