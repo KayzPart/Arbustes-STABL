@@ -1,9 +1,8 @@
-
 {% block body %}
 	{{ include("Templates/header.twig")}}
 
 	<div id="question"></div>
-	<form action="./update" method="GET" id="click-result">
+	<form action="./insert" method="POST" id="click-result">
 		<div id="score">
 			<p>
 				Score : 0 / 10
@@ -16,8 +15,14 @@
 		<div id="generateBille"></div>
 
 		<div id="finalScore"></div>
-		
+
 
 	</form>
-
 {% endblock %}
+<footer></footer>
+<script>
+	let nombreSelectionner = {{ param1 }}
+	let order = {{ param2 }}
+	let help = {{ param3 }}
+</script>
+<script src="./public/assets/script/table.js"></script></body></html>

@@ -162,7 +162,13 @@ h2 {
 .tables input[type=radio]+img {
     cursor: pointer;
 }
-
+.score-table{
+    position: relative;
+}
+.score-table  figure{
+    position: absolute;
+    right: 0;
+}
 
 .tables>label>img {
     width: 200px;

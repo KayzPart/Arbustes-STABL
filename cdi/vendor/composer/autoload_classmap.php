@@ -11,6 +11,7 @@ return array(
     'Connect' => $baseDir . '/STABL/Models_stabl/Connect.php',
     'ControllerHumain' => $baseDir . '/STABL/Controllers_stabl/ControllerHumain.php',
     'ControllerScore' => $baseDir . '/STABL/Controllers_stabl/ControllerScore.php',
+    'ControllerTable' => $baseDir . '/STABL/Controllers_stabl/ControllerTable.php',
     'ControllerTwigStabl' => $baseDir . '/STABL/Controllers_stabl/ControllerTwigStabl.php',
     'Humain_stabl' => $baseDir . '/STABL/Classes_stabl/Humain_stabl.php',
     'Hydrate_stabl' => $baseDir . '/STABL/Classes_stabl/Hydrate_stabl.php',
