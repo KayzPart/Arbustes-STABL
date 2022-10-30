@@ -1,4 +1,31 @@
 let arrayNumbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+
+// Homepage
+let radioInput = document.querySelectorAll("input[type=radio][name=scoreParam1]")
+let imgTables = document.querySelectorAll('.click-table')
+let optionRadio = document.querySelectorAll('.option-radio.input')
+let inputRadioOption = document.querySelectorAll('input[type=radio][name=scoreParam3]')
+
+radioInput.forEach(r => {
+  r.addEventListener('click', () => {
+    let imgRelated = r.parentNode.querySelector('img')
+    updateImages(imgRelated)
+  })
+})
+
+function updateImages(changedImage) {
+  imgTables.forEach(image => {
+    if (image === changedImage) {
+      image.style.opacity = 1
+    } else {
+      image.style.opacity = 0.3
+    }
+  })
+}
+
+
+
+
 fetch('./Models_stabl/Ajax.php', {
   method: 'GET',
   mode: 'cors',
@@ -70,7 +97,7 @@ fetch('./Models_stabl/Ajax.php', {
         //   }
 
         // }
-        for( i = 0; i <= spanResult.length; i++){
+        for (i = 0; i <= spanResult.length; i++) {
           console.log(spanResult[i])
         }
       }
@@ -176,7 +203,7 @@ fetch('./Models_stabl/Ajax.php', {
         inputScoreValeur.forEach((elem) => {
           elem.addEventListener('click', function (event) {
             let item = event.target.value
-            if(item == nombreSelectionner * nombre2){
+            if (item == nombreSelectionner * nombre2) {
               arrayNumbers.indexOf(nombre2)
             }
           })
