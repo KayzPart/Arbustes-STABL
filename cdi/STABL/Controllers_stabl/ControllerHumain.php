@@ -73,7 +73,7 @@ class ControllerHumain extends ControllerTwigStabl{
         $datasOutil = $outil->selectOutil();
         $humain = $datas->selectHumain($id);
         echo $twig->render('homepage.twig', ['humain_id' => $_SESSION['humain']['humain_id'], 'humain' => $humain, 'outils' => $datasOutil[0]]);
-        var_dump($humain);
+        // var_dump($humain);
     }
 
 

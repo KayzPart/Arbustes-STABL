@@ -28,10 +28,11 @@ $router->setBasePath($dossier_server_path . '/cdi/' . $_SESSION['outil_id']);
 // else{
 //     $router->map('GET', '/', 'ControllerHumain#redirectionEspace', '/');
 // }
-$router->map('GET', '/', 'ControllerHumain#redirectionEspace');
-$router->map('GET', '/choice', 'ControllerScore#insertScoreHumain');
-$router->map('GET', '/table', 'ControllerScore#jeuTable');
-$router->map('GET', '/update', 'ControllerScore#updateScore');
+$router->map('GET|POST', '/', 'ControllerHumain#redirectionEspace');
+// $router->map('GET', '/choice', 'ControllerScore#insertScoreHumain');
+$router->map('GET|POST', '/table', 'ControllerTable#jeuTable');
+$router->map('POST', '/insert', 'ControllerScore#insertScoreHumain');
+$router->map('POST', '/update', 'ControllerScore#updateScore');
 
 $match = $router->match();
 

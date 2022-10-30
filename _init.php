@@ -11,5 +11,3 @@ function trouve_outil_id($dossier) {
     $outil_id=substr($dossier,$position1+5,$position2-$position1-5);
     return $outil_id;
 }
-
-// test

@@ -67,6 +67,7 @@ class ComposerStaticInitcebccc70ee1025448ee9450b0efed45f
         'Connect' => __DIR__ . '/../..' . '/STABL/Models_stabl/Connect.php',
         'ControllerHumain' => __DIR__ . '/../..' . '/STABL/Controllers_stabl/ControllerHumain.php',
         'ControllerScore' => __DIR__ . '/../..' . '/STABL/Controllers_stabl/ControllerScore.php',
+        'ControllerTable' => __DIR__ . '/../..' . '/STABL/Controllers_stabl/ControllerTable.php',
         'ControllerTwigStabl' => __DIR__ . '/../..' . '/STABL/Controllers_stabl/ControllerTwigStabl.php',
         'Humain_stabl' => __DIR__ . '/../..' . '/STABL/Classes_stabl/Humain_stabl.php',
         'Hydrate_stabl' => __DIR__ . '/../..' . '/STABL/Classes_stabl/Hydrate_stabl.php',

@@ -5,8 +5,8 @@ class ControllerScore extends ControllerTwigStabl
     public static function insertScoreHumain($datas)
     {
         // session_start();
-        $datas = $_GET;
-        if (isset($_GET['submit'])) {
+        $datas = $_POST;
+        if (isset($_POST['submit'])) {
             $manager = new ModelScore();
             $manager->insertScore($datas);
             header('Location: ./table');
@@ -15,15 +15,7 @@ class ControllerScore extends ControllerTwigStabl
         }
         var_dump($datas);
     }
-
-    public static function jeuTable()
-    {
-        $twig = ControllerTwigStabl::twigControl();
-        $manager = new ModelScore();
-        $score = $manager->selectScore();
-        echo $twig->render('table.twig', ['score' => $score]);
-    }
-
+    
     public static function updateScore(){
         // session_start();
         if(isset($_GET['submit'])){

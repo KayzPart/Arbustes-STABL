@@ -6,13 +6,13 @@ class ModelScore extends Connect{
             $scoreActif = 1;
             $scoreDate = date('Y-m-d');
             $db = $this->getDb();
-            $score = $db->prepare('INSERT INTO `scores`(`score_valeur`, `score_outil_id`, `score_humain_id`, `score_param1`, `score_param2`, `score_param3`, `score_est_actif`, `score_date`) VALUES (:scoreValeur, :scoreOutilId,  :id, :scoreParam1, :scoreParam2, :scoreParam3, :scoreActif, :scoreDate)');
+            $score = $db->prepare('INSERT INTO `scores`(`score_valeur`, `score_outil_id`, `score_humain_id`, `score_param1`, `score_param2`, `score_param3`, `score_est_actif`, `score_date`) VALUES (:scoreValeur, :scoreOutilId,  :id, :selectTable, :order, :help, :scoreActif, :scoreDate)');
             $score->bindParam(':scoreValeur', $datas['scoreValeur'], PDO::PARAM_STR);
             $score->bindParam(':scoreOutilId', $datas['scoreOutilId'], PDO::PARAM_INT);
             $score->bindParam(':id', $datas['id'], PDO::PARAM_INT);
-            $score->bindParam(':scoreParam1', $datas['scoreParam1'], PDO::PARAM_INT);
-            $score->bindParam(':scoreParam2', $datas['scoreParam2'], PDO::PARAM_INT);
-            $score->bindParam(':scoreParam3', $datas['scoreParam3'], PDO::PARAM_INT);
+            $score->bindParam(':selectTable', $datas['selectTable'], PDO::PARAM_INT);
+            $score->bindParam(':order', $datas['order'], PDO::PARAM_INT);
+            $score->bindParam(':help', $datas['help'], PDO::PARAM_INT);
             $score->bindParam(':scoreActif', $scoreActif, PDO::PARAM_INT);
             $score->bindParam(':scoreDate', $scoreDate, PDO::PARAM_STR);
             $score->execute();
