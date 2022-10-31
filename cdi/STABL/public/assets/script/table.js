@@ -4,11 +4,38 @@ let randomRange = 11
 let score = 0
 let counter = 0
 
+let myFunction = function () {
+  for (let i = 1; i <= 10; i++) {
+    let result = nombreSelectionner * i
+
+    document.getElementById('choice').innerHTML += `<div class="billes"><input type="radio" value= "${result}"><label>${result}</label></div>`
+  }
+}
+myFunction()
+
+// function toggleItem(elem) {
+//   for (var i = 0; i < elem.length; i++) {
+//     elem[i].addEventListener("click", function(e) {
+//       var current = this;
+//       for (var i = 0; i < elem.length; i++) {
+//         if (current != elem[i]) {
+//           elem[i].classList.remove('active');
+//         } else if (current.classList.contains('active') === true) {
+//           current.classList.remove('active');
+//         } else {
+//           current.classList.add('active')
+//         }
+//       }
+//       e.preventDefault();
+//     });
+//   };
+// }
+// toggleItem(document.querySelectorAll('.billes'));
 
 for (let i = 1; i <= 10; i++) {
   let result = nombreSelectionner * i
 
-  document.getElementById('choice').innerHTML += `<div class="billes"><input type="radio" value= "${result}"><label>${result}</label></div>`
+  // document.getElementById('choice').innerHTML += `<div class="billes"><input type="radio" value= "${result}"><label>${result}</label></div>`
 
   document.getElementById('table').innerHTML += `<div class="operation">${nombreSelectionner} x ${i} = &nbsp;<span class="results">${result}</span> <br ></div>`
 }
@@ -116,44 +143,49 @@ function click() {
         let item = event.target.value;
         const spanResult = document.querySelectorAll('.results')
         if (item == nombreSelectionner * nombre2) {
-          parent.style.backgroundImage = "url('public/assets/ressources/bille-vert.png')"
+          parent.classList.add('true')
           spanResult.forEach(result => {
             if (result.textContent == nombreSelectionner * nombre2) {
               result.classList.add('show')
               result.style.color = 'green'
             }
+
           })
-          score++
           nombre2++
           const myTimeout = setTimeout(() => {
+            let billes = document.querySelectorAll('.billes')
+            console.log(billes)
             startGame()
-            parent.style.backgroundImage = "url('public/assets/ressources/bille-jaune.png')"
-          }, 1000)
-          if (score === 10) {
-            clearTimeout(myTimeout)
-          }
-        } else {
-          parent.classList.add('false')
-          setTimeout(() => {
-            parent.style.backgroundImage = "url('public/assets/ressources/bille-jaune.png')"
-          }, 3000)
+            parent.classList.remove('true')
+            billes.forEach((element) => {
+              if(element.classList.contains('false')){
+                element.classList.remove('false')
+              }
+            })
+            click()
+          }, 1000);
+
         }
+        else {
+          parent.classList.add('false')
+          // parent.style.backgroundImage = "url('public/assets/ressources/bille-rouge.png')"
+        }
+        score++
         showScore()
-      });
+      })
     });
   }
 }
 
 function showScore() {
   document.getElementById('score').innerHTML = `<p> Score : ${score} / 10</p>`
-  if (score === 10) {
-    document.getElementById('finalScore').innerHTML = `<input type="hidden" name="score_valeur" value="${score}"><input type="hidden"  name="score_id" value="${idScore}"><input type="submit" name="submit" value="Bien joué ! Enregistre ton score 🏆">`
-  }
+  // if (score === 10) {
+  //   document.getElementById('finalScore').innerHTML = `<input type="hidden" name="score_valeur" value="${score}"><input type="hidden"  name="score_id" value="${idScore}"><input type="submit" name="submit" value="Bien joué ! Enregistre ton score 🏆">`
+  // }
 }
 
 function randomNumber() {
   const inputScoreValeur = document.querySelectorAll('input[type=radio]')
-  let resultsFind = []
   let numbers = arrayNumbers.sort(() => Math.random() - 0.5)
   nombre2 = numbers.pop()
   inputScoreValeur.forEach((elem) => {
