@@ -1,6 +1,8 @@
+// Améliorer la fonction du compteur de click
+
+
 let arrayNumbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
 let arrayNumbersRandom = arrayNumbers.sort(() => Math.random() - 0.5)
-console.log(arrayNumbersRandom)
 
 const btn = document.getElementById('good-result')
 const or = document.getElementById('or')
@@ -8,6 +10,7 @@ let nombre2 = 1
 let randomRange = 11
 let counter = 0
 let resultScore
+
 
 
 let myFunction = function () {
@@ -50,28 +53,10 @@ function startGame() {
 
 }
 
-function tableOutOfOrder() {
-  const spanResult = document.querySelectorAll('.results')
-  // for (i = 1; i <= nombre2; i++) {
-  //   // if (i == 10) {
-  //   //   break
-  //   // }
-  //   spanResult[i].classList.add('show')
-  //   console.log(i)
-  //   console.log(spanResult[i])
-
-  //   if (i == nombre2 -1) {
-  //     spanResult[i].classList.remove('show')
-  //   }
-  //   else if (i < nombre2 - 1 && i < nombre2 - 2) {
-  //     spanResult[i].classList.remove('show')
-  //   }
-
-  // }
-  for (i = 0; i <= spanResult.length; i++) {
-    console.log(spanResult[i])
-  }
-}
+// function tableOutOfOrder() {
+//   const spanResult = document.querySelectorAll('.results')
+//   
+// }
 
 function generateBallsGreen() {
   const table = document.createElement('table');
@@ -132,19 +117,9 @@ function click() {
       }
     })
   });
-  counter++
-  console.log(counter)
-  if (nombre2 === 11) {
-    if (counter === 11) {
-      counter = 10
-    }
-    
-    resultScore = counter
-    console.log(resultScore)
-    showScore(resultScore)
-  }
-  // }
 }
+
+// Affichage de la modal score
 function showScore() {
   const modal = document.getElementById('modal-container')
   modal.style.display = 'block'
@@ -153,11 +128,12 @@ function showScore() {
   document.getElementById('finalScore').innerHTML = `<input type="hidden" name="score_valeur" value="${resultScore}"><input type="submit" name="submit" id="scoreSubmit"  value="Bien joué ! Enregistre ton score 🏆">`
 }
 
+// Affichage du bouton pour passer à la question suivante
 function goodResult() {
   btn.addEventListener('click', () => {
-    let billes = document.querySelectorAll('.billes')
+    let ballsGreen = document.querySelectorAll('.billes')
     btn.style.display = "none"
-    billes.forEach((element) => {
+    ballsGreen.forEach((element) => {
       if (element.classList.contains('false')) {
         element.classList.remove('false')
       }
@@ -165,11 +141,43 @@ function goodResult() {
         element.classList.remove('true')
       }
     })
-    nombre2++
-    startGame()
+    if(nombre2 < 10){
+      nombre2++
+      startGame()
+    } 
+    else if(nombre2 == 10){
+      showScore(resultScore)
+    }
+    
   })
 }
 goodResult()
+
+// Compteur de click
+function counterClick(){
+  let ballsGreen = document.querySelectorAll('.billes')
+  ballsGreen.forEach((element) => {
+    element.addEventListener('click', function () {
+      counter++
+      console.log(counter)
+      if(counter > 10){
+        resultScore = difference(10, counter)
+        console.log(resultScore)
+        return resultScore
+      }
+      else{
+        resultScore = counter
+      }
+    })
+  })
+}
+counterClick()
+
+// calcule la difference entre le counter et 10 
+function difference(a, b){
+  return Math.abs(a - b)
+}
+
 
 function randomNumber() {
   const inputScoreValeur = document.querySelectorAll('input[type=radio]')
