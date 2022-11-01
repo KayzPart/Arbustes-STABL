@@ -3,26 +3,58 @@
 
 	<div id="question"></div>
 	<form action="./insert" method="POST" id="click-result">
-		<div id="score">
-			<p>
-				Score : 0 / 10
-			</p>
+		<div id="modal-container">
+			<div class="modal-background">
+				<div class="modal">
+					{# <h2>Félicitation !</h2> #}
+					<div class="wrapper">
+						<ul>
+							<li class="container">
+								<section class="sphere"></section>
+								<span class="shadow"></span>
+							</li>
+							<li class="container">
+								<section class="sphere"></section>
+								<span class="shadow"></span>
+							</li>
+							<li class="container">
+								<section class="sphere"></section>
+								<span class="shadow"></span>
+							</li>
+						</ul>
+					</div>
+					<p>
+						Tu as terminé la table de
+						{{param1}}
+					</p>
+					<p>
+						Voici ton score :
+					</p>
+					<span id="viewScore">
+						Score : 0 / 10
+					</span>
+					<div id="finalScore"></div>
+				</div>
+			</div>
 		</div>
 		<section class="content">
+			<div class="colum-display">
+				<div id="choice"></div>
+				<div id="good-result">Bien joué 💪 ! On continue ?</div>
+				<div id="generateBille">
+					<div id="colum"></div>
+					<span id="or">OU</span>
+					<div id="second-colum"></div>
+				</div>
+			</div>
 			<div id="table"></div>
-			<div id="choice"></div>
 		</section>
-		<div id="generateBille"></div>
-
-		<div id="finalScore"></div>
-
-
 	</form>
 {% endblock %}
 <footer></footer>
 <script>
 	let nombreSelectionner = {{ param1 }}
-	let order = {{ param2 }}
-	let help = {{ param3 }}
+let order = {{ param2 }}
+let help = {{ param3 }}
 </script>
 <script src="./public/assets/script/table.js"></script></body></html>
