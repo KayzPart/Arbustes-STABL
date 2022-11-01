@@ -322,6 +322,8 @@ input[type=radio]:checked+label .outer .inner:after {
     color: #94e458;
     box-shadow: 0 0.5em 0.5em -0.4em #94e458;
 }
+
+
 /* Jeu */
 #question {
     text-align: center;
@@ -329,12 +331,78 @@ input[type=radio]:checked+label .outer .inner:after {
     font-weight: bold;
     margin: 10px;
 }
-
-#score {
-    margin: 0 auto;
+#good-result{
+    display: none;
+    text-align: center;
+    color: #9c89f7;
+    background: none;
+    border: 2px solid;
+    border-bottom-width: 4px;
     width: fit-content;
+    font-size: 20px;
+    margin: 0 auto;
+    padding: 20px; 
+    transition: color 1s;
+    border-radius: 10px;
+    cursor: pointer;
 }
+#good-result:hover{
+    animation: halftone 1s forwards;
+    background: radial-gradient(circle, #9c89f7 0.2em, transparent 0.25em) 0 0 / 1.25em 1.25em
+    , radial-gradient(circle, #9c89f7 0.2em, transparent 0.25em) 6.25em 6.25em / 1.25em 1.25em;
+    color: rgb(161, 255, 133);
+}
+@keyframes halftone {
+    100% {
+      background-size: 2.375em 2.375em, 0.1em 0.1em;
+    }
+  }
 
+  #modal-container {
+    position: fixed;
+  display: table;
+  height: 100%;
+  width: 100%;
+  top: 0;
+  left: 0;
+  /* transform: scale(0); */
+  z-index: 1;
+    display: none;
+  }
+  #modal-container .modal-background {
+    background: rgba(0, 0, 0, 0.7);
+    height: 100%;
+  }
+  #modal-container .modal-background .modal {
+    animation: blowUpModal 0.5s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
+    /* background: white; */
+    padding: 50px;
+  }
+  .modal, .modal h2 {
+    color: white;
+  }
+ /* .out{
+    animation: blowUpModalTwo 0.5s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
+  } */
+
+  @keyframes blowUpModal {
+    0% {
+      transform: scale(0);
+    }
+    100% {
+      transform: scale(1);
+    }
+  }
+  @keyframes blowUpModalTwo {
+    0% {
+      transform: scale(1);
+      opacity: 1;
+    }
+    100% {
+      transform: scale(0);
+      opacity: 0;
+    }
+  }
 #table {
     border: solid 2px #4D3709;
     padding: 10px;
@@ -372,10 +440,10 @@ input[type=radio]:checked+label .outer .inner:after {
 #generateBille {
     display: flex;
     justify-content: space-between;
-    /* margin: 20px; */
     width: 100%;
     height: 320px;
     margin: 0 auto;
+    padding: 20px 0;
 }
 
 #or {
@@ -383,20 +451,9 @@ input[type=radio]:checked+label .outer .inner:after {
     font-size: 20px;
     font-weight: bold;
 }
-/* #colum::after{
-    content: "OU";
-    position: relative;
-    left: 450px;
-    top: -30px;
-    /* position: absolute;
-    left: 190%;
-    top: 0; 
-} */
 #second-colum{
     transform-origin: left;
-    /* transform: translate(50%, -50%) rotate(90deg); */
     transform : translate(50%, 35%) rotate(-90deg);
-    /* height: fit-content; */
 }
 
 .billes {
@@ -501,6 +558,10 @@ input[type=radio]:checked+label .outer .inner:after {
     }
     #generateBille{
         justify-content: center;
+    }
+    #good-result{
+        padding: 10px;
+        font-size: 16px;
     }
 }
 @media screen and (max-width: 550px){

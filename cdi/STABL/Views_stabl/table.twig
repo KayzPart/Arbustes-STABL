@@ -2,15 +2,41 @@
 	{{ include("Templates/header.twig")}}
 
 	<div id="question"></div>
-	<form action="./insert" method="POST" id="click-result">
-		<div id="score">
-			<p>
-				Score : 0 / 10
-			</p>
+	<form
+		action="./insert" method="POST" id="click-result">
+		{# <div id="score" class="score-modal">
+							<div class="score-modal-background">
+								<div class="modal">
+									<h2>Félicitation !</h2>
+									<span>Tu as terminé la table de
+										{{param1}}</span>
+									<p>
+										Score : 0 / 10
+									</p>
+								</div>
+							</div>
+						</div> #}
+		<div id="modal-container">
+			<div class="modal-background">
+				<div class="modal">
+					<h2>Félicitation !</h2>
+					<p>
+						Tu as terminé la table de
+						{{param1}}
+					</p>
+					<p>
+						Voici ton score :
+					</p>
+					<span>
+						Score : 0 / 10
+					</span>
+				</div>
+			</div>
 		</div>
 		<section class="content">
 			<div class="colum-display">
 				<div id="choice"></div>
+				<div id="good-result">Bien joué 💪 ! Question suivante ?</div>
 				<div id="generateBille">
 					<div id="colum"></div>
 					<span id="or">OU</span>

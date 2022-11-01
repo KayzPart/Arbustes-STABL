@@ -1,17 +1,18 @@
 let arrayNumbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
 let arrayNumbersRandom = arrayNumbers.sort(() => Math.random() - 0.5)
 console.log(arrayNumbersRandom)
+
+const btn = document.getElementById('good-result')
 const or = document.getElementById('or')
 let nombre2 = 1
 let randomRange = 11
 let score = 0
 let counter = 0
-let myTimeout
 
 
 let myFunction = function () {
   for (let i = 1; i <= 10; i++) {
-    
+
     let result = nombreSelectionner * i
     document.getElementById('choice').innerHTML += `<div class="billes"><input type="radio" value= "${result}"><label>${result}</label></div>`
   }
@@ -28,8 +29,8 @@ for (let i = 1; i <= 10; i++) {
 startGame()
 function startGame() {
   if (order == 1 && help == 1) {
-      generateBallsGreen()
-      or.style.display = 'block'
+    generateBallsGreen()
+    or.style.display = 'block'
   }
   else if (order == 1 && help == 2) {
     table()
@@ -46,6 +47,7 @@ function startGame() {
   // Question opération
   document.getElementById('question').innerHTML = `<span>${nombreSelectionner} x ${nombre2}</span>`
   click()
+  
 }
 
 function tableOutOfOrder() {
@@ -72,11 +74,11 @@ function tableOutOfOrder() {
 }
 
 function generateBallsGreen() {
+  const table = document.createElement('table');
   const firstColum = document.getElementById('colum')
   const secondColum = document.getElementById('second-colum')
-  const table = document.createElement('table');
 
-  for (let i = 1; i <= nombre2; i++) {
+  for (let i = 0; i < nombre2; i++) {
     const row = document.createElement('tr');
     for (let j = 1; j <= nombreSelectionner; j++) {
       const col = document.createElement('td');
@@ -87,9 +89,7 @@ function generateBallsGreen() {
     break
   }
   firstColum.append(table);
-  // firstColum.innerhtml = ""
   clone = table.cloneNode(true)
-  console.log(clone)
   secondColum.append(clone)
 }
 
@@ -111,8 +111,7 @@ function table() {
 // Function that checks the click, the result and the value and which adds the correct result in the table
 function click() {
   const inputScoreValeur = document.querySelectorAll('input[type=radio]')
-  const valeurScore = document.querySelector('input[type=radio]')
-  if (valeurScore) {
+  const btn = document.getElementById('good-result')
     inputScoreValeur.forEach((elem) => {
       const parent = elem.parentNode
       elem.addEventListener("click", function (event) {
@@ -126,38 +125,57 @@ function click() {
               result.style.color = 'green'
             }
           })
-          // Remplacer par next number function (indice)
-          nombre2++
-          // score++
-          myTimeout = setTimeout(() => {
-            let billes = document.querySelectorAll('.billes')
-            startGame()
-            parent.classList.remove('true')
-            billes.forEach((element) => {
-              if(element.classList.contains('false')){
-                element.classList.remove('false')
-              }
-            })
-            // clearTimeout(myTimeout)
-          }, 1000);
+          btn.style.display = 'block'
         }
         else {
           parent.classList.add('false')
-          // score++
+          counter++
+          console.log(counter)
         }
-        score++
-        showScore()
+        // Problème
+        // counter++
+        // console.log(counter)
       })
-    });
+  });
+  if(nombre2 === 11){
+    showScore()
   }
+  // }
 }
 function showScore() {
-  document.getElementById('score').innerHTML = `<p> Score : ${score} / 10</p>`
+  const score = document.getElementById('modal-container')
+  score.style.display ='block'
+  score.classList.add('out')
+  // .innerHTML = `<p> Score : ${score} / 10</p>`
   // console.log(score)
   // if (score === 10) {
   //   document.getElementById('finalScore').innerHTML = `<input type="hidden" name="score_valeur" value="${score}"><input type="hidden"  name="score_id" value="${idScore}"><input type="submit" name="submit" value="Bien joué ! Enregistre ton score 🏆">`
   // }
 }
+function goodResult() {
+  btn.addEventListener('click', () => {
+    let billes = document.querySelectorAll('.billes')
+    btn.style.display ="none"
+    billes.forEach((element) => {
+      if (element.classList.contains('false')) {
+        element.classList.remove('false')
+      }
+      if(element.classList.contains('true')){
+        element.classList.remove('true')
+      }
+    })
+    nombre2++
+    startGame()
+  })
+}
+goodResult()
+
+// function showScore(){
+//   if(nombre2 === 10){
+//     console.log('afficher score')
+//   }
+// }
+// showScore()
 
 function randomNumber() {
   const inputScoreValeur = document.querySelectorAll('input[type=radio]')
