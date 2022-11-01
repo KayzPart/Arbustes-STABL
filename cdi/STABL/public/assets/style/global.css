@@ -158,6 +158,7 @@ h2 {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
+    align-items: flex-start;
 }
 
 .tables input[type=radio] {
@@ -176,9 +177,13 @@ h2 {
 }
 
 .tables>label>img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+.tables > label{
     width: 200px;
     height: 200px;
-    object-fit: contain;
 }
 
 .display-radio {
@@ -333,10 +338,14 @@ input[type=radio]:checked+label .outer .inner:after {
 #table {
     border: solid 2px #4D3709;
     padding: 10px;
-    width: 25%;
+    width: 20%;
+    height: fit-content;
     margin: 20px 10px;
 }
-
+.colum-display{
+    width: 70%;
+    height: fit-content;
+}
 .operation {
     display: flex;
     margin: 10px;
@@ -350,19 +359,44 @@ input[type=radio]:checked+label .outer .inner:after {
 .content {
     display: flex;
     flex-wrap: wrap;
-    align-items: center;
     justify-content: space-around;
 }
 
 #choice {
-    display: flex;
-    justify-content: space-around;
-    height: fit-content;
+    width: 80%;
+    padding: 50px;
+    height: 200px;
+    position: relative;
 }
 
 #generateBille {
+    display: flex;
+    justify-content: space-between;
+    /* margin: 20px; */
+    width: 100%;
+    height: 320px;
     margin: 0 auto;
-    width: fit-content;
+}
+
+#or {
+    display: none;
+    font-size: 20px;
+    font-weight: bold;
+}
+/* #colum::after{
+    content: "OU";
+    position: relative;
+    left: 450px;
+    top: -30px;
+    /* position: absolute;
+    left: 190%;
+    top: 0; 
+} */
+#second-colum{
+    transform-origin: left;
+    /* transform: translate(50%, -50%) rotate(90deg); */
+    transform : translate(50%, 35%) rotate(-90deg);
+    /* height: fit-content; */
 }
 
 .billes {
@@ -374,11 +408,48 @@ input[type=radio]:checked+label .outer .inner:after {
     display: flex;
     align-items: center;
     justify-content: center;
-    flex-direction: column-reverse;
-    position: relative;
+    position: absolute;
     cursor: pointer;
 }
-
+.billes:nth-child(1){
+    top: 50px;
+    right: 200px;
+}
+.billes:nth-child(2){
+    top: 120px;
+    right: 150px;
+} 
+.billes:nth-child(3){
+    right: 200px;
+    top: 200px;
+} 
+.billes:nth-child(4){
+    right: 100px;
+} 
+.billes:nth-child(5){
+    right: 350px;
+    top: 120px;
+} 
+.billes:nth-child(6){
+    top: 70px;
+    right: 300px;
+} 
+.billes:nth-child(7){
+    right: 80px;
+    top: 120px;
+}
+.billes:nth-child(8){
+    bottom: 130px;
+    right: 230px;
+}  
+.billes:nth-child(9){
+    right: 80px;
+    bottom: 60px;
+}
+.billes:nth-child(10){
+    right: 300px;
+    bottom: 70px;
+}
 .false {
     background-image: url('../ressources/bille-rouge.png');
 }
@@ -409,6 +480,132 @@ input[type=radio]:checked+label .outer .inner:after {
     background-image: url('../ressources/bille-vert.png');
     background-size: contain;
     background-repeat: no-repeat;
-    width: 50px;
-    height: 50px;
+    width: 25px;
+    height: 25px;
+}
+@media screen and (max-width:980px){
+    .col-header{
+        width: 20px;
+        height: 20px;
+    }
+    #second-colum{
+        transform: translate(65%, 20%) rotate(-90deg);
+    }
+    #or{
+        font-size: 18px;
+    }
+}
+@media screen and (max-width:740px){
+    #second-colum, #or{
+        display: none !important;
+    }
+    #generateBille{
+        justify-content: center;
+    }
+}
+@media screen and (max-width: 550px){
+    h1 {
+        font-size: 25px;
+    }
+    #choice{
+        padding: 20px 10px;
+        width: 90%;
+    }
+    .billes{
+        width: 35px;
+        height: 35px;
+    }
+    .billes:nth-child(9){
+        right: 10px;
+    }
+    .billes:nth-child(7) {
+        right: 20px;
+        top: 80px;
+    }
+    .billes:nth-child(1) {
+        top: 50px;
+        right: 150px;
+    }
+    .billes:nth-child(2) {
+        top: 100px;
+        right: 100px;
+    }
+    .billes:nth-child(3){
+        right: 70px;
+        top: 150px;
+    }
+    .billes:nth-child(4) {
+        right: 100px;
+        top: 30px;
+    }
+    .billes:nth-child(10){
+        right: 150px;
+    }
+    .billes:nth-child(5) {
+        right: 200px;
+    top: 160px;
+    }
+    .billes:nth-child(6) {
+        top: 120px;
+        right: 250px;
+    }
+    #table{
+        margin: 0;
+        font-size: 14px;
+    }
+    .operation{
+        margin: 0;
+    }
+}
+@media screen and (max-width: 430px){
+    .billes:nth-child(10) {
+        right: 120px;
+        top: 180px;
+    }
+    .billes:nth-child(5) {
+        right: 170px;
+    }
+    .billes:nth-child(6) {
+        right: 150px;
+    }
+    .billes:nth-child(8) {
+        bottom: 120px;
+        right: 200px;
+    }
+}@media screen and (max-width: 405px){
+    .billes:nth-child(10) {
+        right: 120px;
+        top: 180px;
+    }
+    .billes:nth-child(5) {
+        right: 170px;
+    }
+    .billes:nth-child(6) {
+        right: 150px;
+    }
+    .billes:nth-child(8) {
+        bottom: 120px;
+        right: 200px;
+    }
+    .content{
+        flex-direction: column;
+    }
+    #table{
+        margin: 0 auto;
+        width: 50%;
+        font-size: inherit;
+    }
+    #generateBille{
+        padding: 20px 0;
+        height: fit-content;
+    }
+    .colum-display{
+        width: 100%;
+    }
+    #choice{
+        width: 85%;
+    }
+    h1 {
+        font-size: 20px;
+    }
 }

@@ -1,50 +1,35 @@
 let arrayNumbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+let arrayNumbersRandom = arrayNumbers.sort(() => Math.random() - 0.5)
+console.log(arrayNumbersRandom)
+const or = document.getElementById('or')
 let nombre2 = 1
 let randomRange = 11
 let score = 0
 let counter = 0
+let myTimeout
+
 
 let myFunction = function () {
   for (let i = 1; i <= 10; i++) {
+    
     let result = nombreSelectionner * i
-
     document.getElementById('choice').innerHTML += `<div class="billes"><input type="radio" value= "${result}"><label>${result}</label></div>`
   }
 }
 myFunction()
 
-// function toggleItem(elem) {
-//   for (var i = 0; i < elem.length; i++) {
-//     elem[i].addEventListener("click", function(e) {
-//       var current = this;
-//       for (var i = 0; i < elem.length; i++) {
-//         if (current != elem[i]) {
-//           elem[i].classList.remove('active');
-//         } else if (current.classList.contains('active') === true) {
-//           current.classList.remove('active');
-//         } else {
-//           current.classList.add('active')
-//         }
-//       }
-//       e.preventDefault();
-//     });
-//   };
-// }
-// toggleItem(document.querySelectorAll('.billes'));
 
 for (let i = 1; i <= 10; i++) {
   let result = nombreSelectionner * i
-
-  // document.getElementById('choice').innerHTML += `<div class="billes"><input type="radio" value= "${result}"><label>${result}</label></div>`
 
   document.getElementById('table').innerHTML += `<div class="operation">${nombreSelectionner} x ${i} = &nbsp;<span class="results">${result}</span> <br ></div>`
 }
 
 startGame()
 function startGame() {
-
   if (order == 1 && help == 1) {
-    generateBallsInOrder()
+      generateBallsGreen()
+      or.style.display = 'block'
   }
   else if (order == 1 && help == 2) {
     table()
@@ -52,6 +37,7 @@ function startGame() {
   else if (order == 2 && help == 1) {
     randomNumber()
     generateBallsOutOfOrder()
+    or.style.display = 'block'
   }
   else if (order == 2 && help == 2) {
     randomNumber()
@@ -85,9 +71,11 @@ function tableOutOfOrder() {
   }
 }
 
-function generateBallsInOrder() {
-  const billes = document.getElementById('generateBille')
+function generateBallsGreen() {
+  const firstColum = document.getElementById('colum')
+  const secondColum = document.getElementById('second-colum')
   const table = document.createElement('table');
+
   for (let i = 1; i <= nombre2; i++) {
     const row = document.createElement('tr');
     for (let j = 1; j <= nombreSelectionner; j++) {
@@ -98,25 +86,13 @@ function generateBallsInOrder() {
     table.appendChild(row);
     break
   }
-  billes.append(table);
+  firstColum.append(table);
+  // firstColum.innerhtml = ""
+  clone = table.cloneNode(true)
+  console.log(clone)
+  secondColum.append(clone)
 }
 
-function generateBallsOutOfOrder() {
-  const billes = document.getElementById('generateBille')
-  const table = document.createElement('table');
-  let j
-  for (let i = 1; i <= nombre2; i++) {
-    const row = document.createElement('tr');
-    for (j = 1; j <= nombreSelectionner; j++) {
-      const col = document.createElement('td');
-      col.classList.add('col-header')
-      row.appendChild(col);
-    }
-    table.appendChild(row);
-  }
-  billes.append(table)
-
-}
 function table() {
   const spanResult = document.querySelectorAll('.results')
   let i = 1
@@ -149,12 +125,12 @@ function click() {
               result.classList.add('show')
               result.style.color = 'green'
             }
-
           })
+          // Remplacer par next number function (indice)
           nombre2++
-          const myTimeout = setTimeout(() => {
+          // score++
+          myTimeout = setTimeout(() => {
             let billes = document.querySelectorAll('.billes')
-            console.log(billes)
             startGame()
             parent.classList.remove('true')
             billes.forEach((element) => {
@@ -162,13 +138,12 @@ function click() {
                 element.classList.remove('false')
               }
             })
-            click()
+            // clearTimeout(myTimeout)
           }, 1000);
-
         }
         else {
           parent.classList.add('false')
-          // parent.style.backgroundImage = "url('public/assets/ressources/bille-rouge.png')"
+          // score++
         }
         score++
         showScore()
@@ -176,9 +151,9 @@ function click() {
     });
   }
 }
-
 function showScore() {
   document.getElementById('score').innerHTML = `<p> Score : ${score} / 10</p>`
+  // console.log(score)
   // if (score === 10) {
   //   document.getElementById('finalScore').innerHTML = `<input type="hidden" name="score_valeur" value="${score}"><input type="hidden"  name="score_id" value="${idScore}"><input type="submit" name="submit" value="Bien joué ! Enregistre ton score 🏆">`
   // }

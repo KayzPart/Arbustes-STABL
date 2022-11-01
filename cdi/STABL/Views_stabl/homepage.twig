@@ -54,9 +54,9 @@
 						</ul>
 					</div>
 
-					<div id="submit-btn">
-						<input type="submit" name="submit" id="letsgo" value="C'EST PARTI !">
-					</div>
+					{# <div id="submit-btn">
+											<input type="submit" name="submit" id="letsgo" value="C'EST PARTI !">
+										</div> #}
 
 					<div class="aide">
 						<ul>
@@ -105,12 +105,11 @@
 
 				<input type="hidden" name="id" value="{{humain.getHumain_id}}">
 				<input type="hidden" name="scoreValeur" value="0">
-				<input
-				type="hidden" name="scoreOutilId" value="{{outils.getOutil_id}}">
+				<input type="hidden" name="scoreOutilId" value="{{outils.getOutil_id}}">
 
-			{# <div id="submit-btn">
-								<input type="submit" name="submit" id="letsgo" value="C'EST PARTI !">
-							</div> #}
+				<div id="submit-btn">
+					<input type="submit" name="submit" id="letsgo" value="C'EST PARTI !">
+				</div>
 			</form>
 		</section>
 	</div>
