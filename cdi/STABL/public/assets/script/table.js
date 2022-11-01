@@ -6,8 +6,8 @@ const btn = document.getElementById('good-result')
 const or = document.getElementById('or')
 let nombre2 = 1
 let randomRange = 11
-let score = 0
 let counter = 0
+let resultScore
 
 
 let myFunction = function () {
@@ -47,7 +47,7 @@ function startGame() {
   // Question opération
   document.getElementById('question').innerHTML = `<span>${nombreSelectionner} x ${nombre2}</span>`
   click()
-  
+
 }
 
 function tableOutOfOrder() {
@@ -112,55 +112,56 @@ function table() {
 function click() {
   const inputScoreValeur = document.querySelectorAll('input[type=radio]')
   const btn = document.getElementById('good-result')
-    inputScoreValeur.forEach((elem) => {
-      const parent = elem.parentNode
-      elem.addEventListener("click", function (event) {
-        let item = event.target.value;
-        const spanResult = document.querySelectorAll('.results')
-        if (item == nombreSelectionner * nombre2) {
-          parent.classList.add('true')
-          spanResult.forEach(result => {
-            if (result.textContent == nombreSelectionner * nombre2) {
-              result.classList.add('show')
-              result.style.color = 'green'
-            }
-          })
-          btn.style.display = 'block'
-        }
-        else {
-          parent.classList.add('false')
-          counter++
-          console.log(counter)
-        }
-        // Problème
-        // counter++
-        // console.log(counter)
-      })
+  inputScoreValeur.forEach((elem) => {
+    const parent = elem.parentNode
+    elem.addEventListener("click", function (event) {
+      let item = event.target.value;
+      const spanResult = document.querySelectorAll('.results')
+      if (item == nombreSelectionner * nombre2) {
+        parent.classList.add('true')
+        spanResult.forEach(result => {
+          if (result.textContent == nombreSelectionner * nombre2) {
+            result.classList.add('show')
+            result.style.color = 'green'
+          }
+        })
+        btn.style.display = 'block'
+      }
+      else {
+        parent.classList.add('false')
+      }
+    })
   });
-  if(nombre2 === 11){
-    showScore()
+  counter++
+  console.log(counter)
+  if (nombre2 === 11) {
+    if (counter === 11) {
+      counter = 10
+    }
+    
+    resultScore = counter
+    console.log(resultScore)
+    showScore(resultScore)
   }
   // }
 }
 function showScore() {
-  const score = document.getElementById('modal-container')
-  score.style.display ='block'
-  score.classList.add('out')
-  // .innerHTML = `<p> Score : ${score} / 10</p>`
-  // console.log(score)
-  // if (score === 10) {
-  //   document.getElementById('finalScore').innerHTML = `<input type="hidden" name="score_valeur" value="${score}"><input type="hidden"  name="score_id" value="${idScore}"><input type="submit" name="submit" value="Bien joué ! Enregistre ton score 🏆">`
-  // }
+  const modal = document.getElementById('modal-container')
+  modal.style.display = 'block'
+  const viewScore = document.getElementById('viewScore')
+  viewScore.innerHTML = `Score : ${resultScore} / 10`
+  document.getElementById('finalScore').innerHTML = `<input type="hidden" name="score_valeur" value="${resultScore}"><input type="submit" name="submit" id="scoreSubmit"  value="Bien joué ! Enregistre ton score 🏆">`
 }
+
 function goodResult() {
   btn.addEventListener('click', () => {
     let billes = document.querySelectorAll('.billes')
-    btn.style.display ="none"
+    btn.style.display = "none"
     billes.forEach((element) => {
       if (element.classList.contains('false')) {
         element.classList.remove('false')
       }
-      if(element.classList.contains('true')){
+      if (element.classList.contains('true')) {
         element.classList.remove('true')
       }
     })
@@ -169,13 +170,6 @@ function goodResult() {
   })
 }
 goodResult()
-
-// function showScore(){
-//   if(nombre2 === 10){
-//     console.log('afficher score')
-//   }
-// }
-// showScore()
 
 function randomNumber() {
   const inputScoreValeur = document.querySelectorAll('input[type=radio]')

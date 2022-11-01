@@ -4,18 +4,6 @@
 	<div id="question"></div>
 	<form
 		action="./insert" method="POST" id="click-result">
-		{# <div id="score" class="score-modal">
-							<div class="score-modal-background">
-								<div class="modal">
-									<h2>Félicitation !</h2>
-									<span>Tu as terminé la table de
-										{{param1}}</span>
-									<p>
-										Score : 0 / 10
-									</p>
-								</div>
-							</div>
-						</div> #}
 		<div id="modal-container">
 			<div class="modal-background">
 				<div class="modal">
@@ -27,9 +15,10 @@
 					<p>
 						Voici ton score :
 					</p>
-					<span>
+					<span id="viewScore">
 						Score : 0 / 10
 					</span>
+					<div id="finalScore"></div>
 				</div>
 			</div>
 		</div>
@@ -46,7 +35,6 @@
 			<div id="table"></div>
 		</section>
 
-		<div id="finalScore"></div>
 
 
 	</form>
