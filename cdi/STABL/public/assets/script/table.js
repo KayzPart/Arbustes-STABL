@@ -160,13 +160,12 @@ function counterClick(){
     element.addEventListener('click', function () {
       counter++
       console.log(counter)
-      if(counter > 10){
+      if(counter <= 10 ){
+        resultScore = counter
+      }
+      else if (counter > 10){
         resultScore = difference(10, counter)
         console.log(resultScore)
-        return resultScore
-      }
-      else{
-        resultScore = counter
       }
     })
   })

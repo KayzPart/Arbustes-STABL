@@ -2,12 +2,27 @@
 	{{ include("Templates/header.twig")}}
 
 	<div id="question"></div>
-	<form
-		action="./insert" method="POST" id="click-result">
+	<form action="./insert" method="POST" id="click-result">
 		<div id="modal-container">
 			<div class="modal-background">
 				<div class="modal">
-					<h2>Félicitation !</h2>
+					{# <h2>Félicitation !</h2> #}
+					<div class="wrapper">
+						<ul>
+							<li class="container">
+								<section class="sphere"></section>
+								<span class="shadow"></span>
+							</li>
+							<li class="container">
+								<section class="sphere"></section>
+								<span class="shadow"></span>
+							</li>
+							<li class="container">
+								<section class="sphere"></section>
+								<span class="shadow"></span>
+							</li>
+						</ul>
+					</div>
 					<p>
 						Tu as terminé la table de
 						{{param1}}
@@ -34,9 +49,6 @@
 			</div>
 			<div id="table"></div>
 		</section>
-
-
-
 	</form>
 {% endblock %}
 <footer></footer>
