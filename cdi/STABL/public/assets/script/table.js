@@ -1,17 +1,30 @@
-// Améliorer la fonction du compteur de click
-
-
+let indice = 0
 let arrayNumbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
 let arrayNumbersRandom = arrayNumbers.sort(() => Math.random() - 0.5)
 
 const btn = document.getElementById('good-result')
 const or = document.getElementById('or')
-let nombre2 = 1
+let nombre2 = 0
 let randomRange = 11
 let counter = 0
 let resultScore
 
 
+
+
+// function randomNumber() {
+//   const inputScoreValeur = document.querySelectorAll('input[type=radio]')
+//   let numbers = arrayNumbers.sort(() => Math.random() - 0.5)
+//   nombre2 = numbers.pop()
+//   inputScoreValeur.forEach((elem) => {
+//     elem.addEventListener('click', function (event) {
+//       let item = event.target.value
+//       if (item == nombreSelectionner * nombre2) {
+//         arrayNumbers.indexOf(nombre2)
+//       }
+//     })
+//   })
+// }
 
 let myFunction = function () {
   for (let i = 1; i <= 10; i++) {
@@ -31,20 +44,24 @@ for (let i = 1; i <= 10; i++) {
 
 startGame()
 function startGame() {
+  nextNumber(indice)
   if (order == 1 && help == 1) {
     generateBallsGreen()
     or.style.display = 'block'
   }
   else if (order == 1 && help == 2) {
-    table()
+    beforeAfter()
   }
   else if (order == 2 && help == 1) {
-    randomNumber()
-    generateBallsOutOfOrder()
+    // randomNumber()
+    // nextNumber()
+    generateBallsGreen()
+    console.log(indice)
     or.style.display = 'block'
   }
   else if (order == 2 && help == 2) {
-    randomNumber()
+    // randomNumber()
+    // nextNumber()
     tableOutOfOrder()
   }
   // Question opération
@@ -53,16 +70,13 @@ function startGame() {
 
 }
 
-// function tableOutOfOrder() {
-//   const spanResult = document.querySelectorAll('.results')
-//   
-// }
-
 function generateBallsGreen() {
   const table = document.createElement('table');
   const firstColum = document.getElementById('colum')
   const secondColum = document.getElementById('second-colum')
 
+  firstColum.innerHTML='';
+  secondColum.innerHTML='';
   for (let i = 0; i < nombre2; i++) {
     const row = document.createElement('tr');
     for (let j = 1; j <= nombreSelectionner; j++) {
@@ -71,7 +85,6 @@ function generateBallsGreen() {
       row.appendChild(col);
     }
     table.appendChild(row);
-    break
   }
   firstColum.append(table);
   clone = table.cloneNode(true)
@@ -91,6 +104,12 @@ function table() {
       spanResult[i].classList.remove('show')
     }
   }
+}
+
+function beforeAfter(){
+  console.log(`${nombreSelectionner} * ${nombre2-1}`)
+  console.log(`${nombreSelectionner} * ${nombre2}`)
+  console.log(`${nombreSelectionner} * ${nombre2+1}`)
 }
 
 // Function that checks the click, the result and the value and which adds the correct result in the table
@@ -128,6 +147,18 @@ function showScore() {
   document.getElementById('finalScore').innerHTML = `<input type="hidden" name="score_valeur" value="${resultScore}"><input type="submit" name="submit" id="scoreSubmit"  value="Bien joué ! Enregistre ton score 🏆">`
 }
 
+function nextNumber(indice) {
+  if (order==1){
+    nombre2=arrayNumbers[indice]
+  }
+  // else if(indice == 10){
+  //   showScore(resultScore)
+  // } 
+  else {
+    nombre2=arrayNumbersRandom[indice]
+  }
+}
+
 // Affichage du bouton pour passer à la question suivante
 function goodResult() {
   btn.addEventListener('click', () => {
@@ -141,17 +172,21 @@ function goodResult() {
         element.classList.remove('true')
       }
     })
-    if(nombre2 < 10){
-      nombre2++
+    if(indice < 10){
+      indice++
+      console.log(indice)
+      nombre2 = nextNumber()
       startGame()
     } 
-    else if(nombre2 == 10){
+    if(indice == 10){
+      console.log(indice)
       showScore(resultScore)
     }
-    
   })
 }
 goodResult()
+
+
 
 // Compteur de click
 function counterClick(){
@@ -159,7 +194,6 @@ function counterClick(){
   ballsGreen.forEach((element) => {
     element.addEventListener('click', function () {
       counter++
-      console.log(counter)
       if(counter <= 10 ){
         resultScore = counter
       }
@@ -183,16 +217,3 @@ function difference(a, b){
 }
 
 
-function randomNumber() {
-  const inputScoreValeur = document.querySelectorAll('input[type=radio]')
-  let numbers = arrayNumbers.sort(() => Math.random() - 0.5)
-  nombre2 = numbers.pop()
-  inputScoreValeur.forEach((elem) => {
-    elem.addEventListener('click', function (event) {
-      let item = event.target.value
-      if (item == nombreSelectionner * nombre2) {
-        arrayNumbers.indexOf(nombre2)
-      }
-    })
-  })
-}
