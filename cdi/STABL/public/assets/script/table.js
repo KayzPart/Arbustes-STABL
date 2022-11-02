@@ -164,8 +164,13 @@ function counterClick(){
         resultScore = counter
       }
       else if (counter > 10){
-        resultScore = difference(10, counter)
+        diffCount = difference(counter, 10)
+        console.log(diffCount)
+        resultScore = 10 - diffCount
         console.log(resultScore)
+        if(resultScore < 0){
+          resultScore = 1
+        }
       }
     })
   })

@@ -415,7 +415,7 @@ input[type=radio]:checked+label .outer .inner:after {
     display: block;
 }
 
-.containerTable {
+.container-bille {
     height: 60px;
     width: 60px;
     float: left;
@@ -432,22 +432,22 @@ input[type=radio]:checked+label .outer .inner:after {
     top: 0;
     
 }
-.container:nth-child(1) .sphere {
+.container-bille:nth-child(1) .sphere {
     animation: bounceTwo 2s infinite ease-in-out;
 }
-.container:nth-child(1) .shadow {
+.container-bille:nth-child(1) .shadow {
     animation: depth 2s infinite ease-in-out;
 }
-.container:nth-child(2) .sphere{
+.container-bille:nth-child(2) .sphere{
     animation: bounceTwo 2s infinite .2s ease-in-out;
 }
-.container:nth-child(2) .shadow{
+.container-bille:nth-child(2) .shadow{
     animation: depth 2s infinite .2s ease-in-out;
 }
-.container:nth-child(3) .sphere{
+.container-bille:nth-child(3) .sphere{
     animation: bounceTwo 2s infinite .4s ease-in-out;
 }
-.container:nth-child(3) .shadow{
+.container-bille:nth-child(3) .shadow{
     animation: depth 2s infinite .4s ease-in-out;
 }
 
