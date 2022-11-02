@@ -153,14 +153,10 @@ h2 {
     margin: 0 auto;
 }
 
-.choix-tables,
-.tables {
-    height: 400px;
-}
-
 .tables {
     display: flex;
     flex-wrap: wrap;
+    height: fit-content;
     justify-content: center;
     align-items: flex-start;
 }
@@ -195,6 +191,7 @@ h2 {
 
 .display-radio {
     display: flex;
+    flex-wrap: wrap;
     justify-content: space-between;
     align-items: center;
 }
@@ -703,6 +700,15 @@ span.shadow {
         font-size: 18px;
     }
 }
+@media screen and (max-width: 870px){
+    .choix-tables {
+        width: 95%;
+    }
+    .tables>label {
+        width: 150px;
+        height: 150px;
+    }
+}
 
 @media screen and (max-width:740px) {
 
@@ -724,6 +730,17 @@ span.shadow {
 @media screen and (max-width: 550px) {
     h1 {
         font-size: 25px;
+    }
+    .outer{
+        width: 25px;
+        height: 25px;
+    }
+    .inner::before{
+        top: 0;
+        left: 5.5px;
+    }
+    #letsgo{
+        font-size: 18px;
     }
 
     #choice {
@@ -853,5 +870,18 @@ span.shadow {
 
     h1 {
         font-size: 20px;
+    }
+}
+@media screen and (max-width: 370px){
+    .display-radio{
+        justify-content: center;
+    }
+    .ordre-desordre, .aide{
+        margin: 10px;
+    }
+}
+@media screen and (max-width: 315px){
+    .tables>label{
+        width: inherit;
     }
 }
