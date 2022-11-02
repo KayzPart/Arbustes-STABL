@@ -145,11 +145,18 @@ function showScore() {
 }
 
 function nextNumber(indice) {
-  if (order==1){
-    nombre2=arrayNumbers[indice]
-  }else {
-    nombre2=arrayNumbersRandom[indice]
+  if(indice < 10){
+    if (order==1){
+      nombre2=arrayNumbers[indice]
+    }else {
+      nombre2=arrayNumbersRandom[indice]
+    }
+    indice++
+    cr = true
+  } else if (indice == 10){
+    showScore(resultScore)
   }
+  // indice++
 }
 
 // Affichage du bouton pour passer à la question suivante
@@ -165,15 +172,10 @@ function goodResult() {
         element.classList.remove('true')
       }
     })
-    if(indice < 10){
+    if(cr === true){
       indice++
-      console.log(indice)
-      nombre2 = nextNumber()
+      cr = nextNumber()
       startGame()
-    } 
-    if(indice == 10){
-      console.log(indice)
-      showScore(resultScore)
     }
   })
 }
