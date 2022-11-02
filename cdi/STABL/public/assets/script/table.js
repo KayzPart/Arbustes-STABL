@@ -1,6 +1,7 @@
 let indice = 0
 let arrayNumbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
 let arrayNumbersRandom = arrayNumbers.sort(() => Math.random() - 0.5)
+console.log(arrayNumbersRandom)
 
 const btn = document.getElementById('good-result')
 const or = document.getElementById('or')
@@ -53,15 +54,11 @@ function startGame() {
     beforeAfter()
   }
   else if (order == 2 && help == 1) {
-    // randomNumber()
-    // nextNumber()
     generateBallsGreen()
     console.log(indice)
     or.style.display = 'block'
   }
   else if (order == 2 && help == 2) {
-    // randomNumber()
-    // nextNumber()
     tableOutOfOrder()
   }
   // Question opération
@@ -150,11 +147,7 @@ function showScore() {
 function nextNumber(indice) {
   if (order==1){
     nombre2=arrayNumbers[indice]
-  }
-  // else if(indice == 10){
-  //   showScore(resultScore)
-  // } 
-  else {
+  }else {
     nombre2=arrayNumbersRandom[indice]
   }
 }
@@ -199,9 +192,7 @@ function counterClick(){
       }
       else if (counter > 10){
         diffCount = difference(counter, 10)
-        console.log(diffCount)
         resultScore = 10 - diffCount
-        console.log(resultScore)
         if(resultScore < 0){
           resultScore = 1
         }
