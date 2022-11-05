@@ -9,11 +9,15 @@ class ControllerScore extends ControllerTwigStabl
         if (isset($_POST['submit'])) {
             $manager = new ModelScore();
             $manager->insertScore($datas);
-            header('Location: ./table');
-        }else{
-            echo 'Pense à séléctionner toute les options';
         }
-        var_dump($datas);
+        header('Location: ./');
+    }
+    public static function scoreSelect($id){
+        $twig = ControllerTwigStabl::twigControl();
+        $viewScore = new ModelScore();
+        $score = $viewScore->selectScore($id);
+        echo $twig->render('score.twig', ['score' => $score]);
+        var_dump($score);
     }
     
     public static function updateScore(){

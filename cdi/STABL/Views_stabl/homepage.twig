@@ -3,6 +3,8 @@
 	<div class="container">
 		<h2>Bonjour
 			{{humain.getHumain_login}}</h2>
+		<p>{{score.getScore_humain_id}}</p>
+		<p>{{humain.getHumain_id}}</p>
 		<section class="choix-tables">
 			<form action="./table" method="POST">
 				<div class="tables">
@@ -11,11 +13,13 @@
 							<input type="radio" name="selectTable" value="{{i}}">
 							<img class="click-table" src="./public/assets/ressources/click-{{i}}.png" alt="table-{{i}}">
 						</label>
-						<div class="score-table">
-							<figure>
-								<img src="./public/assets/ressources/score-{{i}}.png" alt="score-table{{i}}">
-							</figure>
-						</div>
+						{# {% if score.getScore_param1 == i %} #}
+							<a href="./score/{{score.getScore_id}}">
+								<figure class="border_score">
+									<img src="./public/assets/ressources/score-{{i}}.png" alt="score-table{{i}}">
+								</figure>
+							</a>
+						{# {% endif %} #}
 					{% endfor %}
 					<label>
 						<input type="radio" name="selectTable" value="-1">
@@ -23,7 +27,7 @@
 					</label>
 				</div>
 				<section class="display-radio">
-					<div class="ordre-desordre">
+					<div class="ordre-desordre" id="display_if_tables">
 						<ul>
 							<li>
 								<input type="radio" id="ordre" name="order" value="1" checked>
@@ -53,11 +57,6 @@
 							</li>
 						</ul>
 					</div>
-
-					{# <div id="submit-btn">
-											<input type="submit" name="submit" id="letsgo" value="C'EST PARTI !">
-										</div> #}
-
 					<div class="aide">
 						<ul>
 							<li>
@@ -105,7 +104,9 @@
 
 				<input type="hidden" name="id" value="{{humain.getHumain_id}}">
 				<input type="hidden" name="scoreValeur" value="0">
-				<input type="hidden" name="scoreOutilId" value="{{outils.getOutil_id}}">
+				<input
+				type="hidden" name="scoreOutilId" value="{{outils.getOutil_id}}">
+				{# <input type="hidden" name="scoreId" value="{{score.getScore_id}}"> #}
 
 				<div id="submit-btn">
 					<input type="submit" name="submit" id="letsgo" value="C'EST PARTI !">
@@ -115,4 +116,5 @@
 	</div>
 {% endblock %}
 {# <footer></footer> #}
+{# <script src="./public/assets/script/ajax.js"></script> #}
 <script src="./public/assets/script/homepage.js"></script></body></html>

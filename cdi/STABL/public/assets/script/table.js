@@ -1,79 +1,72 @@
+// Indice à incrémenter pour parcourir tableau
 let indice = 0
+// Tableau nombre2 dans l'ordre
 let arrayNumbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
-let arrayNumbersRandom = arrayNumbers.sort(() => Math.random() - 0.5)
-console.log(arrayNumbersRandom)
+// Tableau nombre2 dans le désordre
+let arrayNumbers2 = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+let arrayNumbersRandom = arrayNumbers2.sort(() => Math.random() - 0.5)
+// Tableau quand TABLES est sélectionner (vaut nombreselectionner)
+let arrayTablesRandom1 = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+let tableRandom1 = arrayTablesRandom1.sort(() => Math.random() - 0.5)
+// Tableau quand TABLES est sélectionner (vaut nombre2)
+let arrayTablesRandom2 = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+let tableRandom2 = arrayTablesRandom2.sort(() => Math.random() - 0.5)
 
+// Bouton question suivante
 const btn = document.getElementById('good-result')
-const or = document.getElementById('or')
+
+// const or = document.getElementById('or')
 let nombre2 = 0
-let randomRange = 11
+let randomRange = 10
 let counter = 0
-let resultScore
+// let resultScore = 0
+let numberTable1 = 0
+let numberTable2 = 0
 
-
-
-
-// function randomNumber() {
-//   const inputScoreValeur = document.querySelectorAll('input[type=radio]')
-//   let numbers = arrayNumbers.sort(() => Math.random() - 0.5)
-//   nombre2 = numbers.pop()
-//   inputScoreValeur.forEach((elem) => {
-//     elem.addEventListener('click', function (event) {
-//       let item = event.target.value
-//       if (item == nombreSelectionner * nombre2) {
-//         arrayNumbers.indexOf(nombre2)
-//       }
-//     })
-//   })
-// }
-
-let myFunction = function () {
+// // Génère les billes jaunes / CLiquable pour vérifier le résultat
+function generateBallsYellow() {
   for (let i = 1; i <= 10; i++) {
 
     let result = nombreSelectionner * i
     document.getElementById('choice').innerHTML += `<div class="billes"><input type="radio" value= "${result}"><label>${result}</label></div>`
   }
 }
-myFunction()
+generateBallsYellow()
 
+// Affiche la table 
+function generateTableOperation() {
+  for (let i = 1; i <= 10; i++) {
+    let result = nombreSelectionner * i
 
-for (let i = 1; i <= 10; i++) {
-  let result = nombreSelectionner * i
-
-  document.getElementById('table').innerHTML += `<div class="operation">${nombreSelectionner} x ${i} = &nbsp;<span class="results">${result}</span> <br ></div>`
+    document.getElementById('table').innerHTML += `<div class="operation">${nombreSelectionner} x ${i} = &nbsp;<span class="results">${result}</span> <br ></div>`
+  }
 }
+generateTableOperation()
 
+// Lancement du jeu et vérification des conditions 
 startGame()
 function startGame() {
   nextNumber(indice)
-  if (order == 1 && help == 1) {
+  if (help == 1) {
     generateBallsGreen()
-    or.style.display = 'block'
   }
-  else if (order == 1 && help == 2) {
+  if (help == 2) {
     beforeAfter()
-  }
-  else if (order == 2 && help == 1) {
-    generateBallsGreen()
-    console.log(indice)
-    or.style.display = 'block'
-  }
-  else if (order == 2 && help == 2) {
-    tableOutOfOrder()
   }
   // Question opération
   document.getElementById('question').innerHTML = `<span>${nombreSelectionner} x ${nombre2}</span>`
   click()
-
 }
 
+
+// Génère le tableau de billes 
 function generateBallsGreen() {
   const table = document.createElement('table');
   const firstColum = document.getElementById('colum')
-  const secondColum = document.getElementById('second-colum')
+  // const secondColum = document.getElementById('second-colum')
 
-  firstColum.innerHTML='';
-  secondColum.innerHTML='';
+  firstColum.innerHTML = '';
+  // secondColum.innerHTML='';
   for (let i = 0; i < nombre2; i++) {
     const row = document.createElement('tr');
     for (let j = 1; j <= nombreSelectionner; j++) {
@@ -84,29 +77,16 @@ function generateBallsGreen() {
     table.appendChild(row);
   }
   firstColum.append(table);
-  clone = table.cloneNode(true)
-  secondColum.append(clone)
+  // clone = table.cloneNode(true)
+  // secondColum.append(clone)
 }
 
-function table() {
-  const spanResult = document.querySelectorAll('.results')
-  let i = 1
-  for (i = 1; i <= nombre2; i++) {
-    if (i == 10) {
-      break
-    }
-    spanResult[i].classList.add('show')
 
-    if (i == nombre2 - 1) {
-      spanResult[i].classList.remove('show')
-    }
-  }
-}
-
-function beforeAfter(){
-  console.log(`${nombreSelectionner} * ${nombre2-1}`)
-  console.log(`${nombreSelectionner} * ${nombre2}`)
-  console.log(`${nombreSelectionner} * ${nombre2+1}`)
+function beforeAfter() {
+  const beforeQuestion = document.getElementById('before_question')
+  const afterQuestion = document.getElementById('after_question')
+  beforeQuestion.innerHTML = `<span>${nombreSelectionner} x ${nombre2 - 1}</span>`
+  afterQuestion.innerHTML = `<span>${nombreSelectionner} x ${nombre2 + 1}</span>`
 }
 
 // Function that checks the click, the result and the value and which adds the correct result in the table
@@ -134,37 +114,36 @@ function click() {
     })
   });
 }
-
-// Affichage de la modal score
-function showScore() {
-  const modal = document.getElementById('modal-container')
-  modal.style.display = 'block'
-  const viewScore = document.getElementById('viewScore')
-  viewScore.innerHTML = `Score : ${resultScore} / 10`
-  document.getElementById('finalScore').innerHTML = `<input type="hidden" name="score_valeur" value="${resultScore}"><input type="submit" name="submit" id="scoreSubmit"  value="Bien joué ! Enregistre ton score 🏆">`
-}
-
 function nextNumber(indice) {
-  if(indice < 10){
-    if (order==1){
-      nombre2=arrayNumbers[indice]
-    }else {
-      nombre2=arrayNumbersRandom[indice]
+  if (indice < 10) {
+    if (order == 1) {
+      nombre2 = arrayNumbers[indice]
     }
-    indice++
+    if (order == 2) {
+      nombre2 = arrayNumbersRandom[indice]
+    }
+    if(order == 3){
+      nombreSelectionner = tableRandom1[indice]
+      nombre2 = tableRandom2[indice]
+      document.getElementById('choice').innerHTML = ''
+      document.getElementById('table').style.display = "none"
+      generateBallsYellow()
+    }
     cr = true
-  } else if (indice == 10){
+    // indice++
+  } else if (indice == 10) {
     showScore(resultScore)
   }
-  // indice++
 }
+
+
 
 // Affichage du bouton pour passer à la question suivante
 function goodResult() {
   btn.addEventListener('click', () => {
-    let ballsGreen = document.querySelectorAll('.billes')
+    let balls = document.querySelectorAll('.billes')
     btn.style.display = "none"
-    ballsGreen.forEach((element) => {
+    balls.forEach((element) => {
       if (element.classList.contains('false')) {
         element.classList.remove('false')
       }
@@ -172,7 +151,7 @@ function goodResult() {
         element.classList.remove('true')
       }
     })
-    if(cr === true){
+    if (cr == true) {
       indice++
       cr = nextNumber()
       startGame()
@@ -182,31 +161,47 @@ function goodResult() {
 goodResult()
 
 
-
+// Quand table es sélectionner probleme de counter (a voir)
 // Compteur de click
-function counterClick(){
-  let ballsGreen = document.querySelectorAll('.billes')
-  ballsGreen.forEach((element) => {
+function counterClick() {
+  const balls = document.querySelectorAll('.billes')
+  balls.forEach((element) => {
     element.addEventListener('click', function () {
       counter++
-      if(counter <= 10 ){
+      if (counter <= 10) {
         resultScore = counter
       }
-      else if (counter > 10){
+      else if (counter > 10) {
         diffCount = difference(counter, 10)
         resultScore = 10 - diffCount
-        if(resultScore < 0){
+        console.log(counter)
+        console.log(resultScore)
+        if (resultScore <= 0) {
           resultScore = 1
         }
       }
+      console.log(counter)
     })
   })
 }
 counterClick()
 
 // calcule la difference entre le counter et 10 
-function difference(a, b){
+function difference(a, b) {
   return Math.abs(a - b)
 }
-
-
+// Affichage de la modal score
+function showScore() {
+  const modal = document.getElementById('modal-container')
+  modal.style.display = 'block'
+  const viewScore = document.getElementById('viewScore')
+  viewScore.innerHTML = `Score : ${resultScore} / 10`
+  document.getElementById('finalScore').innerHTML = `
+  <input type="hidden" name="scoreValeur" value="${resultScore}">
+  <input type="hidden" name="scoreOutilId" value="${outil}">
+  <input type="hidden" name="id" value="${id}">
+  <input type="hidden" name="selectTable" value="${nombreSelectionner}">
+  <input type="hidden" name="order" value="${order}">
+  <input type="hidden" name="help" value="${help}">
+  <input type="submit" name="submit" id="scoreSubmit"  value="Bien joué ! Enregistre ton score 🏆">`
+}

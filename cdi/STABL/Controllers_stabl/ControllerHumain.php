@@ -61,7 +61,7 @@ class ControllerHumain extends ControllerTwigStabl{
     // }
 
     // Redirection après connexion
-    public static function redirectionEspace(){
+    public static function redirectionEspace($id){
         // session_start();
         if(!isset($_SESSION['humain']['humain_id'])){
             header('Refresh: 0.01; url= ./');
@@ -70,10 +70,12 @@ class ControllerHumain extends ControllerTwigStabl{
         $twig = ControllerTwigStabl::twigControl();
         $datas = new ModelHumain();
         $outil = new ModelOutil();
-        $datasOutil = $outil->selectOutil();
+        $viewScore = new ModelScore();
         $humain = $datas->selectHumain($id);
-        echo $twig->render('homepage.twig', ['humain_id' => $_SESSION['humain']['humain_id'], 'humain' => $humain, 'outils' => $datasOutil[0]]);
-        // var_dump($humain);
+        $datasOutil = $outil->selectOutil();
+        $score = $viewScore->selectScore($id);
+        echo $twig->render('homepage.twig', ['humain_id' => $_SESSION['humain']['humain_id'], 'humain' => $humain, 'outils' => $datasOutil[0], 'score' => $score]);
+        var_dump($score);
     }
 
 

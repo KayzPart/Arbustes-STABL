@@ -2,7 +2,7 @@
 class ModelScore extends Connect{
     // Insertion après sélection depuis l'homepage
     public function insertScore($datas){
-        if(isset($_GET['submit'])){
+        if(isset($_POST['submit'])){
             $scoreActif = 1;
             $scoreDate = date('Y-m-d');
             $db = $this->getDb();
@@ -26,27 +26,27 @@ class ModelScore extends Connect{
     }
 
     // Récupération de la table séléctionner 
-    public function selectScore(){
+    public function selectScore($id){
         $db = $this->getDb();
-        $selectScore = $db->query('SELECT `score_id`, `score_valeur`, `score_outil_id`, `score_humain_id`, `score_param1`, `score_param2`, `score_param3`, `score_est_actif`, `score_date` FROM `scores` ORDER  BY `score_id` DESC LIMIT 0,1');
-        $data = $selectScore->fetch(PDO::FETCH_ASSOC);
-        $score = new Score_stabl($data);
+        $selectScore = $db->prepare('SELECT `score_id`, `score_valeur`, `score_outil_id`, `score_humain_id`, `score_param1`, `score_param2`, `score_param3`, `score_est_actif`, `score_date` FROM `scores` WHERE `score_id` = :id');
+        $selectScore->bindParam(':id', $id, PDO::PARAM_INT);
+        $selectScore->execute();
+        $score = [];
+        while($data = $selectScore->fetch(PDO::FETCH_ASSOC)){
+            $score[] = new Score_stabl($data);
+        }
         return $score;
-
-        // echo json_encode($selectScore->fetchAll(PDO::FETCH_ASSOC));
     }
 
     // Envoie du score une fois compter et valider 
-    public function updateScore($id, $score_valeur){
-        $id = $_GET['score_id'];
-            $scoreValeur = $_GET['score_valeur'];
+    public function updateScore($id, $resultScore){
+        // $id = $_GET['score_id'];
+            $resultScore = $_GET['resultScore'];
         $db = $this->getDb();
-        $updateScore = $db->prepare('UPDATE `scores` SET `score_valeur`= :score_valeur WHERE `score_id` = :id');
+        $updateScore = $db->prepare('UPDATE `scores` SET `score_valeur`= :resultScore WHERE `score_id` = :id');
         $updateScore->bindParam('id', $id, PDO::PARAM_INT);
-        $updateScore->bindParam('score_valeur', $score_valeur, PDO::PARAM_STR);
+        $updateScore->bindParam('score_valeur', $resultScore, PDO::PARAM_STR);
         $updateScore->execute();
-        // $data = $updateScore->fetch(PDO::FETCH_ASSOC);
-        // $newScore = new Score_stabl($data);
         $newScore = [];
         while($score = $updateScore->fetch(PDO::FETCH_ASSOC)){
             $newScore[] = new Score_stabl($score);
