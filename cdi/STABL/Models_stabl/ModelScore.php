@@ -26,11 +26,15 @@ class ModelScore extends Connect{
     }
 
     // Récupération de la table séléctionner 
-    public function selectScore($id){
+    public function selectScore(){
         $db = $this->getDb();
-        $selectScore = $db->prepare('SELECT `score_id`, `score_valeur`, `score_outil_id`, `score_humain_id`, `score_param1`, `score_param2`, `score_param3`, `score_est_actif`, `score_date` FROM `scores` WHERE `score_id` = :id');
-        $selectScore->bindParam(':id', $id, PDO::PARAM_INT);
-        $selectScore->execute();
+        $selectScore = $db->query("SELECT `score_id`, `score_valeur`, `score_outil_id`, `score_humain_id`, `score_param1`, `score_param2`, `score_param3`, `score_est_actif`, `score_date` FROM `scores` WHERE `score_id`");
+        // $selectScore->bindParam(':id', $id, PDO::PARAM_INT);
+        // $selectScore->execute();
+        // $data = $selectScore->fetch(PDO::FETCH_ASSOC);
+        // return new Score_stabl($data);
+        // $user = new Humain_stabl($data);
+        // 
         $score = [];
         while($data = $selectScore->fetch(PDO::FETCH_ASSOC)){
             $score[] = new Score_stabl($data);

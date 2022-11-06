@@ -17,7 +17,6 @@ class ControllerScore extends ControllerTwigStabl
         $viewScore = new ModelScore();
         $score = $viewScore->selectScore($id);
         echo $twig->render('score.twig', ['score' => $score]);
-        var_dump($score);
     }
     
     public static function updateScore(){

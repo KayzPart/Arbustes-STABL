@@ -13,13 +13,15 @@
 							<input type="radio" name="selectTable" value="{{i}}">
 							<img class="click-table" src="./public/assets/ressources/click-{{i}}.png" alt="table-{{i}}">
 						</label>
-						{# {% if score.getScore_param1 == i %} #}
-							<a href="./score/{{score.getScore_id}}">
-								<figure class="border_score">
-									<img src="./public/assets/ressources/score-{{i}}.png" alt="score-table{{i}}">
-								</figure>
-							</a>
-						{# {% endif %} #}
+						{% for scoreUse in score %}
+							{% if scoreUse.getScore_param1 == i%}
+								<a href="./score/{{scoreUse.getScore_id}}">
+									<figure class="border_score">
+										<img src="./public/assets/ressources/score-{{i}}.png" alt="score-table{{i}}">
+									</figure>
+								</a>
+							{% endif %}
+						{% endfor %}
 					{% endfor %}
 					<label>
 						<input type="radio" name="selectTable" value="-1">

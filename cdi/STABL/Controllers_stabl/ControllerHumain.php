@@ -73,11 +73,12 @@ class ControllerHumain extends ControllerTwigStabl{
         $viewScore = new ModelScore();
         $humain = $datas->selectHumain($id);
         $datasOutil = $outil->selectOutil();
-        $score = $viewScore->selectScore($id);
+        $score = $viewScore->selectScore();
+        // $score = $viewScore->selectScore($id);
         echo $twig->render('homepage.twig', ['humain_id' => $_SESSION['humain']['humain_id'], 'humain' => $humain, 'outils' => $datasOutil[0], 'score' => $score]);
+        var_dump($humain);
         var_dump($score);
     }
-
 
     
 
