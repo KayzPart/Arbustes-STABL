@@ -26,19 +26,23 @@ class ModelScore extends Connect{
     }
 
     // Récupération de la table séléctionner 
-    public function selectScore(){
+    public function selectAllScore(){
         $db = $this->getDb();
-        $selectScore = $db->query("SELECT `score_id`, `score_valeur`, `score_outil_id`, `score_humain_id`, `score_param1`, `score_param2`, `score_param3`, `score_est_actif`, `score_date` FROM `scores` WHERE `score_id`");
-        // $selectScore->bindParam(':id', $id, PDO::PARAM_INT);
-        // $selectScore->execute();
-        // $data = $selectScore->fetch(PDO::FETCH_ASSOC);
-        // return new Score_stabl($data);
-        // $user = new Humain_stabl($data);
-        // 
+        $selectScore = $db->query("SELECT `score_id`, `score_valeur`, `score_outil_id`, `score_humain_id`, `score_param1`, `score_param2`, `score_param3`, `score_est_actif`, `score_date` FROM `scores`");
         $score = [];
         while($data = $selectScore->fetch(PDO::FETCH_ASSOC)){
             $score[] = new Score_stabl($data);
         }
+        return $score;
+    }
+
+    public function readScore($id){
+        $db = $this->getDb();
+        $readScore = $db->prepare('SELECT `score_id`, `score_valeur`, `score_outil_id`, `score_humain_id`, `score_param1`, `score_param2`, `score_param3`, `score_est_actif`, `score_date` FROM `scores` WHERE `score_id` = :id');
+        $readScore->bindParam(':id', $id['score_id'], PDO::PARAM_INT);
+        $readScore->execute();
+        $datasScore = $readScore->fetch(PDO::FETCH_ASSOC);
+        $score = new Score_stabl($datasScore);
         return $score;
     }
 
