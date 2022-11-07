@@ -85,8 +85,8 @@ function generateBallsGreen() {
 function beforeAfter() {
   const beforeQuestion = document.getElementById('before_question')
   const afterQuestion = document.getElementById('after_question')
-  beforeQuestion.innerHTML = `<span>${nombreSelectionner} x ${nombre2 - 1} = ${nombreSelectionner * `${nombre2 -1}`}  </span>`
-  afterQuestion.innerHTML = `<span>${nombreSelectionner} x ${nombre2 + 1} =  ${nombreSelectionner * `${nombre2 +1}`}</span>`
+  beforeQuestion.innerHTML = `<span>${nombreSelectionner} x ${nombre2 - 1} = ${nombreSelectionner * `${nombre2 - 1}`}  </span>`
+  afterQuestion.innerHTML = `<span>${nombreSelectionner} x ${nombre2 + 1} =  ${nombreSelectionner * `${nombre2 + 1}`}</span>`
 }
 
 // Function that checks the click, the result and the value and which adds the correct result in the table
@@ -122,7 +122,7 @@ function nextNumber(indice) {
     if (order == 2) {
       nombre2 = arrayNumbersRandom[indice]
     }
-    if(order == 3){
+    if (order == 0) {
       nombreSelectionner = tableRandom1[indice]
       nombre2 = tableRandom2[indice]
       document.getElementById('choice').innerHTML = ''
@@ -132,7 +132,9 @@ function nextNumber(indice) {
     cr = true
     // indice++
   } else if (indice == 10) {
+    console.log(nombreSelectionner);
     showScore(resultScore)
+    // ajaxSendScore(resultScore)
   }
 }
 
@@ -174,13 +176,10 @@ function counterClick() {
       else if (counter > 10) {
         diffCount = difference(counter, 10)
         resultScore = 10 - diffCount
-        console.log(counter)
-        console.log(resultScore)
         if (resultScore <= 0) {
           resultScore = 1
         }
       }
-      console.log(counter)
     })
   })
 }
@@ -203,5 +202,26 @@ function showScore() {
   <input type="hidden" name="selectTable" value="${nombreSelectionner}">
   <input type="hidden" name="order" value="${order}">
   <input type="hidden" name="help" value="${help}">
-  <input type="submit" name="submit" id="scoreSubmit"  value="Bien joué ! Enregistre ton score 🏆">`
+  <input type="submit" name="submit" id="scoreSubmit" value="Enregistre ton score ! 🏆">`
 }
+
+// function ajaxSendScore() {
+//   fetch('./Controllers_stabl/Ajax.php', {
+//     method: 'POST',
+//     mode: 'cors',
+//     headers: {
+//       'Content-Type': 'application/json',  // sent request
+//       'Accept': 'application/json'   // expected data sent back
+//     },
+//     body: JSON.stringify()
+//   })
+//     .then((response) => { return response.json() })
+//     .then(datas => {
+//       datas.map(element => {
+//         console.log(datas);
+//         console.log(element.score_id)
+        
+//       })
+//     })
+//     .catch((error) => console.log(error))
+// }
