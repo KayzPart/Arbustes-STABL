@@ -85,8 +85,8 @@ function generateBallsGreen() {
 function beforeAfter() {
   const beforeQuestion = document.getElementById('before_question')
   const afterQuestion = document.getElementById('after_question')
-  beforeQuestion.innerHTML = `<span>${nombreSelectionner} x ${nombre2 - 1}</span>`
-  afterQuestion.innerHTML = `<span>${nombreSelectionner} x ${nombre2 + 1}</span>`
+  beforeQuestion.innerHTML = `<span>${nombreSelectionner} x ${nombre2 - 1} = ${nombreSelectionner * `${nombre2 -1}`}  </span>`
+  afterQuestion.innerHTML = `<span>${nombreSelectionner} x ${nombre2 + 1} =  ${nombreSelectionner * `${nombre2 +1}`}</span>`
 }
 
 // Function that checks the click, the result and the value and which adds the correct result in the table

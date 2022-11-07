@@ -3,30 +3,47 @@
 	<div class="container">
 		<h2>Bonjour
 			{{humain.getHumain_login}}</h2>
-		<p>{{score.getScore_humain_id}}</p>
-		<p>{{humain.getHumain_id}}</p>
 		<section class="choix-tables">
 			<form action="./table" method="POST">
 				<div class="tables">
 					{% for i in 1..10 %}
+						{% if score  %}
+							{% for scoreUpdate in score %}
+								<a href="./update/{{scoreUpdate.getScore_id}}">dd</a>
+
+							{% endfor %}
+						{% endif %}
+						<div class="display_table_content">
+							<label>
+								<input type="radio" name="selectTable" value="{{i}}">
+								<img class="click-table" src="./public/assets/ressources/click-{{i}}.png" alt="table-{{i}}">
+							</label>
+							{% for scoreUse in score %}
+								{% if scoreUse.getScore_param1 == i%}
+									<a href="./score/{{scoreUse.getScore_id}}">
+										<figure>
+											<img src="./public/assets/ressources/score-{{i}}.png" alt="score-table{{i}}">
+										</figure>
+									</a>
+								{% endif %}
+							{% endfor %}
+						</div>
+					{% endfor %}
+					<div class="display_table_content">
 						<label>
-							<input type="radio" name="selectTable" value="{{i}}">
-							<img class="click-table" src="./public/assets/ressources/click-{{i}}.png" alt="table-{{i}}">
+							<input type="radio" name="selectTable" value="-1">
+							<img class="click-table" src="./public/assets/ressources/click-tables.png" alt="tables">
 						</label>
 						{% for scoreUse in score %}
 							{% if scoreUse.getScore_param1 == i%}
 								<a href="./score/{{scoreUse.getScore_id}}">
-									<figure class="border_score">
-										<img src="./public/assets/ressources/score-{{i}}.png" alt="score-table{{i}}">
+									<figure>
+										<img src="./public/assets/ressources/score-tableau.png" alt="score-tables">
 									</figure>
 								</a>
 							{% endif %}
 						{% endfor %}
-					{% endfor %}
-					<label>
-						<input type="radio" name="selectTable" value="-1">
-						<img class="click-table" src="./public/assets/ressources/click-tables.png" alt="tables">
-					</label>
+					</div>
 				</div>
 				<section class="display-radio">
 					<div class="ordre-desordre" id="display_if_tables">
@@ -117,6 +134,4 @@
 		</section>
 	</div>
 {% endblock %}
-{# <footer></footer> #}
-{# <script src="./public/assets/script/ajax.js"></script> #}
 <script src="./public/assets/script/homepage.js"></script></body></html>

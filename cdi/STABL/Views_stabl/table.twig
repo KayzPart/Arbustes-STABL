@@ -5,13 +5,11 @@
 		<div id="question"></div>
 		<div id="after_question"></div>
 	</section>
-	<div id="good-result">Suivant</div>
+	{# <div id="good-result">Suivant</div> #}
 	<form action="./insert" method="POST" id="click-result">
 		<div id="modal-container">
 			<div class="modal-background">
-				<div
-					class="modal">
-					{# <h2>Félicitation !</h2> #}
+				<div class="modal">
 					<div class="wrapper">
 						<ul>
 							<li class="container-bille">
@@ -29,8 +27,12 @@
 						</ul>
 					</div>
 					<p>
+					{% if param1 == -1 %}
+						Tu as terminé la série des tables
+						{% else %}	
 						Tu as terminé la table de
 						{{param1}}
+					{% endif %}
 					</p>
 					<p>
 						Voici ton score :
@@ -38,37 +40,32 @@
 					<span id="viewScore">
 						Score : 0 / 10
 					</span>
-					<div id="finalScore">
-						
-					</div>
+					<div id="finalScore"></div>
 				</div>
 			</div>
 		</div>
 		<section class="content">
 			<div class="colum-display">
 				<div id="choice"></div>
-				{# <div id="good-result">Suivant</div> #}
 				<div id="generateBille">
 					<div id="colum"></div>
-					{# <span id="or">OU</span> #}
-					{# <div id="second-colum"></div> #}
 				</div>
 				<div id="table"></div>
 			</div>
-			{# <div id="table"></div> #}
+			<div id="good-result">Suivant</div>
 		</section>
 	</form>
 {% endblock %}
 <footer></footer>
 <script>
 	let nombreSelectionner = {{ param1 }};
-	let order = {{ param2 }};
-	let help = {{ param3 }};
-	let outil = {{ outil }}
-	let id = {{ id }}
-	let resultScore = {{ value }}
-	if (nombreSelectionner == -1) {
-	order = 3
-	}
+let order = {{ param2 }};
+let help = {{ param3 }};
+let outil = {{ outil }}
+let id = {{ id }}
+let resultScore = {{ value }}
+if (nombreSelectionner == -1) {
+order = 3
+}
 </script>
 <script src="./public/assets/script/table.js"></script></body></html>

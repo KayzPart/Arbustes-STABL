@@ -107,7 +107,7 @@ header {
 }
 
 h1 {
-    font-size: 35px;
+    font-size: 2.5em;
 }
 
 ul {
@@ -165,28 +165,31 @@ h2 {
     opacity: 0;
 }
 
+.tables a {
+    position: absolute;
+    top: 0;
+    right: 0;
+}
+
 .tables input[type=radio]+img {
     cursor: pointer;
 }
 
-.score-table {
-    position: relative;
-}
-
-.score-table figure {
-    position: absolute;
-    right: 0;
-}
-
-.tables>label>img {
+.tables>.display_table_content>label>img {
     width: 100%;
     height: 100%;
     object-fit: contain;
 }
 
-.tables>label {
+.display_table_content {
     width: 200px;
     height: 200px;
+    position: relative;
+}
+
+.tables>.display_table_content>label {
+    width: 100%;
+    height: 100%;
 }
 
 .display-radio {
@@ -344,10 +347,14 @@ input[type=radio]:checked+label .outer .inner:after {
 .question_display div {
     margin: 0 10px;
 }
-
+#before_question, #after_question{
+    font-size: 1.2em;
+    color: #afa9cf;
+}
 #question {
     text-align: center;
-    font-size: 20px;
+    color: #5aa9cd;
+    font-size: 1.7em;
     font-weight: bold;
     margin: 10px;
 }
@@ -548,6 +555,7 @@ span.shadow {
     width: 20%;
     height: fit-content;
     margin: 20px 10px;
+    font-size: 1.3em;
 }
 
 .colum-display {
@@ -567,22 +575,14 @@ span.shadow {
     display: none;
 }
 
-/* .content {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-around;
-} */
-
 #choice {
     width: 30%;
     padding: 20px;
     height: 200px;
-    /* position: relative; */
 }
 
 #generateBille {
     display: flex;
-    /* justify-content: space-between; */
     align-items: stretch;
     flex-direction: column;
     width: fit-content;
@@ -598,7 +598,6 @@ span.shadow {
 }
 
 #second-colum {
-    /* transform-origin: left; */
     transform: translate(30%, 95%) rotate(-90deg);
 }
 
@@ -719,8 +718,6 @@ span.shadow {
 .container_of_table th span {
     font-weight: bold;
     font-size: 1em;
-    /* text-align: left; */
-
 }
 
 .container_of_table td {
@@ -747,27 +744,22 @@ span.shadow {
 
 .container_of_table tr:hover {
     background-color: #464A52;
-             box-shadow: 0 6px 6px -6px #0E1119;
- }
- .container_of_table td:hover {
+    box-shadow: 0 6px 6px -6px #0E1119;
+}
+
+.container_of_table td:hover {
     background-color: #FFF842;
     color: #403E10;
     font-weight: bold;
-    
     box-shadow: #7F7C21 -1px 1px, #7F7C21 -2px 2px, #7F7C21 -3px 3px, #7F7C21 -4px 4px, #7F7C21 -5px 5px, #7F7C21 -6px 6px;
     transform: translate3d(6px, -6px, 0);
-    
     transition-delay: 0s;
-        transition-duration: 0.4s;
-        transition-property: all;
+    transition-duration: 0.4s;
+    transition-property: all;
     transition-timing-function: line;
-  }
-@media screen and (max-width:980px) {
-    /* .col-header {
-        width: 20px;
-        height: 20px;
-    } */
+}
 
+@media screen and (max-width:980px) {
     #second-colum {
         transform: translate(65%, 20%) rotate(-90deg);
     }
@@ -851,10 +843,29 @@ span.shadow {
         font-size: 16px;
     }
 }
+@media screen and (max-width: 710px){
+    #table{
+        width: 40%;
+    }
+}
+@media screen and (max-width: 610px){
+    .container_of_table th span, .container_of_table td{
+        font-size: 12px;
+    }
+    .container_of_table{
+        width: 95%;
+    }
+}
 
 @media screen and (max-width: 550px) {
     h1 {
-        font-size: 25px;
+        font-size: 1.8em;
+    }
+    h2{
+        font-size: 20px;
+    }
+    #question{
+        font-size: 1.5em;
     }
 
     .outer {
@@ -870,14 +881,10 @@ span.shadow {
     #letsgo {
         font-size: 18px;
     }
-
-    #table {
-        margin: 0;
-        font-size: 14px;
-    }
-
-    .operation {
-        margin: 0;
+}
+@media screen and (max-width: 445px){
+    #choice {
+        width: 85%;
     }
 }
 
@@ -900,9 +907,7 @@ span.shadow {
     }
 
     #table {
-        margin: 0 auto;
         width: 50%;
-        font-size: inherit;
     }
 
     #generateBille {
@@ -914,12 +919,23 @@ span.shadow {
         width: 100%;
     }
 
-    #choice {
-        width: 85%;
-    }
-
     h1 {
-        font-size: 20px;
+        font-size: 1.3em;
+    }
+    h2{
+        font-size: 18px;
+    }
+    #question{
+        font-size: 1.1em;
+    }
+    #before_question, #after_question{
+        font-size: 1em;
+    }
+    .container_of_table th span, .container_of_table td{
+        font-size: 10px;
+    }
+    .container_of_table{
+        width: 100%;
     }
 }
 

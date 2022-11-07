@@ -8,30 +8,17 @@ class ControllerScore extends ControllerTwigStabl
         $datas = $_POST;
         if (isset($_POST['submit'])) {
             $manager = new ModelScore();
+            // Verifier si la colonne existe deja si elle est null => INSERT sinon UPDATE
             $manager->insertScore($datas);
         }
-        header('Location: ./');
+        
+        // header('Location: ./');
     }
-    public static function scoreSelect($id){
+    public static function scoreSelect($id)
+    {
         $twig = ControllerTwigStabl::twigControl();
         $viewScore = new ModelScore();
         $score = $viewScore->readScore($id);
         echo $twig->render('score.twig', ['score' => $score]);
-    }
-    
-    public static function updateScore(){
-        // session_start();
-        if(isset($_GET['submit'])){
-            $id = $_GET['score_id'];
-            var_dump($id);
-            $score_valeur = $_GET['score_valeur'];
-            $twig = ControllerTwigStabl::twigControl();
-            $manager = new ModelScore();
-            $updateScore = $manager->updateScore($id, $score_valeur);
-            echo $twig->render('table.twig', ['score' => $updateScore]);
-            var_dump($updateScore);
-        }
-        header('Location: ./');
-        
     }
 }

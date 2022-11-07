@@ -32,7 +32,8 @@ $router->map('GET|POST', '/', 'ControllerHumain#redirectionEspace');
 $router->map('GET|POST', '/table', 'ControllerTable#jeuTable');
 $router->map('POST', '/insert', 'ControllerScore#insertScoreHumain');
 $router->map('GET', '/score/[i:score_id]','ControllerScore#scoreSelect', 'score');
-// $router->map('POST', '/update', 'ControllerScore#updateScore');
+$router->map('GET|POST', '/update/[i:score_id]', 'ControllerScore#updateScore');
+$router->map('GET|POST', '/update', 'ControllerScore#redirectionAfterUpdate');
 
 $match = $router->match();
 
