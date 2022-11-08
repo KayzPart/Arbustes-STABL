@@ -21,4 +21,13 @@ class ControllerScore extends ControllerTwigStabl
         $score = $viewScore->readScore($id);
         echo $twig->render('score.twig', ['score' => $score]);
     }
+
+    public static function misajourscore(){
+        $donnees = $_POST;
+        var_dump($donnees);
+        $datas = [];
+        $datas['cr'] = 1;
+       // echo json_encode($datas);
+        
+    }
 }

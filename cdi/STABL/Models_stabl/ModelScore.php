@@ -19,6 +19,7 @@ class ModelScore extends Connect{
             // var_dump($help);
             // var_dump($selectTable);
             var_dump($_POST['submit']);
+            
 
             if($count == 0){
                 $scoreActif = 1;

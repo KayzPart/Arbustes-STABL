@@ -115,7 +115,7 @@ function click() {
   });
 }
 function nextNumber(indice) {
-  if (indice < 10) {
+  if (indice < 2) {
     if (order == 1) {
       nombre2 = arrayNumbers[indice]
     }
@@ -131,9 +131,10 @@ function nextNumber(indice) {
     }
     cr = true
     // indice++
-  } else if (indice == 10) {
-    showScore(resultScore)
-    // ajaxSendScore(resultScore)
+  } else if (indice == 2) {
+    // showScore(resultScore)
+    ajaxSendScore(order, help, nombreSelectionner, resultScore)
+    
   }
 }
 
@@ -186,54 +187,50 @@ function difference(a, b) {
   return Math.abs(a - b)
 }
 // Affichage de la modal score
-function showScore() {
-  const modal = document.getElementById('modal-container')
-  modal.style.display = 'block'
-  const viewScore = document.getElementById('viewScore')
-  viewScore.innerHTML = `Score : ${resultScore} / 10`
-  document.getElementById('finalScore').innerHTML = `
-    <input type="hidden" name="scoreValeur" value="${resultScore}">
-    <input type="hidden" name="scoreOutilId" value="${outil}">
-		<input type="hidden" name="id" value="${id}">
-    <input type="hidden" name="selectTable" value="${nombreSelectionner}">
-    <input type="hidden" name="order" value="${order}">
-    <input type="hidden" name="help" value="${help}">
-    <input type="submit" name="submit" id="scoreSubmit" value="Enregistre ton score ! 🏆">`
-  // if(order == 0){
-  //   nombreSelectionner = -1
-  //   document.getElementById('finalScore').innerHTML = `
-  //   <input type="hidden" name="scoreValeur" value="${resultScore}">
-  //   <input type="hidden" name="selectTable" value="${nombreSelectionner}">
-  //   <input type="hidden" name="order" value="${order}">
-  //   <input type="hidden" name="help" value="${help}">
-  //   <input type="submit" name="submit" id="scoreSubmit" value="Enregistre ton score ! 🏆">`
-  // } else {
-  //   document.getElementById('finalScore').innerHTML = `
-  //   <input type="hidden" name="scoreValeur" value="${resultScore}">
-  //   <input type="hidden" name="selectTable" value="${nombreSelectionner}">
-  //   <input type="hidden" name="order" value="${order}">
-  //   <input type="hidden" name="help" value="${help}">
-  //   <input type="submit" name="submit" id="scoreSubmit" value="Enregistre ton score ! 🏆">`
-  // }
-}
-
-// function ajaxSendScore() {
-//   fetch('./Controllers_stabl/Ajax.php', {
-//     method: 'POST',
-//     mode: 'cors',
-//     headers: {
-//       'Content-Type': 'application/json',  // sent request
-//       'Accept': 'application/json'   // expected data sent back
-//     },
-//     body: JSON.stringify()
-//   })
-//     .then((response) => { return response.json() })
-//     .then(datas => {
-//       datas.map(element => {
-//         console.log(datas);
-//         console.log(element.score_id)
-        
-//       })
-//     })
-//     .catch((error) => console.log(error))
+// function showScore() {
+//   const modal = document.getElementById('modal-container')
+//   modal.style.display = 'block'
+//   const viewScore = document.getElementById('viewScore')
+//   viewScore.innerHTML = `Score : ${resultScore} / 10`
+//   document.getElementById('finalScore').innerHTML = `
+//     <input type="hidden" name="scoreValeur" value="${resultScore}">
+//     <input type="hidden" name="scoreOutilId" value="${outil}">
+// 		<input type="hidden" name="id" value="${id}">
+//     <input type="hidden" name="selectTable" value="${nombreSelectionner}">
+//     <input type="hidden" name="order" value="${order}">
+//     <input type="hidden" name="help" value="${help}">
+//     <input type="submit" name="submit" id="scoreSubmit" value="Enregistre ton score ! 🏆">`
+//   // if(order == 0){
+//   //   nombreSelectionner = -1
+//   //   document.getElementById('finalScore').innerHTML = `
+//   //   <input type="hidden" name="scoreValeur" value="${resultScore}">
+//   //   <input type="hidden" name="selectTable" value="${nombreSelectionner}">
+//   //   <input type="hidden" name="order" value="${order}">
+//   //   <input type="hidden" name="help" value="${help}">
+//   //   <input type="submit" name="submit" id="scoreSubmit" value="Enregistre ton score ! 🏆">`
+//   // } else {
+//   //   document.getElementById('finalScore').innerHTML = `
+//   //   <input type="hidden" name="scoreValeur" value="${resultScore}">
+//   //   <input type="hidden" name="selectTable" value="${nombreSelectionner}">
+//   //   <input type="hidden" name="order" value="${order}">
+//   //   <input type="hidden" name="help" value="${help}">
+//   //   <input type="submit" name="submit" id="scoreSubmit" value="Enregistre ton score ! 🏆">`
+//   // }
 // }
+
+function ajaxSendScore() {
+  console.log(order, help, nombreSelectionner, resultScore)
+  fetch('./misajourscore', {
+    method: 'POST',
+    mode: 'cors',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(order)
+  })
+    .then((response) => { return response.json() })
+    // .then(datas => {
+      console.log(order)
+    // })
+    .catch((error) => console.log(error))
+}
