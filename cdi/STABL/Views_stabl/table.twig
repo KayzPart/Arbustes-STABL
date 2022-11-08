@@ -27,12 +27,12 @@
 						</ul>
 					</div>
 					<p>
-					{% if param1 == -1 %}
-						Tu as terminé la série des tables
-						{% else %}	
-						Tu as terminé la table de
-						{{param1}}
-					{% endif %}
+						{% if param1 == -1 %}
+							Tu as terminé la série des tables
+						{% else %}
+							Tu as terminé la table de
+							{{param1}}
+						{% endif %}
 					</p>
 					<p>
 						Voici ton score :
@@ -40,7 +40,9 @@
 					<span id="viewScore">
 						Score : 0 / 10
 					</span>
-					<div id="finalScore"></div>
+					<div id="finalScore">
+						
+					</div>
 				</div>
 			</div>
 		</div>

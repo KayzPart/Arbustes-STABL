@@ -31,6 +31,9 @@
 		<tbody>
 			<tr>
 				<td>Ordre</td>
+				{% for scores in score %}
+					{{scores.getScore_param1}}
+				{% endfor %}
 				{% if score.getScore_param2 == 1 %}
 					{% if score.getScore_param3 == 1 %}
 						<td>{{score.getScore_valeur}}

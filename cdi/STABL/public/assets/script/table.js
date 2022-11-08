@@ -132,13 +132,10 @@ function nextNumber(indice) {
     cr = true
     // indice++
   } else if (indice == 10) {
-    console.log(nombreSelectionner);
     showScore(resultScore)
     // ajaxSendScore(resultScore)
   }
 }
-
-
 
 // Affichage du bouton pour passer à la question suivante
 function goodResult() {
@@ -161,7 +158,6 @@ function goodResult() {
   })
 }
 goodResult()
-
 
 // Quand table es sélectionner probleme de counter (a voir)
 // Compteur de click
@@ -196,13 +192,29 @@ function showScore() {
   const viewScore = document.getElementById('viewScore')
   viewScore.innerHTML = `Score : ${resultScore} / 10`
   document.getElementById('finalScore').innerHTML = `
-  <input type="hidden" name="scoreValeur" value="${resultScore}">
-  <input type="hidden" name="scoreOutilId" value="${outil}">
-  <input type="hidden" name="id" value="${id}">
-  <input type="hidden" name="selectTable" value="${nombreSelectionner}">
-  <input type="hidden" name="order" value="${order}">
-  <input type="hidden" name="help" value="${help}">
-  <input type="submit" name="submit" id="scoreSubmit" value="Enregistre ton score ! 🏆">`
+    <input type="hidden" name="scoreValeur" value="${resultScore}">
+    <input type="hidden" name="scoreOutilId" value="${outil}">
+		<input type="hidden" name="id" value="${id}">
+    <input type="hidden" name="selectTable" value="${nombreSelectionner}">
+    <input type="hidden" name="order" value="${order}">
+    <input type="hidden" name="help" value="${help}">
+    <input type="submit" name="submit" id="scoreSubmit" value="Enregistre ton score ! 🏆">`
+  // if(order == 0){
+  //   nombreSelectionner = -1
+  //   document.getElementById('finalScore').innerHTML = `
+  //   <input type="hidden" name="scoreValeur" value="${resultScore}">
+  //   <input type="hidden" name="selectTable" value="${nombreSelectionner}">
+  //   <input type="hidden" name="order" value="${order}">
+  //   <input type="hidden" name="help" value="${help}">
+  //   <input type="submit" name="submit" id="scoreSubmit" value="Enregistre ton score ! 🏆">`
+  // } else {
+  //   document.getElementById('finalScore').innerHTML = `
+  //   <input type="hidden" name="scoreValeur" value="${resultScore}">
+  //   <input type="hidden" name="selectTable" value="${nombreSelectionner}">
+  //   <input type="hidden" name="order" value="${order}">
+  //   <input type="hidden" name="help" value="${help}">
+  //   <input type="submit" name="submit" id="scoreSubmit" value="Enregistre ton score ! 🏆">`
+  // }
 }
 
 // function ajaxSendScore() {

@@ -4,10 +4,20 @@ class ModelScore extends Connect{
     public function insertScore($datas){
         if(isset($_POST['submit'])){
             $selectTable = $datas['selectTable'];
+            $order = $datas['order'];
+            $help = $datas['help'];
             $db = $this->getDb();
-            $result = $db->query("SELECT `score_id`, `score_valeur`, `score_outil_id`, `score_humain_id`, `score_param1`, `score_param2`, `score_param3`, `score_est_actif`, `score_date` FROM `scores` WHERE `score_param1` LIKE $selectTable");
+            $result = $db->query("SELECT `score_id`, `score_valeur`, `score_outil_id`, `score_humain_id`, `score_param1`, `score_param2`, `score_param3`, `score_est_actif`, `score_date` FROM `scores` WHERE (`score_param1` LIKE $selectTable) AND (`score_param2` LIKE $order) AND (`score_param3` LIKE $help)");
+            // $result->bindParam('score_param1', $selectTable, PDO::PARAM_INT);
+            // $result->bindParam('score_param2', $order, PDO::PARAM_INT);
+            // $result->bindParam('score_param3', $help, PDO::PARAM_INT);
+            // $result->execute();
+            // var_dump($result);
             $count = $result->fetchColumn();
             var_dump($count);
+            // var_dump($order);
+            // var_dump($help);
+            // var_dump($selectTable);
             var_dump($_POST['submit']);
 
             if($count == 0){
@@ -41,7 +51,6 @@ class ModelScore extends Connect{
                 var_dump($newScore);
             }
             return $newScore;
-
         }
     }
 

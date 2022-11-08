@@ -12,7 +12,7 @@ class ControllerScore extends ControllerTwigStabl
             $manager->insertScore($datas);
         }
         
-        header('Location: ./');
+        // header('Location: ./');
     }
     public static function scoreSelect($id)
     {
