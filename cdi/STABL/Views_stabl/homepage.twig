@@ -7,12 +7,6 @@
 			<form action="./table" method="POST">
 				<div class="tables">
 					{% for i in 1..10 %}
-						{% if score  %}
-							{% for scoreUpdate in score %}
-								<a href="./update/{{scoreUpdate.getScore_id}}">dd</a>
-
-							{% endfor %}
-						{% endif %}
 						<div class="display_table_content">
 							<label>
 								<input type="radio" name="selectTable" value="{{i}}">

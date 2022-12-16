@@ -115,7 +115,7 @@ function click() {
   });
 }
 function nextNumber(indice) {
-  if (indice < 2) {
+  if (indice < 10) {
     if (order == 1) {
       nombre2 = arrayNumbers[indice]
     }
@@ -131,7 +131,7 @@ function nextNumber(indice) {
     }
     cr = true
     // indice++
-  } else if (indice == 2) {
+  } else if (indice == 10) {
     // showScore(resultScore)
     ajaxSendScore(order, help, nombreSelectionner, resultScore)
     
@@ -219,18 +219,23 @@ function difference(a, b) {
 // }
 
 function ajaxSendScore() {
-  console.log(order, help, nombreSelectionner, resultScore)
+  const donnees = {
+    order: order,
+    help: help,
+    nombreSelectionner: nombreSelectionner,
+    resultScore: resultScore
+  };
+  //const donnees = [order, help, nombreSelectionner, resultScore];
+  console.log(donnees);
   fetch('./misajourscore', {
     method: 'POST',
     mode: 'cors',
     headers: {
       'Content-Type': 'application/json'
     },
-    body: JSON.stringify(order)
+    body: JSON.stringify(donnees)
   })
-    .then((response) => { return response.json() })
-    // .then(datas => {
-      console.log(order)
-    // })
-    .catch((error) => console.log(error))
+  .then((response) => { return response.json() })
+  .then(datas => {alert(datas.msg)})
+  .catch((error) => console.log(error))
 }

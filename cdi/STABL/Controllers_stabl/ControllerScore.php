@@ -23,11 +23,14 @@ class ControllerScore extends ControllerTwigStabl
     }
 
     public static function misajourscore(){
-        $donnees = $_POST;
-        var_dump($donnees);
+        //$donnees = $_POST;
+        $donnees = json_decode(file_get_contents('php://input'), true);
         $datas = [];
-        $datas['cr'] = 1;
-       // echo json_encode($datas);
+        //******
+        //******
+        $datas['msg'] = "Le 12 septembre 2021, tu avais réussi l'activité en 13 clics.";
+        //var_dump($donnees,$donnees,$datas);
+       echo json_encode($datas);
         
     }
 }

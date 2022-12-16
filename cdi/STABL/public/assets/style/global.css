@@ -99,6 +99,7 @@ body {
     font-family: 'Pacifico', cursive;
     /* overflow: hidden; */
     height: 100vh;
+    /*max-width: 1200px;*/
 }
 
 header {
@@ -354,7 +355,7 @@ input[type=radio]:checked+label .outer .inner:after {
 #question {
     text-align: center;
     color: #5aa9cd;
-    font-size: 1.7em;
+    font-size: 2em;
     font-weight: bold;
     margin: 10px;
 }
@@ -587,7 +588,6 @@ span.shadow {
     flex-direction: column;
     width: fit-content;
     height: fit-content;
-    margin: 0 auto;
     padding: 20px 0;
 }
 
@@ -864,9 +864,6 @@ span.shadow {
     h2{
         font-size: 20px;
     }
-    #question{
-        font-size: 1.5em;
-    }
 
     .outer {
         width: 25px;
@@ -907,16 +904,18 @@ span.shadow {
     }
 
     #table {
-        width: 50%;
+        /*width: 50%;*/
+        margin: 0 auto;
     }
 
     #generateBille {
         padding: 20px 0;
         height: fit-content;
+        margin: 0 auto;
     }
 
     .colum-display {
-        width: 100%;
+        display: block;
     }
 
     h1 {
@@ -924,9 +923,6 @@ span.shadow {
     }
     h2{
         font-size: 18px;
-    }
-    #question{
-        font-size: 1.1em;
     }
     #before_question, #after_question{
         font-size: 1em;
@@ -955,3 +951,4 @@ span.shadow {
         width: inherit;
     }
 }
+

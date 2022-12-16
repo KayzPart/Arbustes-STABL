@@ -14,6 +14,7 @@ require_once __DIR__ . '/../vendor/autoload.php';
 require_once  __DIR__ . '/../vendor/altorouter/altorouter/AltoRouter.php';
 
 $router = new AltoRouter();
+//var_dump($dossier_server_path . '/cdi/' . $_SESSION['outil_id']);
 $router->setBasePath($dossier_server_path . '/cdi/' . $_SESSION['outil_id']);
 
 // Routes
@@ -36,6 +37,11 @@ $router->map('POST', '/misajourscore', 'ControllerScore#misajourscore');
 $router->map('GET', '/score/[i:score_id]','ControllerScore#scoreSelect', 'score');
 $router->map('GET|POST', '/update/[i:score_id]', 'ControllerScore#updateScore');
 $router->map('GET|POST', '/update', 'ControllerScore#redirectionAfterUpdate');
+
+/*echo '<pre>';
+var_dump($router);
+echo '</pre>';*/
+
 
 $match = $router->match();
 
