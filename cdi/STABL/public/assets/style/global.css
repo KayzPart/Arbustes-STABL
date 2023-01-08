@@ -150,6 +150,12 @@ h2 {
 }
 
 /* Homepage */
+.solidGreen{
+    border: solid 1px green;
+}
+.solidGreen2{
+    border: solid 2px green;
+}
 .choix-tables {
     width: 90%;
     margin: 0 auto;
@@ -329,6 +335,7 @@ input[type=radio]:checked+label .outer .inner:after {
     padding: 20px;
     font-size: 22px;
     border-radius: 10px;
+    display: none;
 }
 
 #letsgo:hover,
@@ -343,7 +350,7 @@ input[type=radio]:checked+label .outer .inner:after {
 .question_display {
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: space-around;
 }
 
 .question_display div {
@@ -363,6 +370,9 @@ input[type=radio]:checked+label .outer .inner:after {
 
 #good-result {
     display: none;
+    position: absolute;
+    right: 25px;
+    top: 100px;
     text-align: center;
     color: #9c89f7;
     background: none;
@@ -556,12 +566,12 @@ span.shadow {
     padding: 10px;
     width: 20%;
     height: fit-content;
-    margin: 20px 10px;
+    margin: 0 auto;
     font-size: 1.3em;
 }
 
 .colum-display {
-    width: 100%;
+    margin: 50px;
     display: flex;
     flex-wrap: wrap;
     justify-content: space-around;
@@ -584,7 +594,8 @@ span.shadow {
 }
 #counter{
     display: flex;
-    justify-content: flex-end;
+    justify-content: center;
+    margin: 10px 0;
 }
 #generateBille {
     width: fit-content;
@@ -698,8 +709,8 @@ span.shadow {
     background-image: url('../ressources/bille-vert.png');
     background-size: contain;
     background-repeat: no-repeat;
-    width: 25px;
-    height: 25px;
+    width: 40px;
+    height: 40px;
 }
 
 /* Score */

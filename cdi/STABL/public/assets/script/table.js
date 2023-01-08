@@ -169,7 +169,7 @@ function counterClick() {
     element.addEventListener('click', function () {
       counter++
       resultScore = counter
-      counterSpan.innerHTML = `Nombre de click : ${resultScore}`
+      counterSpan.innerHTML = `Nombres de clics : ${resultScore}`
       // if (counter <= 2) {
       //   
       // }

@@ -32,7 +32,6 @@ class ModelScore extends Connect{
 
                 $newDate = date('Y-m-d');
                 $db = $this->getDb();
-                $verifScoreBeforeUpdate= $db->prepare('SELECT `score_valeur` W ')
 
                 $updateScore = $db->prepare('UPDATE `scores` SET `score_valeur`= :scoreValeur, `score_date` = :newDate WHERE `score_id` = :id');
                 $updateScore->bindParam('id', $count, PDO::PARAM_INT);
@@ -53,23 +52,25 @@ class ModelScore extends Connect{
     }
 
     // Récupération de la table séléctionner 
-    public function selectAllScore(){
+    public function tableScore(){
         $db = $this->getDb();
-        $selectScore = $db->query("SELECT `score_id`, `score_valeur`, `score_outil_id`, `score_humain_id`, `score_param1`, `score_param2`, `score_param3`, `score_est_actif`, `score_date` FROM `scores`");
+        $selectTableScore = $db->query('SELECT `score_param1`, `score_valeur` FROM `scores` WHERE `score_id`');
         $score = [];
-        while($data = $selectScore->fetch(PDO::FETCH_ASSOC)){
+        while($data = $selectTableScore->fetch(PDO::FETCH_ASSOC)){
             $score[] = new Score_stabl($data);
         }
         return $score;
     }
 
-    public function readScore($id){
+    public function readScore(){
+        
         $db = $this->getDb();
-        $readScore = $db->prepare('SELECT `score_id`, `score_valeur`, `score_outil_id`, `score_humain_id`, `score_param1`, `score_param2`, `score_param3`, `score_est_actif`, `score_date` FROM `scores` WHERE `score_id` = :id');
-        $readScore->bindParam(':id', $id['score_id'], PDO::PARAM_INT);
-        $readScore->execute();
-        $datasScore = $readScore->fetch(PDO::FETCH_ASSOC);
-        $score = new Score_stabl($datasScore);
+        $selectScore = $db->query("SELECT `score_id`, `score_valeur`,`score_param1` FROM `scores` WHERE `score_param1`");
+        // $selectScore->bindParam(':scoreParam1', $scoreParam1, PDO::PARAM_INT);
+        // $score = [];
+        while($data = $selectScore->fetch(PDO::FETCH_ASSOC)){
+            $score[] = new Score_stabl($data);
+        }
         return $score;
     }
 }

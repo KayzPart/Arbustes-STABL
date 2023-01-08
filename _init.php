@@ -1,7 +1,7 @@
 <?php
 session_start();
 $dossier_server_path = '/Arbustes-STABL';
-$bdd = new PDO("mysql:host=localhost;dbname=stage_stabl;charset=UTF8", 'admin', 'root');
+$bdd = new PDO("mysql:host=localhost;dbname=stage_stabl;charset=UTF8", 'root');
 $_SESSION['humain']['humain_id'] = 9;
 // unset($_SESSION['humain']['humain_id']);
 $_SESSION['outil_retour'] = $dossier_server_path. '/cdi/STABL';

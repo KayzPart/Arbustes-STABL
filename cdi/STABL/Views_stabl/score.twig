@@ -1,7 +1,7 @@
 {% block body %}
 	{{ include("Templates/header_page_annexe.twig")}}
 	<h2>Voici  tes scores pour la table de
-		{{score.getScore_param1}}</h2>
+		{{score.Score_param1}}</h2>
 	<table class="container_of_table">
 		<thead>
 			<tr>
@@ -89,4 +89,8 @@
 			</tr>
 		</tbody>
 	</table>
+	{% if score.getScore_param1 == -1 %}
+	<p>coucou</p>
+	{% endif %}
+	
 {% endblock %}</body></html>
