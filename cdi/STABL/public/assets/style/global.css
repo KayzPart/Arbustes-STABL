@@ -1,5 +1,7 @@
 html,
-body,
+body{
+    font-size: 100%;
+}
 div,
 span,
 applet,
@@ -97,7 +99,6 @@ a {
 body {
     background-color: #ccd18f7d;
     font-family: 'Pacifico', cursive;
-    /* overflow: hidden; */
     height: 100vh;
 }
 
@@ -580,14 +581,13 @@ span.shadow {
     padding: 20px;
     height: 200px;
 }
-
-#generateBille {
+#counter{
     display: flex;
-    align-items: stretch;
-    flex-direction: column;
+    justify-content: flex-end;
+}
+#generateBille {
     width: fit-content;
     height: fit-content;
-    margin: 0 auto;
     padding: 20px 0;
 }
 

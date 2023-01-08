@@ -2,18 +2,6 @@
 
 class ControllerScore extends ControllerTwigStabl
 {
-    public static function insertScoreHumain($datas)
-    {
-        // session_start();
-        $datas = $_POST;
-        if (isset($_POST['submit'])) {
-            $manager = new ModelScore();
-            // Verifier si la colonne existe deja si elle est null => INSERT sinon UPDATE
-            $manager->insertScore($datas);
-        }
-        
-        // header('Location: ./');
-    }
     public static function scoreSelect($id)
     {
         $twig = ControllerTwigStabl::twigControl();
@@ -23,11 +11,14 @@ class ControllerScore extends ControllerTwigStabl
     }
 
     public static function misajourscore(){
-        $donnees = $_POST;
-        var_dump($donnees);
-        $datas = [];
-        $datas['cr'] = 1;
-       // echo json_encode($datas);
+        $donnees = json_decode(file_get_contents('php://input'), true);
+        // var_dump($donnees);
+        
+        // $datas = [];
+        // $datas['msg'] = "Le 12 septembre 2021, tu avais réussi l'activité en 13 clics.";
+        $manager = new ModelScore();
+        $manager->insertScore($donnees);
+        echo json_encode($datas);
         
     }
 }

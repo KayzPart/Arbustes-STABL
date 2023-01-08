@@ -14,6 +14,7 @@ let tableRandom2 = arrayTablesRandom2.sort(() => Math.random() - 0.5)
 
 // Bouton question suivante
 const btn = document.getElementById('good-result')
+const counterSpan = document.getElementById('counter')
 
 // const or = document.getElementById('or')
 let nombre2 = 0
@@ -167,70 +168,81 @@ function counterClick() {
   balls.forEach((element) => {
     element.addEventListener('click', function () {
       counter++
-      if (counter <= 10) {
-        resultScore = counter
-      }
-      else if (counter > 10) {
-        diffCount = difference(counter, 10)
-        resultScore = 10 - diffCount
-        if (resultScore <= 0) {
-          resultScore = 1
-        }
-      }
+      resultScore = counter
+      counterSpan.innerHTML = `Nombre de click : ${resultScore}`
+      // if (counter <= 2) {
+      //   
+      // }
+      // else if (counter > 2) {
+      //   diffCount = difference(counter, 2)
+      //   resultScore = 2 - diffCount
+      //   if (resultScore <= 0) {
+      //     resultScore = 1
+      //   }
+      // }
     })
   })
 }
 counterClick()
 
 // calcule la difference entre le counter et 10 
-function difference(a, b) {
-  return Math.abs(a - b)
-}
-// Affichage de la modal score
-// function showScore() {
-//   const modal = document.getElementById('modal-container')
-//   modal.style.display = 'block'
-//   const viewScore = document.getElementById('viewScore')
-//   viewScore.innerHTML = `Score : ${resultScore} / 10`
-//   document.getElementById('finalScore').innerHTML = `
-//     <input type="hidden" name="scoreValeur" value="${resultScore}">
-//     <input type="hidden" name="scoreOutilId" value="${outil}">
-// 		<input type="hidden" name="id" value="${id}">
-//     <input type="hidden" name="selectTable" value="${nombreSelectionner}">
-//     <input type="hidden" name="order" value="${order}">
-//     <input type="hidden" name="help" value="${help}">
-//     <input type="submit" name="submit" id="scoreSubmit" value="Enregistre ton score ! 🏆">`
-//   // if(order == 0){
-//   //   nombreSelectionner = -1
-//   //   document.getElementById('finalScore').innerHTML = `
-//   //   <input type="hidden" name="scoreValeur" value="${resultScore}">
-//   //   <input type="hidden" name="selectTable" value="${nombreSelectionner}">
-//   //   <input type="hidden" name="order" value="${order}">
-//   //   <input type="hidden" name="help" value="${help}">
-//   //   <input type="submit" name="submit" id="scoreSubmit" value="Enregistre ton score ! 🏆">`
-//   // } else {
-//   //   document.getElementById('finalScore').innerHTML = `
-//   //   <input type="hidden" name="scoreValeur" value="${resultScore}">
-//   //   <input type="hidden" name="selectTable" value="${nombreSelectionner}">
-//   //   <input type="hidden" name="order" value="${order}">
-//   //   <input type="hidden" name="help" value="${help}">
-//   //   <input type="submit" name="submit" id="scoreSubmit" value="Enregistre ton score ! 🏆">`
-//   // }
+// function difference(a, b) {
+//   return Math.abs(a - b)
 // }
-
 function ajaxSendScore() {
-  console.log(order, help, nombreSelectionner, resultScore)
+  showScore()
+  const donnees = {
+    order: order,
+    help: help,
+    id: id,
+    outil: outil, 
+    nombreSelectionner: nombreSelectionner,
+    resultScore: resultScore
+  };
+  //const donnees = [order, help, nombreSelectionner, resultScore];
+  console.log(donnees);
   fetch('./misajourscore', {
     method: 'POST',
     mode: 'cors',
     headers: {
       'Content-Type': 'application/json'
     },
-    body: JSON.stringify(order)
+    body: JSON.stringify(donnees)
   })
-    .then((response) => { return response.json() })
-    // .then(datas => {
-      console.log(order)
-    // })
-    .catch((error) => console.log(error))
+  .then((response) => { return response.json() })
+  .then(datas => {alert(datas.msg)})
+  .catch((error) => console.log(error))
+}
+
+
+// Affichage de la modal score
+function showScore() {
+  const modal = document.getElementById('modal-container')
+  modal.style.display = 'block'
+  const viewScore = document.getElementById('viewScore')
+  viewScore.innerHTML = `Tu as réussi l'activité en ${resultScore} clics.`
+  // document.getElementById('finalScore').innerHTML = `
+  //   <input type="hidden" name="scoreValeur" value="${resultScore}">
+  //   <input type="hidden" name="scoreOutilId" value="${outil}">
+	// 	<input type="hidden" name="id" value="${id}">
+  //   <input type="hidden" name="selectTable" value="${nombreSelectionner}">
+  //   <input type="hidden" name="order" value="${order}">
+  //   <input type="hidden" name="help" value="${help}">
+  //   <input type="submit" name="submit" id="scoreSubmit" value="Enregistre ton score ! 🏆">`
+  // if(order == 0){
+  //   nombreSelectionner = -1
+  //   document.getElementById('finalScore').innerHTML = `
+  //   <input type="hidden" name="scoreValeur" value="${resultScore}">
+  //   <input type="hidden" name="selectTable" value="${nombreSelectionner}">
+  //   <input type="hidden" name="order" value="${order}">
+  //   <input type="hidden" name="help" value="${help}">
+  //   <input type="submit" name="submit" id="scoreSubmit" value="Enregistre ton score ! 🏆">`
+  // } else {
+  //   document.getElementById('finalScore').innerHTML = `
+  //   <input type="hidden" name="scoreValeur" value="${resultScore}">
+  //   <input type="hidden" name="selectTable" value="${nombreSelectionner}">
+  //   <input type="hidden" name="order" value="${order}">
+  //   <input type="hidden" name="help" value="${help}">
+  //   <input type="submit" name="submit" id="scoreSubmit" value="Enregistre ton score ! 🏆">`
+  // }
 }

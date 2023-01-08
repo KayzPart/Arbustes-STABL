@@ -6,7 +6,7 @@
 		<div id="after_question"></div>
 	</section>
 	{# <div id="good-result">Suivant</div> #}
-	{# <form action="./insert" method="POST" id="click-result"> #}
+	{# <form action="" method="POST" id="click-result"> #}
 		<div id="modal-container">
 			<div class="modal-background">
 				<div class="modal">
@@ -34,11 +34,7 @@
 							{{param1}}
 						{% endif %}
 					</p>
-					<p>
-						Voici ton score :
-					</p>
 					<span id="viewScore">
-						Score : 0 / 10
 					</span>
 					<div id="finalScore">
 						
@@ -47,6 +43,7 @@
 			</div>
 		</div>
 		<section class="content">
+				<span id= "counter"> Nombre de click : {{value}}</span>
 			<div class="colum-display">
 				<div id="choice"></div>
 				<div id="generateBille">
