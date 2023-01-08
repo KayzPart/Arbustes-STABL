@@ -116,7 +116,7 @@ function click() {
   });
 }
 function nextNumber(indice) {
-  if (indice < 2) {
+  if (indice < 10) {
     if (order == 1) {
       nombre2 = arrayNumbers[indice]
     }
@@ -132,7 +132,7 @@ function nextNumber(indice) {
     }
     cr = true
     // indice++
-  } else if (indice == 2) {
+  } else if (indice == 10) {
     // showScore(resultScore)
     ajaxSendScore(order, help, nombreSelectionner, resultScore)
     
@@ -221,28 +221,4 @@ function showScore() {
   modal.style.display = 'block'
   const viewScore = document.getElementById('viewScore')
   viewScore.innerHTML = `Tu as réussi l'activité en ${resultScore} clics.`
-  // document.getElementById('finalScore').innerHTML = `
-  //   <input type="hidden" name="scoreValeur" value="${resultScore}">
-  //   <input type="hidden" name="scoreOutilId" value="${outil}">
-	// 	<input type="hidden" name="id" value="${id}">
-  //   <input type="hidden" name="selectTable" value="${nombreSelectionner}">
-  //   <input type="hidden" name="order" value="${order}">
-  //   <input type="hidden" name="help" value="${help}">
-  //   <input type="submit" name="submit" id="scoreSubmit" value="Enregistre ton score ! 🏆">`
-  // if(order == 0){
-  //   nombreSelectionner = -1
-  //   document.getElementById('finalScore').innerHTML = `
-  //   <input type="hidden" name="scoreValeur" value="${resultScore}">
-  //   <input type="hidden" name="selectTable" value="${nombreSelectionner}">
-  //   <input type="hidden" name="order" value="${order}">
-  //   <input type="hidden" name="help" value="${help}">
-  //   <input type="submit" name="submit" id="scoreSubmit" value="Enregistre ton score ! 🏆">`
-  // } else {
-  //   document.getElementById('finalScore').innerHTML = `
-  //   <input type="hidden" name="scoreValeur" value="${resultScore}">
-  //   <input type="hidden" name="selectTable" value="${nombreSelectionner}">
-  //   <input type="hidden" name="order" value="${order}">
-  //   <input type="hidden" name="help" value="${help}">
-  //   <input type="submit" name="submit" id="scoreSubmit" value="Enregistre ton score ! 🏆">`
-  // }
 }
