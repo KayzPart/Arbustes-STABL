@@ -1,20 +1,18 @@
 <?php
 
-class ControllerScore extends ControllerTwigStabl
-{
-    public static function scoreSelect()
-    {
+class ControllerScore extends ControllerTwigStabl{
+
+    public static function scoresOfTable($table){
         $twig = ControllerTwigStabl::twigControl();
         $viewScore = new ModelScore();
-        $score = $viewScore->readScore();
-        echo $twig->render('score.twig', ['score' => $score, 'param1' => $_GET['score_param1']]);
+        $scores = $viewScore->ScoresOfTable($table['score_param1']);
+        echo $twig->render('score.twig', ['scores' => $scores, 'table' => $table['score_param1']]);
     }
 
     public static function misajourscore(){
         $donnees = json_decode(file_get_contents('php://input'), true);
         $manager = new ModelScore();
-        $manager->insertScore($donnees);
-        echo json_encode($datas);
-        
+        $manager->majScore($donnees);
+        //echo json_encode($donnees);
     }
 }

@@ -2,7 +2,7 @@
 	{{ include("Templates/header.twig") }}
 	<div class="container">
 		<h2>Bonjour
-			{{humain.getHumain_login}}</h2>
+			{{prenom}}</h2>
 		<section class="choix-tables">
 			<form action="./table" method="POST">
 				<div class="tables">
@@ -10,7 +10,7 @@
 					{% for i in 1..10 %}
 						<div class="display_table_content">
 
-							{# {% for scoreUse in score %} #}
+							{# {% for scoreUse in scores %} #}
 								{% if scoreUse.getScore_valeur == 10 %}
 									<label>
 										<input type="radio" name="selectTable" value="{{i}}">
@@ -23,7 +23,7 @@
 									</label>
 								{% endif %}
 							{# {% endfor %} #}
-							{% for scoreUse in score %}
+							{% for scoreUse in scores %}
 								{% if scoreUse.getScore_param1 == i%}
 									<a href="./score/{{scoreUse.getScore_param1}}">
 										<figure>
@@ -39,7 +39,7 @@
 							<input type="radio" name="selectTable" value="-1">
 							<img class="click-table" src="./public/assets/ressources/click-tables.png" alt="tables">
 						</label>
-						{% for scoreUse in score %}
+						{% for scoreUse in scores %}
 							{% if scoreUse.getScore_param1 == -1%}
 								<a href="./score/allTables">
 									<figure>
@@ -88,7 +88,7 @@
 								<label for="billes">
 									<p class="inlet">
 										<span class="text__effect">
-											Tableau de billes
+											Tableau&nbsp;de&nbsp;billes
 										</span>
 									</p>
 									<span class="outer">
@@ -126,11 +126,8 @@
 					</div>
 				</section>
 
-				<input type="hidden" name="id" value="{{humain.getHumain_id}}">
+				<input type="hidden" name="id" value="{{humain_id}}">
 				<input type="hidden" name="scoreValeur" value="0">
-				<input
-				type="hidden" name="scoreOutilId" value="{{outils.getOutil_id}}">
-
 				<div id="submit-btn">
 					<input type="submit" name="submit" id="letsgo" value="C'EST PARTI !">
 				</div>

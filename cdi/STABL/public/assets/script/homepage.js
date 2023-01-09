@@ -7,7 +7,6 @@ const letsGo = document.getElementById('letsgo')
 allTables.addEventListener('click', () => {
   orderOrnotOrder.style.display = 'none'
 })
-
 radioInput.forEach(r => {
   r.addEventListener('click', () => {
     letsGo.style.display = "block"

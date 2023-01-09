@@ -1,76 +1,73 @@
 <?php
 class ModelScore extends Connect{
-    // Insertion après sélection depuis l'homepage
-    public function insertScore($donnees){
-            $order = $donnees['order'];
-            $help = $donnees['help'];
-            $selectTable = $donnees['nombreSelectionner'];
-            $scoreValeur = $donnees['resultScore'];
-            $outil = $donnees['outil'];
-            $id = $donnees['id'];
+  public function majScore($donnees){
+    $order = $donnees['order'];
+    $help = $donnees['help'];
+    $table = $donnees['nombreSelectionner'];
+    $valeur= $donnees['resultScore'];
 
-            $db = $this->getDb();
-            $result = $db->query("SELECT `score_id`, `score_valeur`, `score_outil_id`, `score_humain_id`, `score_param1`, `score_param2`, `score_param3`, `score_est_actif`, `score_date` FROM `scores` WHERE (`score_param1` LIKE $selectTable) AND (`score_param2` LIKE $order) AND (`score_param3` LIKE $help)");
-            $count = $result->fetchColumn();
-            
+    $db = $this->getDb();
+    $req = $db->prepare("SELECT score_id FROM `scores` WHERE score_outil_id=:outil_id AND score_param1=:table AND score_param2=:order AND score_param3=:help AND score_humain_id=:humain_id AND score_est_actif=:actif");
+    $req->bindvalue('outil_id', $_SESSION['outil_id'], PDO::PARAM_STR);
+    $req->bindvalue('table', $table, PDO::PARAM_INT);
+    $req->bindvalue('order', $order, PDO::PARAM_INT);
+    $req->bindvalue('help', $help, PDO::PARAM_INT);
+    $req->bindvalue('humain_id', $_SESSION['humain']['humain_id'], PDO::PARAM_INT);        
+    $req->bindvalue('actif', 1, PDO::PARAM_INT);
+    $req->execute();
+    $score_id = $req->fetch();
+    if ($score_id) $score_id=$score_id[0];
 
-            if($count == 0){
-                $scoreActif = 1;
-                $scoreDate = date('Y-m-d');
-                $db = $this->getDb();
-                $score = $db->prepare('INSERT INTO `scores`(`score_valeur`, `score_outil_id`, `score_humain_id`, `score_param1`, `score_param2`, `score_param3`, `score_est_actif`, `score_date`) VALUES (:scoreValeur, :scoreOutilId,  :id, :selectTable, :order, :help, :scoreActif, :scoreDate)');
-                $score->bindParam(':scoreValeur', $scoreValeur, PDO::PARAM_STR);
-                $score->bindParam(':scoreOutilId', $outil, PDO::PARAM_INT);
-                $score->bindParam(':id', $id, PDO::PARAM_INT);
-                $score->bindParam(':selectTable', $selectTable, PDO::PARAM_INT);
-                $score->bindParam(':order', $order, PDO::PARAM_INT);
-                $score->bindParam(':help', $help, PDO::PARAM_INT);
-                $score->bindParam(':scoreActif', $scoreActif, PDO::PARAM_INT);
-                $score->bindParam(':scoreDate', $scoreDate, PDO::PARAM_STR);
-                $score->execute();
-            } else if ($count === $count){
-
-                $newDate = date('Y-m-d');
-                $db = $this->getDb();
-
-                $updateScore = $db->prepare('UPDATE `scores` SET `score_valeur`= :scoreValeur, `score_date` = :newDate WHERE `score_id` = :id');
-                $updateScore->bindParam('id', $count, PDO::PARAM_INT);
-                $updateScore->bindParam('scoreValeur', $scoreValeur, PDO::PARAM_STR);
-                $updateScore->bindParam('newDate', $newDate, PDO::PARAM_STR);
-                $updateScore->execute();
-                var_dump($scoreValeur);
-                var_dump($count);
-            }
-            
-            $newScore = [];
-            while($sc = $result->fetch(PDO::FETCH_ASSOC)){
-                $newScore[] = new Score_stabl($sc);
-                var_dump($newScore);
-            }
-            return $newScore;
-        
-    }
-
-    // Récupération de la table séléctionner 
-    public function tableScore(){
+    if($score_id){
+        $newDate = date('Y-m-d');
         $db = $this->getDb();
-        $selectTableScore = $db->query('SELECT `score_param1`, `score_valeur` FROM `scores` WHERE `score_id`');
-        $score = [];
-        while($data = $selectTableScore->fetch(PDO::FETCH_ASSOC)){
-            $score[] = new Score_stabl($data);
-        }
-        return $score;
-    }
-
-    public function readScore(){
-        
+        $req = $db->prepare('UPDATE `scores` SET `score_valeur`= :valeur, `score_date` = :newDate WHERE `score_id` = :score_id');
+        $req->bindvalue('score_id', $score_id, PDO::PARAM_INT);
+        $req->bindvalue('valeur', $valeur, PDO::PARAM_STR);
+        $req->bindvalue('newDate', $newDate, PDO::PARAM_STR);
+        $req->execute();
+    } else {
+        $scoreDate = date('Y-m-d');
         $db = $this->getDb();
-        $selectScore = $db->query("SELECT `score_id`, `score_valeur`,`score_param1` FROM `scores` WHERE `score_param1`");
-        // $selectScore->bindParam(':scoreParam1', $scoreParam1, PDO::PARAM_INT);
-        // $score = [];
-        while($data = $selectScore->fetch(PDO::FETCH_ASSOC)){
-            $score[] = new Score_stabl($data);
-        }
-        return $score;
+        $score = $db->prepare('INSERT INTO `scores`(`score_valeur`, `score_outil_id`, `score_humain_id`, `score_param1`, `score_param2`, `score_param3`, `score_est_actif`, `score_date`) VALUES (:valeur, :outil_id,  :humain_id, :table, :order, :help, :actif, :scoreDate)');
+        $score->bindvalue('outil_id', $_SESSION['outil_id'], PDO::PARAM_STR);
+        $score->bindvalue('valeur', $valeur, PDO::PARAM_STR);
+        $score->bindvalue('humain_id', $_SESSION['humain']['humain_id'], PDO::PARAM_INT);
+        $score->bindvalue('table', $table, PDO::PARAM_INT);
+        $score->bindvalue('order', $order, PDO::PARAM_INT);
+        $score->bindvalue('help', $help, PDO::PARAM_INT);
+        $score->bindvalue('actif', 1, PDO::PARAM_INT);
+        $score->bindvalue('scoreDate', $scoreDate, PDO::PARAM_STR);
+        $score->execute();
     }
+    /*$newScore = [];
+    while($sc = $result->fetch(PDO::FETCH_ASSOC)){
+        $newScore[] = new Score_stabl($sc);
+        var_dump($newScore);
+    }
+    return $newScore;*/
+  }
+
+  // Récupération de la table séléctionner 
+  public function tableScores(){
+      $db = $this->getDb();
+      $req = $db->prepare('SELECT `score_param1`, `score_valeur` FROM `scores` WHERE score_outil_id=:outil_id');
+      $req->bindvalue('outil_id', $_SESSION['outil_id'], PDO::PARAM_STR);
+      $req->execute();
+      $score = [];
+      while($data = $req->fetch(PDO::FETCH_ASSOC)) $score[] = new Score_stabl($data);
+      return $score;
+  }
+
+  public function ScoresOfTable($table){
+      $db = $this->getDb();
+      $req = $db->prepare("SELECT score_id, score_valeur, score_param2, score_param3 FROM scores WHERE score_outil_id=:outil_id AND score_param1=:table");
+      $req->bindvalue('table', $table, PDO::PARAM_INT);
+      $req->bindvalue('outil_id', $_SESSION['outil_id'], PDO::PARAM_STR);
+      $req->execute();      
+      $scores = array();
+      while($score = $req->fetch()) $scores[]=$score;
+      $req->closeCursor();
+      return $scores;
+  }
 }

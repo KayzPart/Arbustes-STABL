@@ -1,6 +1,6 @@
 html,
 body{
-    font-size: 100%;
+    font-size: 30px;
 }
 div,
 span,
@@ -89,7 +89,7 @@ video {
     vertical-align: baseline;
 }
 
-@import url('https://fonts.googleapis.com/css2?family=Pacifico&family=Parisienne&display=swap');
+/*@import url('https://fonts.googleapis.com/css2?family=Pacifico&family=Parisienne&display=swap');*/
 
 a {
     display: block;
@@ -98,7 +98,7 @@ a {
 
 body {
     background-color: #ccd18f7d;
-    font-family: 'Pacifico', cursive;
+    /*font-family: 'Pacifico', cursive;*/
     height: 100vh;
     /*max-width: 1200px;*/
 }
@@ -211,12 +211,12 @@ h2 {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    height: 40px;
-    width: 150px;
+ /*   height: 40px;
+    width: 150px;*/
 }
 
 .display-radio .aide label {
-    width: 180px;
+   /* width: 180px;*/
 }
 
 .display-radio li {
@@ -248,22 +248,22 @@ h2 {
     opacity: 1;
 }
 
-.inner:before {
+.inner:before{
     content: "\2716";
-    top: 2.5px;
-    left: 7px;
+    top: -3px;
+    left: 3px;
     color: #4B6279;
     transform: scale(0) translateY(-50%);
 }
 
-.inner:after {
+/*.inner:after {
     content: "\2716";
     left: -140px;
     bottom: -180px;
     font-size: 2em;
     transform: scale(3);
     color: #4B6279;
-}
+}*/
 
 input[type=radio]+label .text__effect {
     cursor: pointer;
@@ -277,32 +277,32 @@ input[type=radio] {
     opacity: 0;
 }
 
-input[type=radio]:hover+label .outer .inner:before {
+/*input[type=radio]:hover+label .outer .inner:before {
     opacity: 0.2;
     position: absolute;
     transform: scale(1);
-    transition: all 0.3s ease;
-}
+   transition: all 0.3s ease;
+}*/
 
 input[type=radio]:checked label .inner:before {
     opacity: 1;
-    transform: scale(1.5);
-    transition: all 0.2s ease;
+    transform: scale(1);
+    /*transition: all 0.2s ease;*/
 }
 
 input[type=radio]:checked+label .outer .inner:before {
     opacity: 1;
-    transform: scale(1.5);
-    transition: all 0.3s ease;
-    transition-delay: 0.75s;
+    transform: scale(1);
+    /*transition: all 0.3s ease;*/
+    /*transition-delay: 0.75s;*/
 }
 
 input[type=radio]:checked+label .outer {
-    transform: translate(0.09em, 0.09em);
-    border: 3px solid #81B7D2;
-    transition-delay: 0.75s;
-    animation: boom 1s ease-out;
-    animation-delay: 0.75s;
+    /*transform: translate(0.09em, 0.09em);*/
+    /*border: 3px solid #81B7D2;*/
+    /*transition-delay: 0.75s;
+    animation: boom 1s ease-out;*/
+    /*animation-delay: 0.75s;*/
 }
 
 input[type=radio]:checked+label .outer .inner:after {
@@ -617,8 +617,8 @@ span.shadow {
     background-image: url('../ressources/bille-jaune.png');
     background-size: contain;
     background-repeat: no-repeat;
-    width: 50px;
-    height: 50px;
+    width: 70px;
+    height: 70px;
     display: flex;
     align-items: center;
     justify-content: center;
