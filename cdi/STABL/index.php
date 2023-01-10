@@ -31,9 +31,9 @@ $router->setBasePath($dossier_server_path . '/cdi/' . $_SESSION['outil_id']);
 // }
 $router->map('GET|POST', '/', 'ControllerHumain#redirectionEspace');
 $router->map('GET|POST', '/table', 'ControllerTable#jeuTable');
-$router->map('POST', '/misajourscore', 'ControllerScore#misajourscore');
-$router->map('GET', '/score/[i:score_param1]','ControllerScore#scoreSelect', 'score');
-$router->map('GET', '/score/allTables','ControllerScore#scoreSelect', 'allscore');
+$router->map('GET|POST', '/misajourscore', 'ControllerScore#misajourscore');
+$router->map('GET', '/score/[i:score_param1]','ControllerScore#scoresOfTable', 'score');
+$router->map('GET', '/score/allTables','ControllerScore#scoresOfTable', 'allscore');
 $router->map('GET|POST', '/update/[i:score_id]', 'ControllerScore#updateScore');
 $router->map('GET|POST', '/update', 'ControllerScore#redirectionAfterUpdate');
 

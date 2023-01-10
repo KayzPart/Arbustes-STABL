@@ -61,19 +61,23 @@ class ControllerHumain extends ControllerTwigStabl{
     // }
 
     // Redirection après connexion
-    public static function redirectionEspace($id){
-        // session_start();
+    public static function redirectionEspace(){
+        global $globales;
         if(!isset($_SESSION['humain']['humain_id'])){
             header('Refresh: 0.01; url= ./');
         }
-        $id = $_SESSION['humain']['humain_id'];
         $twig = ControllerTwigStabl::twigControl();
-        $datas = new ModelHumain();
-        $outil = new ModelOutil();
         $viewScore = new ModelScore();
-        $humain = $datas->selectHumain($id);
-        $datasOutil = $outil->selectOutil();
-        $score = $viewScore->tablesScore();
-        echo $twig->render('homepage.twig', ['humain_id' => $_SESSION['humain']['humain_id'], 'humain' => $humain, 'outils' => $datasOutil[0], 'score' => $score]);
+        $prenom = $globales['humain']['humain_login'];
+        $scores = $viewScore->tableScores();
+        echo $twig->render('homepage.twig', ['humain_id' => $_SESSION['humain']['humain_id'], 'prenom' => $prenom, 'scores' => $scores]);
+    }
+
+        public static function majscore(){
+        echo 'coucou';exit;
+        /*$donnees = json_decode(file_get_contents('php://input'), true);
+        $manager = new ModelScore();
+        $manager->majScore($donnees);
+        echo json_encode($donnees);*/
     }
 }

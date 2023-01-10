@@ -1,14 +1,12 @@
 {% block body %}
 	{{ include("Templates/header_page_annexe.twig")}}
-	<h2>Voici  tes scores pour la table de
-		{{score.Score_param1}}</h2>
+	<h2>Voici tes scores pour la table de {{table}}</h2>
 	<table class="container_of_table">
 		<thead>
 			<tr>
 				<th>
 					<span>
-						table de
-						{{score.getScore_param1}}
+						table de {{table}}
 					</span>
 				</th>
 				<th>
@@ -30,66 +28,68 @@
 		</thead>
 		<tbody>
 			<tr>
-				<td>Ordre</td>
-				{% for scores in score %}
-					{{scores.getScore_param1}}
-				{% endfor %}
-				{% if score.getScore_param2 == 1 %}
-					{% if score.getScore_param3 == 1 %}
-						<td>{{score.getScore_valeur}}
-							/ 10</td>
-					{% endif %}
-				{% else %}
-					<td></td>
-				{% endif %}
-				{% if score.getScore_param2 == 1 %}
-					{% if score.getScore_param3 == 2 %}
-						<td>{{score.getScore_valeur}}
-							/ 10</td>
-					{% endif %}
-					{% else %}
-						<td></td>
-				{% endif %}
-				{% if score.getScore_param2 == 1 %}
-					{% if score.getScore_param3 == 0 %}
-						<td>{{score.getScore_valeur}}
-							/ 10</td>
-					{% endif %}
-					{% else %}
-						<td></td>
-				{% endif %}
+				<td>Ordre </td>
+				<td>
+					{% for score in scores %}
+						{% if score.score_param2 == 1 %}
+							{% if score.score_param3 == 1 %}
+								{{score.score_valeur}} / 10
+							{% endif %}
+						{% endif %}
+					{% endfor %}
+				</td>
+				<td>
+					{% for score in scores %}
+						{% if score.score_param2 == 1 %}
+							{% if score.score_param3 == 2 %}
+								{{score.score_valeur}} / 10
+							{% endif %}
+						{% endif %}
+					{% endfor %}
+				</td>
+				<td>
+					{% for score in scores %}
+						{% if score.score_param2 == 1 %}
+							{% if score.score_param3 == 0 %}
+								{{score.score_valeur}} / 10
+							{% endif %}
+						{% endif %}
+					{% endfor %}
+				</td>
 			</tr>
 			<tr>
 				<td>Désordre</td>
-				{% if score.getScore_param2 == 2 %}
-					{% if score.getScore_param3 == 1 %}
-						<td>{{score.getScore_valeur}}
-							/ 10
-						</td>
-					{% endif %}
-				{% else %}
-					<td></td>
-				{% endif %}
-                {% if score.getScore_param2 == 2 %}
-					{% if score.getScore_param3 == 2 %}
-						<td>{{score.getScore_valeur}}
-							/ 10</td>
-				{% endif %}
-					{% else %}
-						<td></td>
-					{% endif %}
-                {% if score.getScore_param2 == 2 %}
-					{% if score.getScore_param3 == 0 %}
-						<td>{{score.getScore_valeur}}
-							/ 10</td>
-					{% endif %}
-					{% else %}
-						<td></td>
-				{% endif %}
+				<td>
+					{% for score in scores %}
+						{% if score.score_param2 == 2 %}
+							{% if score.score_param3 == 1 %}
+								{{score.score_valeur}} / 10
+							{% endif %}
+						{% endif %}
+					{% endfor %}						
+				</td>
+				<td>
+					{% for score in scores %}
+	          {% if score.score_param2 == 2 %}
+							{% if score.score_param3 == 2 %}
+								{{score.score_valeur}} / 10
+							{% endif %}
+						{% endif %}
+					{% endfor %}
+				</td>
+				<td>
+					{% for score in scores %}
+	          {% if score.score_param2 == 2 %}
+							{% if score.score_param3 == 0 %}
+								{{score.score_valeur}} / 10
+							{% endif %}
+						{% endif %}
+					{% endfor %}
+				</td>
 			</tr>
 		</tbody>
 	</table>
-	{% if score.getScore_param1 == -1 %}
+	{% if table == -1 %}
 	<p>coucou</p>
 	{% endif %}
 	

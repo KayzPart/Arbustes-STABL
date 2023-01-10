@@ -13,7 +13,7 @@ let arrayTablesRandom2 = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
 let tableRandom2 = arrayTablesRandom2.sort(() => Math.random() - 0.5)
 
 // Bouton question suivante
-const btn = document.getElementById('good-result')
+/*const btn = document.getElementById('good-result')*/
 const counterSpan = document.getElementById('counter')
 
 // const or = document.getElementById('or')
@@ -93,7 +93,7 @@ function beforeAfter() {
 // Function that checks the click, the result and the value and which adds the correct result in the table
 function click() {
   const inputScoreValeur = document.querySelectorAll('input[type=radio]')
-  const btn = document.getElementById('good-result')
+  /*const btn = document.getElementById('good-result')*/
   inputScoreValeur.forEach((elem) => {
     const parent = elem.parentNode
     elem.addEventListener("click", function (event) {
@@ -107,7 +107,7 @@ function click() {
             result.style.color = 'green'
           }
         })
-        btn.style.display = 'block'
+        /*btn.style.display = 'block'*/
       }
       else {
         parent.classList.add('false')
@@ -128,12 +128,12 @@ function nextNumber(indice) {
       nombre2 = tableRandom2[indice]
       document.getElementById('choice').innerHTML = ''
       document.getElementById('table').style.display = "none"
-      generateBallsYellow()
+      //generateBallsYellow()
     }
     cr = true
     // indice++
   } else if (indice == 10) {
-    // showScore(resultScore)
+    showScore(resultScore)
     ajaxSendScore(order, help, nombreSelectionner, resultScore)
     
   }
@@ -141,9 +141,9 @@ function nextNumber(indice) {
 
 // Affichage du bouton pour passer à la question suivante
 function goodResult() {
-  btn.addEventListener('click', () => {
+  /*btn.addEventListener('click', () => {*/
     let balls = document.querySelectorAll('.billes')
-    btn.style.display = "none"
+    /*btn.style.display = "none"*/
     balls.forEach((element) => {
       if (element.classList.contains('false')) {
         element.classList.remove('false')
@@ -154,10 +154,10 @@ function goodResult() {
     })
     if (cr == true) {
       indice++
-      cr = nextNumber()
+      cr = nextNumber(indice)
       startGame()
     }
-  })
+  //})
 }
 goodResult()
 
@@ -190,18 +190,15 @@ counterClick()
 //   return Math.abs(a - b)
 // }
 function ajaxSendScore() {
-  showScore()
+  //showScore()
   const donnees = {
     order: order,
     help: help,
-    id: id,
-    outil: outil, 
     nombreSelectionner: nombreSelectionner,
     resultScore: resultScore
   }
   console.log(donnees)
   //const donnees = [order, help, nombreSelectionner, resultScore];
-  console.log(donnees);
   fetch('./misajourscore', {
     method: 'POST',
     mode: 'cors',
@@ -210,11 +207,10 @@ function ajaxSendScore() {
     },
     body: JSON.stringify(donnees)
   })
-  .then((response) => { return response.json() })
+  .then(response => { return response.json() })
   .then(datas => {alert(datas.msg)})
-  .catch((error) => console.log(error))
+  .catch(error => console.log(error))
 }
-
 
 // Affichage de la modal score
 function showScore() {
