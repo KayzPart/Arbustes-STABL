@@ -6,23 +6,21 @@
 		<section class="choix-tables">
 			<form action="./table" method="POST">
 				<div class="tables">
-{{score.getScore_param1}}
 					{% for i in 1..10 %}
 						<div class="display_table_content">
-
-							{# {% for scoreUse in score %} #}
 								{% if scoreUse.getScore_valeur == 10 %}
+								{# {% if scoreUse.getScore_param1 == 1 %} #}
 									<label>
 										<input type="radio" name="selectTable" value="{{i}}">
 										<img class="click-table solidGreen" src="./public/assets/ressources/click-{{i}}.png" alt="table-{{i}}">
 									</label>	
+								{# {% endif %} #}
 									{% else %}
 									<label>
 										<input type="radio" name="selectTable" value="{{i}}">
 										<img class="click-table" src="./public/assets/ressources/click-{{i}}.png" alt="table-{{i}}">
 									</label>
 								{% endif %}
-							{# {% endfor %} #}
 							{% for scoreUse in score %}
 								{% if scoreUse.getScore_param1 == i%}
 									<a href="./score/{{scoreUse.getScore_param1}}">

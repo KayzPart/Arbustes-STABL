@@ -8,7 +8,5 @@ class ModelOutil extends Connect{
             $outil[] = new Outil_stabl($data);
         }
         return $outil;
-        // $data = $selectOutil->fetch(PDO::FETCH_ASSOC);
-        // return new Outil($data);
     }
 }

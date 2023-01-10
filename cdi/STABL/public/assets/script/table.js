@@ -198,7 +198,8 @@ function ajaxSendScore() {
     outil: outil, 
     nombreSelectionner: nombreSelectionner,
     resultScore: resultScore
-  };
+  }
+  console.log(donnees)
   //const donnees = [order, help, nombreSelectionner, resultScore];
   console.log(donnees);
   fetch('./misajourscore', {

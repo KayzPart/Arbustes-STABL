@@ -15,6 +15,6 @@ class ControllerScore extends ControllerTwigStabl
         $manager = new ModelScore();
         $manager->insertScore($donnees);
         echo json_encode($datas);
-        
+
     }
 }
